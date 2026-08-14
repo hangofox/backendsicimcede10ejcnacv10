@@ -19,7 +19,8 @@ public class torresCEDE10ejcnacv10Application {
 }*/
 //DECLARACIÓN DE LA CLASE PRINCIPAL:
 @SpringBootApplication
-public class SICIMCEDE10EjcNacv10Application extends SpringBootServletInitializer {
+public class
+SICIMCEDE10EjcNacv10Application extends SpringBootServletInitializer {
 	/**
 	* Método requerido para permitir que WebLogic gestione el despliegue del WAR.
 	* Sobrescribimos el método configure para registrar esta clase como punto de entrada.
@@ -35,7 +36,7 @@ public class SICIMCEDE10EjcNacv10Application extends SpringBootServletInitialize
 /*//DECLARACIÓN DE LA CLASE PRINCIPAL:
 @SpringBootApplication
 public class torresCEDE10ejcnacv10Application extends SpringBootServletInitializer {
-
+        
 	public static void main(String[] args) {
 		SpringApplication.run(torresCEDE10ejcnacv10Application.class, args);
 	}

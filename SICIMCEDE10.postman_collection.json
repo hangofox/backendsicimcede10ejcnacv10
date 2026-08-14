@@ -1,7 +1,7 @@
 {
   "info": {
     "_postman_id": "76b5ebde-5e16-4058-b68d-bff90997491f",
-    "name": "TORRESCEDE10",
+    "name": "SICIMCEDE10",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "51075893",
     "_collection_link": "https://go.postman.co/collection/51075893-76b5ebde-5e16-4058-b68d-bff90997491f?source=collection_link"
@@ -33958,6 +33958,11 @@
                   "disabled": true
                 },
                 {
+                  "key": "nombreTipoUsuario",
+                  "value": "SUPER ADMINISTRADOR DEL SISTEMA",
+                  "disabled": true
+                },
+                {
                   "key": "orderBy",
                   "value": "idUsuario"
                 },
@@ -33995,6 +34000,11 @@
                 {
                   "key": "idUsuario",
                   "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "nombreTipoUsuario",
+                  "value": "SUPER ADMINISTRADOR DEL SISTEMA",
                   "disabled": true
                 },
                 {

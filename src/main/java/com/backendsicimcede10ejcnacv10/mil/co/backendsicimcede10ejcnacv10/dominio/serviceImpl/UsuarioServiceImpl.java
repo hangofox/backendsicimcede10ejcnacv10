@@ -41,14 +41,14 @@ public class UsuarioServiceImpl implements UsuarioService {
     
     //CONTAR TOTAL DE REGISTROS:
     @Override//SOBREESCRIBIMOS EL METODO DE CONTAR TOTAL DE REGISTROS.
-    public Long contarTotalRegistros(Long idUsuario, String keyword) {
-        return usuarioRepository.findTotalRegistros(idUsuario, keyword);
+    public Long contarTotalRegistros(Long idUsuario, String nombreTipoUsuario, String keyword) {
+        return usuarioRepository.findTotalRegistros(idUsuario, nombreTipoUsuario, keyword);
     }
     
     //LISTAR REGISTROS:
     @Override//SOBREESCRIBIMOS EL METODO DE LISTAR REGISTROS.
-    public List<UsuarioDTO> listarUsuarios(Long idUsuario, String keyword, String orderBy, String orderMode) {
-        List<Usuario> usuarios = usuarioRepository.findAllUsuarios(idUsuario, keyword, orderBy, orderMode);
+    public List<UsuarioDTO> listarUsuarios(Long idUsuario, String nombreTipoUsuario, String keyword, String orderBy, String orderMode) {
+        List<Usuario> usuarios = usuarioRepository.findAllUsuarios(idUsuario, nombreTipoUsuario, keyword, orderBy, orderMode);
         List<UsuarioDTO> usuarioDTOS = new ArrayList<>();
         
         for (Usuario usuario : usuarios){
@@ -60,8 +60,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     
     //LISTAR REGISTROS PAGINADOS:
     @Override//SOBREESCRIBIMOS EL METODO DE LISTAR REGISTROS PAGINADOS.
-    public Slice<UsuarioDTO> listarUsuariosPag(Pageable pageable, Long idUsuario, String keyword, String orderBy, String orderMode) {
-        Slice<Usuario> usuarios = usuarioRepository.findAllUsuariosPag(pageable, idUsuario, keyword, orderBy, orderMode);
+    public Slice<UsuarioDTO> listarUsuariosPag(Pageable pageable, Long idUsuario, String nombreTipoUsuario, String keyword, String orderBy, String orderMode) {
+        Slice<Usuario> usuarios = usuarioRepository.findAllUsuariosPag(pageable, idUsuario, nombreTipoUsuario, keyword, orderBy, orderMode);
         return usuarios.map(usuario -> usuarioDAO.usuarioDTO(usuario));
     }
     

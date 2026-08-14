@@ -18,9 +18,9 @@ import java.util.List;
 public interface UsuarioService {
     //DECLARACIÓN DE LOS METODOS DE RESPUESTA EN LA INTERFACE PARA LOS CRUDS QUE SON LOS METODOS PARA LA
     //CREACIÓN, LECTURA (LISTAR Y CONSULTAR), EDICIÓN Y ELIMINACIÓN DE UN REGISTRO:
-    Long contarTotalRegistros(Long idUsuario, String keyword);
-    List<UsuarioDTO> listarUsuarios(Long idUsuario, String keyword, String orderBy, String orderMode);
-    Slice<UsuarioDTO> listarUsuariosPag(Pageable pageable, Long idUsuario, String keyword, String orderBy, String orderMode);
+    Long contarTotalRegistros(Long idUsuario, String nombreTipoUsuario, String keyword);
+    List<UsuarioDTO> listarUsuarios(Long idUsuario, String nombreTipoUsuario, String keyword, String orderBy, String orderMode);
+    Slice<UsuarioDTO> listarUsuariosPag(Pageable pageable, Long idUsuario, String nombreTipoUsuario, String keyword, String orderBy, String orderMode);
     RespuestaDTO crearUsuario(UsuarioDTO usuarioDTO);
     RespuestaDTO consultarUsuarioporId(Long idUsuario);
     RespuestaDTO consultarUsuarioporNumeroDocumentoIdentificacion(String numeroDocumentoIdentificacionUsuario);

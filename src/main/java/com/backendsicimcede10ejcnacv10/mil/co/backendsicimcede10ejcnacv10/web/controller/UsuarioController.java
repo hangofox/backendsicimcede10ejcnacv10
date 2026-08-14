@@ -32,31 +32,34 @@ public class UsuarioController {
     @GetMapping("/usuarios/count")//DECLARACIÓN DEL MAPEO DEL CRUD CONTAR REGISTROS.
     public ResponseEntity<Long> contarTotalRegistros(
             @RequestParam(required = false) Long idUsuario,
+            @RequestParam(required = false) String nombreTipoUsuario,
             @RequestParam(required = false) String keyword) {
-        return new ResponseEntity<>(usuarioService.contarTotalRegistros(idUsuario, keyword), HttpStatus.OK);
+        return new ResponseEntity<>(usuarioService.contarTotalRegistros(idUsuario, nombreTipoUsuario, keyword), HttpStatus.OK);
     }
     
     //LISTAR REGISTROS:
     @GetMapping("/usuarios/lista")//DECLARACIÓN DEL MAPEO DEL CRUD LISTAR REGISTROS.
     public ResponseEntity<List<UsuarioDTO>> listarUsuariosLista(
             @RequestParam(required = false) Long idUsuario,
+            @RequestParam(required = false) String nombreTipoUsuario,
             @RequestParam(required = false) String keyword,
             @RequestParam(required = false) String orderBy,
             @RequestParam(required = false, defaultValue = "ASC") String orderMode) {
-        return new ResponseEntity<>(usuarioService.listarUsuarios(idUsuario, keyword, orderBy, orderMode), HttpStatus.OK);
+        return new ResponseEntity<>(usuarioService.listarUsuarios(idUsuario, nombreTipoUsuario, keyword, orderBy, orderMode), HttpStatus.OK);
     }
     
     //LISTAR REGISTROS PAGINADOS:
     @GetMapping("/usuarios/listaPag")//DECLARACIÓN DEL MAPEO DEL CRUD LISTAR REGISTROS PAGINADOS.
     public ResponseEntity<Slice<UsuarioDTO>> listarUsuarios(
             @RequestParam(required = false) Long idUsuario,
+            @RequestParam(required = false) String nombreTipoUsuario,
             @RequestParam(required = false) String keyword,
             @RequestParam(required = false) String orderBy,
             @RequestParam(required = false, defaultValue = "ASC") String orderMode,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return new ResponseEntity<>(usuarioService.listarUsuariosPag(pageable, idUsuario, keyword, orderBy, orderMode), HttpStatus.OK);
+        return new ResponseEntity<>(usuarioService.listarUsuariosPag(pageable, idUsuario, nombreTipoUsuario, keyword, orderBy, orderMode), HttpStatus.OK);
     }
     
     //CREAR REGISTRO:

@@ -51,8 +51,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Long> {
     "UPPER(tabla_tipos_usuarios.nombre_tipo_usuario) LIKE UPPER('%'||:keyword||'%') OR " +
     "UPPER(tabla_usuarios.fecha_h_m_s_ingreso_usuario) LIKE UPPER('%'||:keyword||'%') OR " +
     "UPPER(tabla_usuarios.fecha_h_m_s_modificacion_usuario) LIKE UPPER('%'||:keyword||'%') OR " +
-    "UPPER(tabla_usuarios.estado_usuario) LIKE UPPER('%'||:keyword||'%')))", nativeQuery = true)
-    Long findTotalRegistros(@Param("idUsuario") Long idUsuario, @Param("keyword") String keyword);
+    "UPPER(tabla_usuarios.estado_usuario) LIKE UPPER('%'||:keyword||'%'))) AND " +
+    "(:nombreTipoUsuario IS NULL OR UPPER(tabla_tipos_usuarios.nombre_tipo_usuario) = UPPER(:nombreTipoUsuario))", nativeQuery = true)
+    Long findTotalRegistros(@Param("idUsuario") Long idUsuario, @Param("nombreTipoUsuario") String nombreTipoUsuario, @Param("keyword") String keyword);
     
     @Query(value = "" +
     "SELECT * " +
@@ -84,7 +85,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Long> {
     "UPPER(tabla_tipos_usuarios.nombre_tipo_usuario) LIKE UPPER('%'||:keyword||'%') OR " +
     "UPPER(tabla_usuarios.fecha_h_m_s_ingreso_usuario) LIKE UPPER('%'||:keyword||'%') OR " +
     "UPPER(tabla_usuarios.fecha_h_m_s_modificacion_usuario) LIKE UPPER('%'||:keyword||'%') OR " +
-    "UPPER(tabla_usuarios.estado_usuario) LIKE UPPER('%'||:keyword||'%'))) " +
+    "UPPER(tabla_usuarios.estado_usuario) LIKE UPPER('%'||:keyword||'%'))) AND " +
+    "(:nombreTipoUsuario IS NULL OR UPPER(tabla_tipos_usuarios.nombre_tipo_usuario) = UPPER(:nombreTipoUsuario)) " +
     "ORDER BY " +
     "CASE WHEN :orderBy = 'idUsuario' AND :orderMode = 'ASC' THEN id_usuario END ASC, " +
     "CASE WHEN :orderBy = 'idUsuario' AND :orderMode = 'DESC' THEN id_usuario END DESC, " +
@@ -128,7 +130,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Long> {
     "CASE WHEN :orderBy = 'fechaHMSModificacionUsuario' AND :orderMode = 'DESC' THEN fecha_h_m_s_modificacion_usuario END DESC, " +
     "CASE WHEN :orderBy = 'estadoUsuario' AND :orderMode = 'ASC' THEN estado_usuario END ASC, " +
     "CASE WHEN :orderBy = 'estadoUsuario' AND :orderMode = 'DESC' THEN estado_usuario END DESC", nativeQuery = true)
-    List<Usuario> findAllUsuarios(@Param("idUsuario") Long idUsuario, @Param("keyword") String keyword, @Param("orderBy") String orderBy, @Param("orderMode") String orderMode);
+    List<Usuario> findAllUsuarios(@Param("idUsuario") Long idUsuario, @Param("nombreTipoUsuario") String nombreTipoUsuario, @Param("keyword") String keyword, @Param("orderBy") String orderBy, @Param("orderMode") String orderMode);
     
     @Query(value = "" +
     "SELECT * " +
@@ -160,7 +162,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Long> {
     "UPPER(tabla_tipos_usuarios.nombre_tipo_usuario) LIKE UPPER('%'||:keyword||'%') OR " +
     "UPPER(tabla_usuarios.fecha_h_m_s_ingreso_usuario) LIKE UPPER('%'||:keyword||'%') OR " +
     "UPPER(tabla_usuarios.fecha_h_m_s_modificacion_usuario) LIKE UPPER('%'||:keyword||'%') OR " +
-    "UPPER(tabla_usuarios.estado_usuario) LIKE UPPER('%'||:keyword||'%'))) " +
+    "UPPER(tabla_usuarios.estado_usuario) LIKE UPPER('%'||:keyword||'%'))) AND " +
+    "(:nombreTipoUsuario IS NULL OR UPPER(tabla_tipos_usuarios.nombre_tipo_usuario) = UPPER(:nombreTipoUsuario)) " +
     "ORDER BY " +
     "CASE WHEN :orderBy = 'idUsuario' AND :orderMode = 'ASC' THEN id_usuario END ASC, " +
     "CASE WHEN :orderBy = 'idUsuario' AND :orderMode = 'DESC' THEN id_usuario END DESC, " +
@@ -204,7 +207,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Long> {
     "CASE WHEN :orderBy = 'fechaHMSModificacionUsuario' AND :orderMode = 'DESC' THEN fecha_h_m_s_modificacion_usuario END DESC, " +
     "CASE WHEN :orderBy = 'estadoUsuario' AND :orderMode = 'ASC' THEN estado_usuario END ASC, " +
     "CASE WHEN :orderBy = 'estadoUsuario' AND :orderMode = 'DESC' THEN estado_usuario END DESC", nativeQuery = true)
-    Slice<Usuario> findAllUsuariosPag(Pageable pageable, @Param("idUsuario") Long idUsuario, @Param("keyword") String keyword, @Param("orderBy") String orderBy, @Param("orderMode") String orderMode);
+    Slice<Usuario> findAllUsuariosPag(Pageable pageable, @Param("idUsuario") Long idUsuario, @Param("nombreTipoUsuario") String nombreTipoUsuario, @Param("keyword") String keyword, @Param("orderBy") String orderBy, @Param("orderMode") String orderMode);
     
     Optional<Usuario> findByIdUsuario(Long idUsuario);
     
