@@ -36,28 +36,28 @@ public class HistorialIntegranteDocumentosServiceImpl implements HistorialIntegr
     //CONTADOR DE REGISTROS FILTRADOS.
     //CONTAR TOTAL DE REGISTROS:
     @Override//SOBREESCRIBIMOS EL METODO DE CONTEO.
-    public Long contarTotalRegistros(Long idHistorialIntegranteDocumentos, String keyword) {
-        return historialIntegranteDocumentosRepository.findTotalRegistros(idHistorialIntegranteDocumentos, keyword);
+    public Long contarTotalRegistros(Long idHistorialIntegranteDocumentos, String siglaoAcronimoUnidadMilitar, String keyword) {
+        return historialIntegranteDocumentosRepository.findTotalRegistros(idHistorialIntegranteDocumentos, siglaoAcronimoUnidadMilitar, keyword);
     }
-    
+
     //LISTADO DE REGISTROS FILTRADOS SIN PAGINACIÓN.
     //LISTAR REGISTROS:
     @Override//SOBREESCRIBIMOS EL METODO DE LISTAR REGISTROS.
-    public List<HistorialIntegranteDocumentosDTO> listarHistorialesIntegrantesDocumentos(Long idHistorialIntegranteDocumentos, String keyword, String orderBy, String orderMode) {
-        List<HistorialIntegranteDocumentos> historialesIntegrantesDocumentos = historialIntegranteDocumentosRepository.findAllHistorialesIntegrantesDocumentos(idHistorialIntegranteDocumentos, keyword, orderBy, orderMode);
+    public List<HistorialIntegranteDocumentosDTO> listarHistorialesIntegrantesDocumentos(Long idHistorialIntegranteDocumentos, String siglaoAcronimoUnidadMilitar, String keyword, String orderBy, String orderMode) {
+        List<HistorialIntegranteDocumentos> historialesIntegrantesDocumentos = historialIntegranteDocumentosRepository.findAllHistorialesIntegrantesDocumentos(idHistorialIntegranteDocumentos, siglaoAcronimoUnidadMilitar, keyword, orderBy, orderMode);
         List<HistorialIntegranteDocumentosDTO> historialIntegranteDocumentosDTOS = new ArrayList<>();
         for (HistorialIntegranteDocumentos historialIntegranteDocumentos : historialesIntegrantesDocumentos) {
             historialIntegranteDocumentosDTOS.add(historialIntegranteDocumentosDAO.historialIntegranteDocumentosDTO(historialIntegranteDocumentos));
         }
-        
+
         return historialIntegranteDocumentosDTOS;
     }
-    
+
     //LISTADO DE REGISTROS FILTRADOS CON PAGINACIÓN.
     //LISTAR REGISTROS CON PAGINACIÓN:
     @Override//SOBREESCRIBIMOS EL METODO DE LISTAR REGISTROS.
-    public Slice<HistorialIntegranteDocumentosDTO> listarHistorialesIntegrantesDocumentosPag(Pageable pageable, Long idHistorialIntegranteDocumentos, String keyword, String orderBy, String orderMode) {
-        Slice<HistorialIntegranteDocumentos> historialesIntegrantesDocumentos = historialIntegranteDocumentosRepository.findAllHistorialesIntegrantesDocumentosPag(pageable, idHistorialIntegranteDocumentos, keyword, orderBy, orderMode);
+    public Slice<HistorialIntegranteDocumentosDTO> listarHistorialesIntegrantesDocumentosPag(Pageable pageable, Long idHistorialIntegranteDocumentos, String siglaoAcronimoUnidadMilitar, String keyword, String orderBy, String orderMode) {
+        Slice<HistorialIntegranteDocumentos> historialesIntegrantesDocumentos = historialIntegranteDocumentosRepository.findAllHistorialesIntegrantesDocumentosPag(pageable, idHistorialIntegranteDocumentos, siglaoAcronimoUnidadMilitar, keyword, orderBy, orderMode);
         return historialesIntegrantesDocumentos.map(historialIntegranteDocumentos -> historialIntegranteDocumentosDAO.historialIntegranteDocumentosDTO(historialIntegranteDocumentos));
     }
     

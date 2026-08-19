@@ -18,14 +18,18 @@ import java.util.Optional;
 */
 public interface HistorialIntegranteDocumentosRepository extends JpaRepository<HistorialIntegranteDocumentos, Long> {
     
-    //CONTADORES Y LISTADOS UNIFICADOS (KEYWORD + ID UNIDAD MILITAR + ORDERBY + ORDERMODE):
-    @Query(value = "SELECT COUNT(*) FROM tabla_historial_integrantes_documentos " +
-            "WHERE (:idHistorialIntegranteDocumentos IS NULL OR tabla_historial_integrantes_documentos.id_historial_integrante_documentos = :idHistorialIntegranteDocumentos) AND " +
+    //CONTADORES Y LISTADOS UNIFICADOS (KEYWORD + ID UNIDAD MILITAR + SIGLA O ACRONIMO UNIDAD MILITAR + ORDERBY + ORDERMODE):
+    @Query(value = "SELECT COUNT(*) FROM tabla_historial_integrantes_documentos, tabla_unidades_militares " +
+            "WHERE (tabla_historial_integrantes_documentos.id_unidad_militar = tabla_unidades_militares.id_unidad_militar) AND " +
+            "(:idHistorialIntegranteDocumentos IS NULL OR tabla_historial_integrantes_documentos.id_historial_integrante_documentos = :idHistorialIntegranteDocumentos) AND " +
+            "(:siglaoAcronimoUnidadMilitar IS NULL OR tabla_unidades_militares.sigla_o_acronimo_unidad_militar = :siglaoAcronimoUnidadMilitar) AND " +
             "(:keyword IS NULL OR UPPER(tabla_historial_integrantes_documentos.num_reg_historial_integrante_documentos) LIKE UPPER('%'||:keyword||'%'))", nativeQuery = true)
-    Long findTotalRegistros(@Param("idHistorialIntegranteDocumentos") Long idHistorialIntegranteDocumentos, @Param("keyword") String keyword);
+    Long findTotalRegistros(@Param("idHistorialIntegranteDocumentos") Long idHistorialIntegranteDocumentos, @Param("siglaoAcronimoUnidadMilitar") String siglaoAcronimoUnidadMilitar, @Param("keyword") String keyword);
     
-    @Query(value = "SELECT tabla_historial_integrantes_documentos.* FROM tabla_historial_integrantes_documentos " +
-            "WHERE (:idHistorialIntegranteDocumentos IS NULL OR tabla_historial_integrantes_documentos.id_historial_integrante_documentos = :idHistorialIntegranteDocumentos) AND " +
+    @Query(value = "SELECT tabla_historial_integrantes_documentos.* FROM tabla_historial_integrantes_documentos, tabla_unidades_militares " +
+            "WHERE (tabla_historial_integrantes_documentos.id_unidad_militar = tabla_unidades_militares.id_unidad_militar) AND " +
+            "(:idHistorialIntegranteDocumentos IS NULL OR tabla_historial_integrantes_documentos.id_historial_integrante_documentos = :idHistorialIntegranteDocumentos) AND " +
+            "(:siglaoAcronimoUnidadMilitar IS NULL OR tabla_unidades_militares.sigla_o_acronimo_unidad_militar = :siglaoAcronimoUnidadMilitar) AND " +
             "(:keyword IS NULL OR UPPER(tabla_historial_integrantes_documentos.num_reg_historial_integrante_documentos) LIKE UPPER('%'||:keyword||'%')) " +
             "ORDER BY CASE WHEN :orderBy = 'idHistorialIntegranteDocumentos' AND :orderMode = 'ASC' THEN tabla_historial_integrantes_documentos.id_historial_integrante_documentos END ASC, " +
             "CASE WHEN :orderBy = 'idHistorialIntegranteDocumentos' AND :orderMode = 'DESC' THEN tabla_historial_integrantes_documentos.id_historial_integrante_documentos END DESC, " +
@@ -53,10 +57,12 @@ public interface HistorialIntegranteDocumentosRepository extends JpaRepository<H
             "CASE WHEN :orderBy = 'fechaHMSIngresoIntegranteDocumentos' AND :orderMode = 'DESC' THEN tabla_historial_integrantes_documentos.fecha_h_m_s_ingreso_integrante_documentos END DESC, " +
             "CASE WHEN :orderBy = 'fechaHMSModificacionIntegranteDocumentos' AND :orderMode = 'ASC' THEN tabla_historial_integrantes_documentos.fecha_h_m_s_modificacion_integrante_documentos END ASC, " +
             "CASE WHEN :orderBy = 'fechaHMSModificacionIntegranteDocumentos' AND :orderMode = 'DESC' THEN tabla_historial_integrantes_documentos.fecha_h_m_s_modificacion_integrante_documentos END DESC", nativeQuery = true)
-    List<HistorialIntegranteDocumentos> findAllHistorialesIntegrantesDocumentos(@Param("idHistorialIntegranteDocumentos") Long idHistorialIntegranteDocumentos, @Param("keyword") String keyword, @Param("orderBy") String orderBy, @Param("orderMode") String orderMode);
+    List<HistorialIntegranteDocumentos> findAllHistorialesIntegrantesDocumentos(@Param("idHistorialIntegranteDocumentos") Long idHistorialIntegranteDocumentos, @Param("siglaoAcronimoUnidadMilitar") String siglaoAcronimoUnidadMilitar, @Param("keyword") String keyword, @Param("orderBy") String orderBy, @Param("orderMode") String orderMode);
     
-    @Query(value = "SELECT tabla_historial_integrantes_documentos.* FROM tabla_historial_integrantes_documentos " +
-            "WHERE (:idHistorialIntegranteDocumentos IS NULL OR tabla_historial_integrantes_documentos.id_historial_integrante_documentos = :idHistorialIntegranteDocumentos) AND " +
+    @Query(value = "SELECT tabla_historial_integrantes_documentos.* FROM tabla_historial_integrantes_documentos, tabla_unidades_militares " +
+            "WHERE (tabla_historial_integrantes_documentos.id_unidad_militar = tabla_unidades_militares.id_unidad_militar) AND " +
+            "(:idHistorialIntegranteDocumentos IS NULL OR tabla_historial_integrantes_documentos.id_historial_integrante_documentos = :idHistorialIntegranteDocumentos) AND " +
+            "(:siglaoAcronimoUnidadMilitar IS NULL OR tabla_unidades_militares.sigla_o_acronimo_unidad_militar = :siglaoAcronimoUnidadMilitar) AND " +
             "(:keyword IS NULL OR UPPER(tabla_historial_integrantes_documentos.num_reg_historial_integrante_documentos) LIKE UPPER('%'||:keyword||'%')) " +
             "ORDER BY CASE WHEN :orderBy = 'idHistorialIntegranteDocumentos' AND :orderMode = 'ASC' THEN tabla_historial_integrantes_documentos.id_historial_integrante_documentos END ASC, " +
             "CASE WHEN :orderBy = 'idHistorialIntegranteDocumentos' AND :orderMode = 'DESC' THEN tabla_historial_integrantes_documentos.id_historial_integrante_documentos END DESC, " +
@@ -84,7 +90,7 @@ public interface HistorialIntegranteDocumentosRepository extends JpaRepository<H
             "CASE WHEN :orderBy = 'fechaHMSIngresoIntegranteDocumentos' AND :orderMode = 'DESC' THEN tabla_historial_integrantes_documentos.fecha_h_m_s_ingreso_integrante_documentos END DESC, " +
             "CASE WHEN :orderBy = 'fechaHMSModificacionIntegranteDocumentos' AND :orderMode = 'ASC' THEN tabla_historial_integrantes_documentos.fecha_h_m_s_modificacion_integrante_documentos END ASC, " +
             "CASE WHEN :orderBy = 'fechaHMSModificacionIntegranteDocumentos' AND :orderMode = 'DESC' THEN tabla_historial_integrantes_documentos.fecha_h_m_s_modificacion_integrante_documentos END DESC", nativeQuery = true)
-    Slice<HistorialIntegranteDocumentos> findAllHistorialesIntegrantesDocumentosPag(Pageable pageable, @Param("idHistorialIntegranteDocumentos") Long idHistorialIntegranteDocumentos, @Param("keyword") String keyword, @Param("orderBy") String orderBy, @Param("orderMode") String orderMode);
+    Slice<HistorialIntegranteDocumentos> findAllHistorialesIntegrantesDocumentosPag(Pageable pageable, @Param("idHistorialIntegranteDocumentos") Long idHistorialIntegranteDocumentos, @Param("siglaoAcronimoUnidadMilitar") String siglaoAcronimoUnidadMilitar, @Param("keyword") String keyword, @Param("orderBy") String orderBy, @Param("orderMode") String orderMode);
     
     Optional<HistorialIntegranteDocumentos> findByIdHistorialIntegranteDocumentos(Long idHistorialIntegranteDocumentos);
     

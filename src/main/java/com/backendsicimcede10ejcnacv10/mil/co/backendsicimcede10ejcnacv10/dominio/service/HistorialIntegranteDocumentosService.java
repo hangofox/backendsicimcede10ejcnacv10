@@ -18,9 +18,9 @@ import java.util.List;
 public interface HistorialIntegranteDocumentosService {
     //DECLARACIÓN DE LOS METODOS DE RESPUESTA EN LA INTERFACE PARA LOS CRUDS QUE SON LOS METODOS PARA LA
     //CREACIÓN, LECTURA (LISTAR Y CONSULTAR), EDICIÓN Y ELIMINACIÓN DE UN REGISTRO:
-    Long contarTotalRegistros(Long idHistorialIntegranteDocumentos, String keyword);
-    List<HistorialIntegranteDocumentosDTO> listarHistorialesIntegrantesDocumentos(Long idHistorialIntegranteDocumentos, String keyword, String orderBy, String orderMode);
-    Slice<HistorialIntegranteDocumentosDTO> listarHistorialesIntegrantesDocumentosPag(Pageable pageable, Long idHistorialIntegranteDocumentos, String keyword, String orderBy, String orderMode);
+    Long contarTotalRegistros(Long idHistorialIntegranteDocumentos, String siglaoAcronimoUnidadMilitar, String keyword);
+    List<HistorialIntegranteDocumentosDTO> listarHistorialesIntegrantesDocumentos(Long idHistorialIntegranteDocumentos, String siglaoAcronimoUnidadMilitar, String keyword, String orderBy, String orderMode);
+    Slice<HistorialIntegranteDocumentosDTO> listarHistorialesIntegrantesDocumentosPag(Pageable pageable, Long idHistorialIntegranteDocumentos, String siglaoAcronimoUnidadMilitar, String keyword, String orderBy, String orderMode);
     RespuestaDTO crearHistorialIntegranteDocumentos(HistorialIntegranteDocumentosDTO historialIntegranteDocumentosDTO);
     RespuestaDTO consultarHistorialIntegranteDocumentosporId(Long idHistorialIntegranteDocumentos);
     RespuestaDTO consultarHistorialIntegranteDocumentosporNumReg(String numRegHistorialIntegranteDocumentos);

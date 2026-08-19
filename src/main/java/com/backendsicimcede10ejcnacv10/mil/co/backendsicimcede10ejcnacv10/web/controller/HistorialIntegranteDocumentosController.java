@@ -33,8 +33,9 @@ public class HistorialIntegranteDocumentosController {
     @GetMapping("/historialesIntegrantesDocumentos/count")//DECLARACIÓN DEL MAPEO DEL CRUD CONTAR REGISTROS.
     public ResponseEntity<Long> contarTotalRegistros(
             @RequestParam(required = false) Long idHistorialIntegranteDocumentos,
+            @RequestParam(required = false) String siglaoAcronimoUnidadMilitar,
             @RequestParam(required = false) String keyword) {
-        return new ResponseEntity<>(historialIntegranteDocumentosService.contarTotalRegistros(idHistorialIntegranteDocumentos, keyword), HttpStatus.OK);
+        return new ResponseEntity<>(historialIntegranteDocumentosService.contarTotalRegistros(idHistorialIntegranteDocumentos, siglaoAcronimoUnidadMilitar, keyword), HttpStatus.OK);
     }
     
     //ENDPOINT LISTAR TODOS LOS HISTORIALES INTEGRANTES DOCUMENTOS SIN PAGINACIÓN (PARA SELECTS DEL FRONTEND):
@@ -42,9 +43,10 @@ public class HistorialIntegranteDocumentosController {
     public ResponseEntity<List<HistorialIntegranteDocumentosDTO>> listarHistorialesIntegrantesDocumentosLista(
             @RequestParam(required = false) String keyword,
             @RequestParam(required = false) Long idHistorialIntegranteDocumentos,
+            @RequestParam(required = false) String siglaoAcronimoUnidadMilitar,
             @RequestParam(required = false) String orderBy,
             @RequestParam(required = false, defaultValue = "ASC") String orderMode) {
-        return new ResponseEntity<>(historialIntegranteDocumentosService.listarHistorialesIntegrantesDocumentos(idHistorialIntegranteDocumentos, keyword, orderBy, orderMode), HttpStatus.OK);
+        return new ResponseEntity<>(historialIntegranteDocumentosService.listarHistorialesIntegrantesDocumentos(idHistorialIntegranteDocumentos, siglaoAcronimoUnidadMilitar, keyword, orderBy, orderMode), HttpStatus.OK);
     }
     
     //ENDPOINT ÚNICO PARA LISTAR/FILTRAR/ORDENAR/PAGINAR HISTORIALES INTEGRANTES DOCUMENTOS CON QUERY PARAMS:
@@ -52,12 +54,13 @@ public class HistorialIntegranteDocumentosController {
     public ResponseEntity<Slice<HistorialIntegranteDocumentosDTO>> listarHistorialesIntegrantesDocumentosListaPag(
             @RequestParam(required = false) String keyword,
             @RequestParam(required = false) Long idHistorialIntegranteDocumentos,
+            @RequestParam(required = false) String siglaoAcronimoUnidadMilitar,
             @RequestParam(required = false) String orderBy,
             @RequestParam(required = false, defaultValue = "ASC") String orderMode,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return new ResponseEntity<>(historialIntegranteDocumentosService.listarHistorialesIntegrantesDocumentosPag(pageable, idHistorialIntegranteDocumentos, keyword, orderBy, orderMode), HttpStatus.OK);
+        return new ResponseEntity<>(historialIntegranteDocumentosService.listarHistorialesIntegrantesDocumentosPag(pageable, idHistorialIntegranteDocumentos, siglaoAcronimoUnidadMilitar, keyword, orderBy, orderMode), HttpStatus.OK);
     }
     
     //CREAR REGISTRO:
