@@ -69,24 +69,62 @@ public class IntegrantesSolicitudesInfraestructura {
     @Column(name = "CARGO_CTE_BATALLON", columnDefinition = "VARCHAR2(255) NULL")
     private String cargoCteBatallon;
     
+    @Column(name = "GRADO_FINCA_RAIZ_BR", columnDefinition = "VARCHAR2(255) NULL")
+    private String gradoFincaRaizBr;
+    
+    @Column(name = "NOMBRES_FINCA_RAIZ_BR", columnDefinition = "VARCHAR2(255) NULL")
+    private String nombresFincaRaizBr;
+    
+    @Column(name = "PRIMER_APELLIDO_FINCA_RAIZ_BR", columnDefinition = "VARCHAR2(255) NULL")
+    private String primerApellidoFincaRaizBr;
+    
+    @Column(name = "SEGUNDO_APELLIDO_FINCA_RAIZ_BR", columnDefinition = "VARCHAR2(255) NULL")
+    private String segundoApellidoFincaRaizBr;
+    
+    @Column(name = "NOMBRE_ARCHIVO_FOTO_FIRMA_FINCA_RAIZ_BR", columnDefinition = "CLOB NULL")
+    //@Lob
+    private String nombreArchivoFotoFirmaFincaRaizBr;
+    
+    @Column(name = "CARGO_FINCA_RAIZ_BR", columnDefinition = "VARCHAR2(255) NULL")
+    private String cargoFincaRaizBr;
+    
+    @Column(name = "GRADO_JEFE_GESTION_INGENIEROS_BR", columnDefinition = "VARCHAR2(255) NULL")
+    private String gradoJefeGestionIngenierosBr;
+    
+    @Column(name = "NOMBRES_JEFE_GESTION_INGENIEROS_BR", columnDefinition = "VARCHAR2(255) NULL")
+    private String nombresJefeGestionIngenierosBr;
+    
+    @Column(name = "PRIMER_APELLIDO_JEFE_GESTION_INGENIEROS_BR", columnDefinition = "VARCHAR2(255) NULL")
+    private String primerApellidoJefeGestionIngenierosBr;
+    
+    @Column(name = "SEGUNDO_APELLIDO_JEFE_GESTION_INGENIEROS_BR", columnDefinition = "VARCHAR2(255) NULL")
+    private String segundoApellidoJefeGestionIngenierosBr;
+    
+    @Column(name = "NOMBRE_ARCHIVO_FOTO_FIRMA_JEFE_GESTION_INGENIEROS_BR", columnDefinition = "CLOB NULL")
+    //@Lob
+    private String nombreArchivoFotoFirmaJefeGestionIngenierosBr;
+    
+    @Column(name = "CARGO_JEFE_GESTION_INGENIEROS_BR", columnDefinition = "VARCHAR2(255) NULL")
+    private String cargoJefeGestionIngenierosBr;
+    
     @Column(name = "GRADO_CTE_O_JEM_2DO_CTE_BR", columnDefinition = "VARCHAR2(255) NULL")
-    private String gradoCteOJem2doCteWBr;
+    private String gradoCteOJem2doCteBr;
     
     @Column(name = "NOMBRES_CTE_O_JEM_2DO_CTE_BR", columnDefinition = "VARCHAR2(255) NULL")
-    private String nombresCteOJem2doCteWBr;
+    private String nombresCteOJem2doCteBr;
     
     @Column(name = "PRIMER_APELLIDO_CTE_O_JEM_2DO_CTE_BR", columnDefinition = "VARCHAR2(255) NULL")
-    private String primerApellidoCteOJem2doCteWBr;
+    private String primerApellidoCteOJem2doCteBr;
     
     @Column(name = "SEGUNDO_APELLIDO_CTE_O_JEM_2DO_CTE_BR", columnDefinition = "VARCHAR2(255) NULL")
-    private String segundoApellidoCteOJem2doCteWBr;
+    private String segundoApellidoCteOJem2doCteBr;
     
     @Column(name = "NOMBRE_ARCHIVO_FOTO_FIRMA_CTE_O_JEM_2DO_CTE_BR", columnDefinition = "CLOB NULL")
     //@Lob
-    private String nombreArchivoFotoFirmaCteOJem2doCteWBr;
+    private String nombreArchivoFotoFirmaCteOJem2doCteBr;
     
     @Column(name = "CARGO_CTE_O_JEM_2DO_CTE_BR", columnDefinition = "VARCHAR2(255) NULL")
-    private String cargoCteOJem2doCteWBr;
+    private String cargoCteOJem2doCteBr;
     
     @Column(name = "GRADO_FINCA_RAIZ_DIV", columnDefinition = "VARCHAR2(255) NULL")
     private String gradoFincaRaizDiv;
@@ -401,41 +439,113 @@ public class IntegrantesSolicitudesInfraestructura {
     public void setCargoCteBatallon(String cargoCteBatallon) {
         this.cargoCteBatallon = cargoCteBatallon;
     }
-    public String getGradoCteOJem2doCteWBr() {
-        return gradoCteOJem2doCteWBr;
+    public String getGradoFincaRaizBr() {
+        return gradoFincaRaizBr;
     }
-    public void setGradoCteOJem2doCteWBr(String gradoCteOJem2doCteWBr) {
-        this.gradoCteOJem2doCteWBr = gradoCteOJem2doCteWBr;
+    public void setGradoFincaRaizBr(String gradoFincaRaizBr) {
+        this.gradoFincaRaizBr = gradoFincaRaizBr;
     }
-    public String getNombresCteOJem2doCteWBr() {
-        return nombresCteOJem2doCteWBr;
+    public String getNombresFincaRaizBr() {
+        return nombresFincaRaizBr;
     }
-    public void setNombresCteOJem2doCteWBr(String nombresCteOJem2doCteWBr) {
-        this.nombresCteOJem2doCteWBr = nombresCteOJem2doCteWBr;
+    public void setNombresFincaRaizBr(String nombresFincaRaizBr) {
+        this.nombresFincaRaizBr = nombresFincaRaizBr;
     }
-    public String getPrimerApellidoCteOJem2doCteWBr() {
-        return primerApellidoCteOJem2doCteWBr;
+    public String getPrimerApellidoFincaRaizBr() {
+        return primerApellidoFincaRaizBr;
     }
-    public void setPrimerApellidoCteOJem2doCteWBr(String primerApellidoCteOJem2doCteWBr) {
-        this.primerApellidoCteOJem2doCteWBr = primerApellidoCteOJem2doCteWBr;
+    public void setPrimerApellidoFincaRaizBr(String primerApellidoFincaRaizBr) {
+        this.primerApellidoFincaRaizBr = primerApellidoFincaRaizBr;
     }
-    public String getSegundoApellidoCteOJem2doCteWBr() {
-        return segundoApellidoCteOJem2doCteWBr;
+    public String getSegundoApellidoFincaRaizBr() {
+        return segundoApellidoFincaRaizBr;
     }
-    public void setSegundoApellidoCteOJem2doCteWBr(String segundoApellidoCteOJem2doCteWBr) {
-        this.segundoApellidoCteOJem2doCteWBr = segundoApellidoCteOJem2doCteWBr;
+    public void setSegundoApellidoFincaRaizBr(String segundoApellidoFincaRaizBr) {
+        this.segundoApellidoFincaRaizBr = segundoApellidoFincaRaizBr;
     }
-    public String getNombreArchivoFotoFirmaCteOJem2doCteWBr() {
-        return nombreArchivoFotoFirmaCteOJem2doCteWBr;
+    public String getNombreArchivoFotoFirmaFincaRaizBr() {
+        return nombreArchivoFotoFirmaFincaRaizBr;
     }
-    public void setNombreArchivoFotoFirmaCteOJem2doCteWBr(String nombreArchivoFotoFirmaCteOJem2doCteWBr) {
-        this.nombreArchivoFotoFirmaCteOJem2doCteWBr = nombreArchivoFotoFirmaCteOJem2doCteWBr;
+    public void setNombreArchivoFotoFirmaFincaRaizBr(String nombreArchivoFotoFirmaFincaRaizBr) {
+        this.nombreArchivoFotoFirmaFincaRaizBr = nombreArchivoFotoFirmaFincaRaizBr;
     }
-    public String getCargoCteOJem2doCteWBr() {
-        return cargoCteOJem2doCteWBr;
+    public String getCargoFincaRaizBr() {
+        return cargoFincaRaizBr;
     }
-    public void setCargoCteOJem2doCteWBr(String cargoCteOJem2doCteWBr) {
-        this.cargoCteOJem2doCteWBr = cargoCteOJem2doCteWBr;
+    public void setCargoFincaRaizBr(String cargoFincaRaizBr) {
+        this.cargoFincaRaizBr = cargoFincaRaizBr;
+    }
+    public String getGradoJefeGestionIngenierosBr() {
+        return gradoJefeGestionIngenierosBr;
+    }
+    public void setGradoJefeGestionIngenierosBr(String gradoJefeGestionIngenierosBr) {
+        this.gradoJefeGestionIngenierosBr = gradoJefeGestionIngenierosBr;
+    }
+    public String getNombresJefeGestionIngenierosBr() {
+        return nombresJefeGestionIngenierosBr;
+    }
+    public void setNombresJefeGestionIngenierosBr(String nombresJefeGestionIngenierosBr) {
+        this.nombresJefeGestionIngenierosBr = nombresJefeGestionIngenierosBr;
+    }
+    public String getPrimerApellidoJefeGestionIngenierosBr() {
+        return primerApellidoJefeGestionIngenierosBr;
+    }
+    public void setPrimerApellidoJefeGestionIngenierosBr(String primerApellidoJefeGestionIngenierosBr) {
+        this.primerApellidoJefeGestionIngenierosBr = primerApellidoJefeGestionIngenierosBr;
+    }
+    public String getSegundoApellidoJefeGestionIngenierosBr() {
+        return segundoApellidoJefeGestionIngenierosBr;
+    }
+    public void setSegundoApellidoJefeGestionIngenierosBr(String segundoApellidoJefeGestionIngenierosBr) {
+        this.segundoApellidoJefeGestionIngenierosBr = segundoApellidoJefeGestionIngenierosBr;
+    }
+    public String getNombreArchivoFotoFirmaJefeGestionIngenierosBr() {
+        return nombreArchivoFotoFirmaJefeGestionIngenierosBr;
+    }
+    public void setNombreArchivoFotoFirmaJefeGestionIngenierosBr(String nombreArchivoFotoFirmaJefeGestionIngenierosBr) {
+        this.nombreArchivoFotoFirmaJefeGestionIngenierosBr = nombreArchivoFotoFirmaJefeGestionIngenierosBr;
+    }
+    public String getCargoJefeGestionIngenierosBr() {
+        return cargoJefeGestionIngenierosBr;
+    }
+    public void setCargoJefeGestionIngenierosBr(String cargoJefeGestionIngenierosBr) {
+        this.cargoJefeGestionIngenierosBr = cargoJefeGestionIngenierosBr;
+    }
+    public String getGradoCteOJem2doCteBr() {
+        return gradoCteOJem2doCteBr;
+    }
+    public void setGradoCteOJem2doCteBr(String gradoCteOJem2doCteBr) {
+        this.gradoCteOJem2doCteBr = gradoCteOJem2doCteBr;
+    }
+    public String getNombresCteOJem2doCteBr() {
+        return nombresCteOJem2doCteBr;
+    }
+    public void setNombresCteOJem2doCteBr(String nombresCteOJem2doCteBr) {
+        this.nombresCteOJem2doCteBr = nombresCteOJem2doCteBr;
+    }
+    public String getPrimerApellidoCteOJem2doCteBr() {
+        return primerApellidoCteOJem2doCteBr;
+    }
+    public void setPrimerApellidoCteOJem2doCteBr(String primerApellidoCteOJem2doCteBr) {
+        this.primerApellidoCteOJem2doCteBr = primerApellidoCteOJem2doCteBr;
+    }
+    public String getSegundoApellidoCteOJem2doCteBr() {
+        return segundoApellidoCteOJem2doCteBr;
+    }
+    public void setSegundoApellidoCteOJem2doCteBr(String segundoApellidoCteOJem2doCteBr) {
+        this.segundoApellidoCteOJem2doCteBr = segundoApellidoCteOJem2doCteBr;
+    }
+    public String getNombreArchivoFotoFirmaCteOJem2doCteBr() {
+        return nombreArchivoFotoFirmaCteOJem2doCteBr;
+    }
+    public void setNombreArchivoFotoFirmaCteOJem2doCteBr(String nombreArchivoFotoFirmaCteOJem2doCteBr) {
+        this.nombreArchivoFotoFirmaCteOJem2doCteBr = nombreArchivoFotoFirmaCteOJem2doCteBr;
+    }
+    public String getCargoCteOJem2doCteBr() {
+        return cargoCteOJem2doCteBr;
+    }
+    public void setCargoCteOJem2doCteBr(String cargoCteOJem2doCteBr) {
+        this.cargoCteOJem2doCteBr = cargoCteOJem2doCteBr;
     }
     public String getGradoFincaRaizDiv() {
         return gradoFincaRaizDiv;

@@ -17,13 +17,13 @@ import java.util.Optional;
 */
 @Component//DECLARACIÓN DEL COMPONENTE PARA LOS METODOS DEL DAO.
 public class IntegrantesSolicitudesInfraestructuraDAO {
-
+    
     @Autowired//INYECTAMOS EL REPOSITORIO.
     private SolicitudInfraestructuraRepository solicitudInfraestructuraRepository;
-
+    
     @Autowired//INYECTAMOS EL DAO.
     private SolicitudInfraestructuraDAO solicitudInfraestructuraDAO;
-
+    
     /**
     * @Autor PD04. HERNAN ADOLFO NUÑEZ GONZALEZ.
     * @Since 01/04/2026.
@@ -46,12 +46,24 @@ public class IntegrantesSolicitudesInfraestructuraDAO {
         integrantesSolicitudesInfraestructura.setSegundoApellidoCteBatallon(integrantesSolicitudesInfraestructuraDTO.getSegundoApellidoCteBatallon());
         integrantesSolicitudesInfraestructura.setNombreArchivoFotoFirmaCteBatallon(integrantesSolicitudesInfraestructuraDTO.getNombreArchivoFotoFirmaCteBatallon());
         integrantesSolicitudesInfraestructura.setCargoCteBatallon(integrantesSolicitudesInfraestructuraDTO.getCargoCteBatallon());
-        integrantesSolicitudesInfraestructura.setGradoCteOJem2doCteWBr(integrantesSolicitudesInfraestructuraDTO.getGradoCteOJem2doCteWBr());
-        integrantesSolicitudesInfraestructura.setNombresCteOJem2doCteWBr(integrantesSolicitudesInfraestructuraDTO.getNombresCteOJem2doCteWBr());
-        integrantesSolicitudesInfraestructura.setPrimerApellidoCteOJem2doCteWBr(integrantesSolicitudesInfraestructuraDTO.getPrimerApellidoCteOJem2doCteWBr());
-        integrantesSolicitudesInfraestructura.setSegundoApellidoCteOJem2doCteWBr(integrantesSolicitudesInfraestructuraDTO.getSegundoApellidoCteOJem2doCteWBr());
-        integrantesSolicitudesInfraestructura.setNombreArchivoFotoFirmaCteOJem2doCteWBr(integrantesSolicitudesInfraestructuraDTO.getNombreArchivoFotoFirmaCteOJem2doCteWBr());
-        integrantesSolicitudesInfraestructura.setCargoCteOJem2doCteWBr(integrantesSolicitudesInfraestructuraDTO.getCargoCteOJem2doCteWBr());
+        integrantesSolicitudesInfraestructura.setGradoFincaRaizBr(integrantesSolicitudesInfraestructuraDTO.getGradoFincaRaizBr());
+        integrantesSolicitudesInfraestructura.setNombresFincaRaizBr(integrantesSolicitudesInfraestructuraDTO.getNombresFincaRaizBr());
+        integrantesSolicitudesInfraestructura.setPrimerApellidoFincaRaizBr(integrantesSolicitudesInfraestructuraDTO.getPrimerApellidoFincaRaizBr());
+        integrantesSolicitudesInfraestructura.setSegundoApellidoFincaRaizBr(integrantesSolicitudesInfraestructuraDTO.getSegundoApellidoFincaRaizBr());
+        integrantesSolicitudesInfraestructura.setNombreArchivoFotoFirmaFincaRaizBr(integrantesSolicitudesInfraestructuraDTO.getNombreArchivoFotoFirmaFincaRaizBr());
+        integrantesSolicitudesInfraestructura.setCargoFincaRaizBr(integrantesSolicitudesInfraestructuraDTO.getCargoFincaRaizBr());
+        integrantesSolicitudesInfraestructura.setGradoJefeGestionIngenierosBr(integrantesSolicitudesInfraestructuraDTO.getGradoJefeGestionIngenierosBr());
+        integrantesSolicitudesInfraestructura.setNombresJefeGestionIngenierosBr(integrantesSolicitudesInfraestructuraDTO.getNombresJefeGestionIngenierosBr());
+        integrantesSolicitudesInfraestructura.setPrimerApellidoJefeGestionIngenierosBr(integrantesSolicitudesInfraestructuraDTO.getPrimerApellidoJefeGestionIngenierosBr());
+        integrantesSolicitudesInfraestructura.setSegundoApellidoJefeGestionIngenierosBr(integrantesSolicitudesInfraestructuraDTO.getSegundoApellidoJefeGestionIngenierosBr());
+        integrantesSolicitudesInfraestructura.setNombreArchivoFotoFirmaJefeGestionIngenierosBr(integrantesSolicitudesInfraestructuraDTO.getNombreArchivoFotoFirmaJefeGestionIngenierosBr());
+        integrantesSolicitudesInfraestructura.setCargoJefeGestionIngenierosBr(integrantesSolicitudesInfraestructuraDTO.getCargoJefeGestionIngenierosBr());
+        integrantesSolicitudesInfraestructura.setGradoCteOJem2doCteBr(integrantesSolicitudesInfraestructuraDTO.getGradoCteOJem2doCteBr());
+        integrantesSolicitudesInfraestructura.setNombresCteOJem2doCteBr(integrantesSolicitudesInfraestructuraDTO.getNombresCteOJem2doCteBr());
+        integrantesSolicitudesInfraestructura.setPrimerApellidoCteOJem2doCteBr(integrantesSolicitudesInfraestructuraDTO.getPrimerApellidoCteOJem2doCteBr());
+        integrantesSolicitudesInfraestructura.setSegundoApellidoCteOJem2doCteBr(integrantesSolicitudesInfraestructuraDTO.getSegundoApellidoCteOJem2doCteBr());
+        integrantesSolicitudesInfraestructura.setNombreArchivoFotoFirmaCteOJem2doCteBr(integrantesSolicitudesInfraestructuraDTO.getNombreArchivoFotoFirmaCteOJem2doCteBr());
+        integrantesSolicitudesInfraestructura.setCargoCteOJem2doCteBr(integrantesSolicitudesInfraestructuraDTO.getCargoCteOJem2doCteBr());
         integrantesSolicitudesInfraestructura.setGradoFincaRaizDiv(integrantesSolicitudesInfraestructuraDTO.getGradoFincaRaizDiv());
         integrantesSolicitudesInfraestructura.setNombresFincaRaizDiv(integrantesSolicitudesInfraestructuraDTO.getNombresFincaRaizDiv());
         integrantesSolicitudesInfraestructura.setPrimerApellidoFincaRaizDiv(integrantesSolicitudesInfraestructuraDTO.getPrimerApellidoFincaRaizDiv());
@@ -124,16 +136,16 @@ public class IntegrantesSolicitudesInfraestructuraDAO {
         integrantesSolicitudesInfraestructura.setSegundoApellidoCteJef(integrantesSolicitudesInfraestructuraDTO.getSegundoApellidoCteJef());
         integrantesSolicitudesInfraestructura.setNombreArchivoFotoFirmaCteJef(integrantesSolicitudesInfraestructuraDTO.getNombreArchivoFotoFirmaCteJef());
         integrantesSolicitudesInfraestructura.setCargoCteJef(integrantesSolicitudesInfraestructuraDTO.getCargoCteJef());
-
+        
         //MAPEAR SOLICITUD INFRAESTRUCTURA RELACIONADA.
         if (integrantesSolicitudesInfraestructuraDTO.getSolicitudInfraestructuraDTO() != null && integrantesSolicitudesInfraestructuraDTO.getSolicitudInfraestructuraDTO().getIdSolicitudInfraestructura() != null) {
            Optional<SolicitudInfraestructura> solicitudInfraestructuraFk = solicitudInfraestructuraRepository.findByIdSolicitudInfraestructura(integrantesSolicitudesInfraestructuraDTO.getSolicitudInfraestructuraDTO().getIdSolicitudInfraestructura());
            solicitudInfraestructuraFk.ifPresent(integrantesSolicitudesInfraestructura::setSolicitudInfraestructura);
         }
-
+        
         return integrantesSolicitudesInfraestructura;
     }
-
+    
     /**
     * @Autor PD04. HERNAN ADOLFO NUÑEZ GONZALEZ.
     * @Since 01/04/2026.
@@ -156,12 +168,24 @@ public class IntegrantesSolicitudesInfraestructuraDAO {
         integrantesSolicitudesInfraestructuraDTO.setSegundoApellidoCteBatallon(integrantesSolicitudesInfraestructura.getSegundoApellidoCteBatallon());
         integrantesSolicitudesInfraestructuraDTO.setNombreArchivoFotoFirmaCteBatallon(integrantesSolicitudesInfraestructura.getNombreArchivoFotoFirmaCteBatallon());
         integrantesSolicitudesInfraestructuraDTO.setCargoCteBatallon(integrantesSolicitudesInfraestructura.getCargoCteBatallon());
-        integrantesSolicitudesInfraestructuraDTO.setGradoCteOJem2doCteWBr(integrantesSolicitudesInfraestructura.getGradoCteOJem2doCteWBr());
-        integrantesSolicitudesInfraestructuraDTO.setNombresCteOJem2doCteWBr(integrantesSolicitudesInfraestructura.getNombresCteOJem2doCteWBr());
-        integrantesSolicitudesInfraestructuraDTO.setPrimerApellidoCteOJem2doCteWBr(integrantesSolicitudesInfraestructura.getPrimerApellidoCteOJem2doCteWBr());
-        integrantesSolicitudesInfraestructuraDTO.setSegundoApellidoCteOJem2doCteWBr(integrantesSolicitudesInfraestructura.getSegundoApellidoCteOJem2doCteWBr());
-        integrantesSolicitudesInfraestructuraDTO.setNombreArchivoFotoFirmaCteOJem2doCteWBr(integrantesSolicitudesInfraestructura.getNombreArchivoFotoFirmaCteOJem2doCteWBr());
-        integrantesSolicitudesInfraestructuraDTO.setCargoCteOJem2doCteWBr(integrantesSolicitudesInfraestructura.getCargoCteOJem2doCteWBr());
+        integrantesSolicitudesInfraestructuraDTO.setGradoFincaRaizBr(integrantesSolicitudesInfraestructura.getGradoFincaRaizBr());
+        integrantesSolicitudesInfraestructuraDTO.setNombresFincaRaizBr(integrantesSolicitudesInfraestructura.getNombresFincaRaizBr());
+        integrantesSolicitudesInfraestructuraDTO.setPrimerApellidoFincaRaizBr(integrantesSolicitudesInfraestructura.getPrimerApellidoFincaRaizBr());
+        integrantesSolicitudesInfraestructuraDTO.setSegundoApellidoFincaRaizBr(integrantesSolicitudesInfraestructura.getSegundoApellidoFincaRaizBr());
+        integrantesSolicitudesInfraestructuraDTO.setNombreArchivoFotoFirmaFincaRaizBr(integrantesSolicitudesInfraestructura.getNombreArchivoFotoFirmaFincaRaizBr());
+        integrantesSolicitudesInfraestructuraDTO.setCargoFincaRaizBr(integrantesSolicitudesInfraestructura.getCargoFincaRaizBr());
+        integrantesSolicitudesInfraestructuraDTO.setGradoJefeGestionIngenierosBr(integrantesSolicitudesInfraestructura.getGradoJefeGestionIngenierosBr());
+        integrantesSolicitudesInfraestructuraDTO.setNombresJefeGestionIngenierosBr(integrantesSolicitudesInfraestructura.getNombresJefeGestionIngenierosBr());
+        integrantesSolicitudesInfraestructuraDTO.setPrimerApellidoJefeGestionIngenierosBr(integrantesSolicitudesInfraestructura.getPrimerApellidoJefeGestionIngenierosBr());
+        integrantesSolicitudesInfraestructuraDTO.setSegundoApellidoJefeGestionIngenierosBr(integrantesSolicitudesInfraestructura.getSegundoApellidoJefeGestionIngenierosBr());
+        integrantesSolicitudesInfraestructuraDTO.setNombreArchivoFotoFirmaJefeGestionIngenierosBr(integrantesSolicitudesInfraestructura.getNombreArchivoFotoFirmaJefeGestionIngenierosBr());
+        integrantesSolicitudesInfraestructuraDTO.setCargoJefeGestionIngenierosBr(integrantesSolicitudesInfraestructura.getCargoJefeGestionIngenierosBr());
+        integrantesSolicitudesInfraestructuraDTO.setGradoCteOJem2doCteBr(integrantesSolicitudesInfraestructura.getGradoCteOJem2doCteBr());
+        integrantesSolicitudesInfraestructuraDTO.setNombresCteOJem2doCteBr(integrantesSolicitudesInfraestructura.getNombresCteOJem2doCteBr());
+        integrantesSolicitudesInfraestructuraDTO.setPrimerApellidoCteOJem2doCteBr(integrantesSolicitudesInfraestructura.getPrimerApellidoCteOJem2doCteBr());
+        integrantesSolicitudesInfraestructuraDTO.setSegundoApellidoCteOJem2doCteBr(integrantesSolicitudesInfraestructura.getSegundoApellidoCteOJem2doCteBr());
+        integrantesSolicitudesInfraestructuraDTO.setNombreArchivoFotoFirmaCteOJem2doCteBr(integrantesSolicitudesInfraestructura.getNombreArchivoFotoFirmaCteOJem2doCteBr());
+        integrantesSolicitudesInfraestructuraDTO.setCargoCteOJem2doCteBr(integrantesSolicitudesInfraestructura.getCargoCteOJem2doCteBr());
         integrantesSolicitudesInfraestructuraDTO.setGradoFincaRaizDiv(integrantesSolicitudesInfraestructura.getGradoFincaRaizDiv());
         integrantesSolicitudesInfraestructuraDTO.setNombresFincaRaizDiv(integrantesSolicitudesInfraestructura.getNombresFincaRaizDiv());
         integrantesSolicitudesInfraestructuraDTO.setPrimerApellidoFincaRaizDiv(integrantesSolicitudesInfraestructura.getPrimerApellidoFincaRaizDiv());
@@ -234,13 +258,13 @@ public class IntegrantesSolicitudesInfraestructuraDAO {
         integrantesSolicitudesInfraestructuraDTO.setSegundoApellidoCteJef(integrantesSolicitudesInfraestructura.getSegundoApellidoCteJef());
         integrantesSolicitudesInfraestructuraDTO.setNombreArchivoFotoFirmaCteJef(integrantesSolicitudesInfraestructura.getNombreArchivoFotoFirmaCteJef());
         integrantesSolicitudesInfraestructuraDTO.setCargoCteJef(integrantesSolicitudesInfraestructura.getCargoCteJef());
-
+        
         //MAPEAR SOLICITUD INFRAESTRUCTURA RELACIONADA.
         if (integrantesSolicitudesInfraestructura.getSolicitudInfraestructura() != null && integrantesSolicitudesInfraestructura.getSolicitudInfraestructura().getIdSolicitudInfraestructura() != null) {
            Optional<SolicitudInfraestructura> solicitudInfraestructuraFk = solicitudInfraestructuraRepository.findByIdSolicitudInfraestructura(integrantesSolicitudesInfraestructura.getSolicitudInfraestructura().getIdSolicitudInfraestructura());
            solicitudInfraestructuraFk.ifPresent(solicInfr -> integrantesSolicitudesInfraestructuraDTO.setSolicitudInfraestructuraDTO(solicitudInfraestructuraDAO.solicitudInfraestructuraDTO(solicInfr)));
         }
-
+        
         return integrantesSolicitudesInfraestructuraDTO;
     }
 }
