@@ -46,17 +46,17 @@ public class ParametrosSistema {
     @Column(name = "RUTA_DESTINO_ARCHIVOS_UNIDADES_MILITARES", columnDefinition="CLOB NOT NULL")
     private String rutaDestinoArchivosUnidadesMilitares;
     
-    @Column(name = "RUTA_DESTINO_ARCHIVOS_INTEGRANTES_DOCUMENTOS", columnDefinition="CLOB NOT NULL")
-    private String rutaDestinoArchivosIntegrantesDocumentos;
+    @Column(name = "RUTA_DESTINO_ARCHIVOS_HISTORIAL_INTEGRANTES_DOCUMENTOS", columnDefinition="CLOB NOT NULL")
+    private String rutaDestinoArchivosHistorialIntegrantesDocumentos;
     
-    @Column(name = "RUTA_DESTINO_ARCHIVOS_CONCEPTOS_TECNICOS", columnDefinition="CLOB NOT NULL")
-    private String rutaDestinoArchivosConceptosTecnicos;
+    @Column(name = "RUTA_DESTINO_ARCHIVOS_RESPONSABLES", columnDefinition="CLOB NOT NULL")
+    private String rutaDestinoArchivosResponsables;
     
-    @Column(name = "RUTA_DESTINO_ARCHIVOS_ACTAS_REINTEGROS", columnDefinition="CLOB NOT NULL")
-    private String rutaDestinoArchivosActasReintegros;
+    @Column(name = "RUTA_DESTINO_ARCHIVOS_ALTAS_EQUIPOS_INGENIEROS", columnDefinition="CLOB NOT NULL")
+    private String rutaDestinoArchivosAltasEquiposIngenieros;
     
-    @Column(name = "RUTA_DESTINO_ARCHIVOS_RESOLUCIONES_BAJAS", columnDefinition="CLOB NOT NULL")
-    private String rutaDestinoArchivosResolucionesBajas;
+    @Column(name = "RUTA_DESTINO_ARCHIVOS_BAJAS_EQUIPOS_INGENIEROS", columnDefinition="CLOB NOT NULL")
+    private String rutaDestinoArchivosBajasEquiposIngenieros;
     
     @Column(name = "AUTH_ENABLE", columnDefinition="VARCHAR2(150) NULL")
     private String authEnable;
@@ -131,29 +131,29 @@ public class ParametrosSistema {
     public void setRutaDestinoArchivosUnidadesMilitares(String rutaDestinoArchivosUnidadesMilitares) {
         this.rutaDestinoArchivosUnidadesMilitares = rutaDestinoArchivosUnidadesMilitares;
     }
-    public String getRutaDestinoArchivosIntegrantesDocumentos() {
-        return rutaDestinoArchivosIntegrantesDocumentos;
+    public String getRutaDestinoArchivosHistorialIntegrantesDocumentos() {
+        return rutaDestinoArchivosHistorialIntegrantesDocumentos;
     }
-    public void setRutaDestinoArchivosIntegrantesDocumentos(String rutaDestinoArchivosIntegrantesDocumentos) {
-        this.rutaDestinoArchivosIntegrantesDocumentos = rutaDestinoArchivosIntegrantesDocumentos;
+    public void setRutaDestinoArchivosHistorialIntegrantesDocumentos(String rutaDestinoArchivosHistorialIntegrantesDocumentos) {
+        this.rutaDestinoArchivosHistorialIntegrantesDocumentos = rutaDestinoArchivosHistorialIntegrantesDocumentos;
     }
-    public String getRutaDestinoArchivosConceptosTecnicos() {
-        return rutaDestinoArchivosConceptosTecnicos;
+    public String getRutaDestinoArchivosResponsables() {
+        return rutaDestinoArchivosResponsables;
     }
-    public void setRutaDestinoArchivosConceptosTecnicos(String rutaDestinoArchivosConceptosTecnicos) {
-        this.rutaDestinoArchivosConceptosTecnicos = rutaDestinoArchivosConceptosTecnicos;
+    public void setRutaDestinoArchivosResponsables(String rutaDestinoArchivosResponsables) {
+        this.rutaDestinoArchivosResponsables = rutaDestinoArchivosResponsables;
     }
-    public String getRutaDestinoArchivosActasReintegros() {
-        return rutaDestinoArchivosActasReintegros;
+    public String getRutaDestinoArchivosAltasEquiposIngenieros() {
+        return rutaDestinoArchivosAltasEquiposIngenieros;
     }
-    public void setRutaDestinoArchivosActasReintegros(String rutaDestinoArchivosActasReintegros) {
-        this.rutaDestinoArchivosActasReintegros = rutaDestinoArchivosActasReintegros;
+    public void setRutaDestinoArchivosAltasEquiposIngenieros(String rutaDestinoArchivosAltasEquiposIngenieros) {
+        this.rutaDestinoArchivosAltasEquiposIngenieros = rutaDestinoArchivosAltasEquiposIngenieros;
     }
-    public String getRutaDestinoArchivosResolucionesBajas() {
-        return rutaDestinoArchivosResolucionesBajas;
+    public String getRutaDestinoArchivosBajasEquiposIngenieros() {
+        return rutaDestinoArchivosBajasEquiposIngenieros;
     }
-    public void setRutaDestinoArchivosResolucionesBajas(String rutaDestinoArchivosResolucionesBajas) {
-        this.rutaDestinoArchivosResolucionesBajas = rutaDestinoArchivosResolucionesBajas;
+    public void setRutaDestinoArchivosBajasEquiposIngenieros(String rutaDestinoArchivosBajasEquiposIngenieros) {
+        this.rutaDestinoArchivosBajasEquiposIngenieros = rutaDestinoArchivosBajasEquiposIngenieros;
     }
     public String getAuthEnable() {
         return authEnable;

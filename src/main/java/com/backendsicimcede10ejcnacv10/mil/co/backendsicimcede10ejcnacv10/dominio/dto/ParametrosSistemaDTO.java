@@ -20,10 +20,10 @@ public class ParametrosSistemaDTO {
     private String rutaDestinoCarpetaCargueTemporalArchivos;
     private String rutaDestinoArchivosUsuarios;
     private String rutaDestinoArchivosUnidadesMilitares;
-    private String rutaDestinoArchivosIntegrantesDocumentos;
-    private String rutaDestinoArchivosConceptosTecnicos;
-    private String rutaDestinoArchivosActasReintegros;
-    private String rutaDestinoArchivosResolucionesBajas;
+    private String rutaDestinoArchivosHistorialIntegrantesDocumentos;
+    private String rutaDestinoArchivosResponsables;
+    private String rutaDestinoArchivosAltasEquiposIngenieros;
+    private String rutaDestinoArchivosBajasEquiposIngenieros;
     private String authEnable;
     private String startTTLSEnable;
     private String smtpHost;
