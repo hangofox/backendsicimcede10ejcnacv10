@@ -282,7 +282,7 @@ public class RecuperacionContrasenaAccesoUsuarioServiceImpl implements Recuperac
         
         return respuestaDTO;
     }
-
+    
     //ENVIAR CÓDIGO DE ACTIVACIÓN DE RECUPERACIÓN DE CONTRASEÑA DE ACCESO POR CORREO ELECTRÓNICO:
     //TODO SE RESUELVE AQUÍ, EN EL SERVIDOR: SE GENERA EL CÓDIGO, SE GUARDA LA RECUPERACIÓN CON SU FECHA DE EXPIRACIÓN,
     //SE REEMPLAZAN LAS ETIQUETAS *[NUMDOCIDSICIM]* Y *[CODACTIVAUSICIM]* DE LA PLANTILLA HTML Y SE ENVÍA EL CORREO.
@@ -293,42 +293,44 @@ public class RecuperacionContrasenaAccesoUsuarioServiceImpl implements Recuperac
             if ( (envioCodigoActivacionRecuperacionContrasenaDTO==null)||(envioCodigoActivacionRecuperacionContrasenaDTO.getIdUsuario()==null) ) {
                return new RespuestaDTO(MensajesConstantes.MSG_USUARIO_RECUPERACION_NO_ENCONTRADO, false);
             }
-
+            
             //USUARIO DESTINATARIO:
             Optional<Usuario> usuarioEncontrado = usuarioRepository.findByIdUsuario(envioCodigoActivacionRecuperacionContrasenaDTO.getIdUsuario());
             if (!usuarioEncontrado.isPresent()) {
                return new RespuestaDTO(MensajesConstantes.MSG_USUARIO_RECUPERACION_NO_ENCONTRADO, false);
             }
             Usuario usuario = usuarioEncontrado.get();
-
+            
             //CORREO ELECTRÓNICO DEL DESTINATARIO SEGÚN EL MEDIO DE ENVÍO ELEGIDO:
             String medioEnvio = (envioCodigoActivacionRecuperacionContrasenaDTO.getMedioEnvio()==null) ? "" : envioCodigoActivacionRecuperacionContrasenaDTO.getMedioEnvio().trim().toUpperCase();
             String correoElectronicoDestinatario;
             if (MEDIO_ENVIO_INSTITUCIONAL.equals(medioEnvio)) {
                correoElectronicoDestinatario = usuario.getCorreoElectronicoInstitucionalUsuario();
-            } else if (MEDIO_ENVIO_PERSONAL.equals(medioEnvio)) {
+            }
+            else if (MEDIO_ENVIO_PERSONAL.equals(medioEnvio)) {
                correoElectronicoDestinatario = usuario.getCorreoElectronicoPersonalUsuario();
-            } else {
+            }
+            else {
                return new RespuestaDTO(MensajesConstantes.MSG_MEDIO_ENVIO_NO_VALIDO, false);
             }
             if ( (correoElectronicoDestinatario==null)||(correoElectronicoDestinatario.trim().isEmpty()) ) {
                return new RespuestaDTO(MensajesConstantes.MSG_CORREO_ELECTRONICO_DESTINATARIO_NO_REGISTRADO, false);
             }
-
+            
             //PARÁMETROS DEL SISTEMA (PRIMER REGISTRO POR ID, IGUAL QUE EL PROYECTO DE REFERENCIA QUE USA EL ID 1):
             List<ParametrosSistema> parametrosSistemaLista = parametrosSistemaRepository.findAll(Sort.by(Sort.Direction.ASC, "idParametrosSistema"));
             if ( (parametrosSistemaLista==null)||(parametrosSistemaLista.isEmpty()) ) {
                return new RespuestaDTO(MensajesConstantes.MSG_PARAMETROS_SISTEMA_NO_ENCONTRADOS, false);
             }
             ParametrosSistema parametrosSistema = parametrosSistemaLista.get(0);
-
+            
             //SE BORRAN LAS RECUPERACIONES ANTERIORES DEL USUARIO PARA QUE SOLO QUEDE VIGENTE EL ÚLTIMO CÓDIGO:
             vaciarRecuperacionesContrasenasAccesosUsuariosporIdUsuario(usuario.getIdUsuario());
-
+            
             //FECHA DE EXPIRACIÓN DEL CÓDIGO SEGÚN EL TIEMPO DE VALIDEZ PARAMETRIZADO:
             long tiempoMinutosValidez = (parametrosSistema.getTiempoMinutosValidezCodigoActivacionContrasena()==null) ? 0L : parametrosSistema.getTiempoMinutosValidezCodigoActivacionContrasena();
             Date fechaHMSExpiracion = new Date(System.currentTimeMillis() + (tiempoMinutosValidez * 60L * 1000L));
-
+            
             //SE GENERA EL CÓDIGO DE 6 DÍGITOS Y SE GUARDA LA RECUPERACIÓN (SE REINTENTA SI EL CÓDIGO YA EXISTIERA):
             String codigoActivacion = null;
             for (int intento = 0; (intento < 5)&&(codigoActivacion==null); intento++) {
@@ -347,12 +349,12 @@ public class RecuperacionContrasenaAccesoUsuarioServiceImpl implements Recuperac
             if (codigoActivacion==null) {
                return new RespuestaDTO(MensajesConstantes.MSG_CODIGO_ACTIVACION_NO_ENVIADO, false);
             }
-
+            
             //SE REEMPLAZAN LAS ETIQUETAS DE LA PLANTILLA (String.replace REEMPLAZA TODAS LAS APARICIONES DE CADA UNA):
             String plantilla = (parametrosSistema.getCuerpoMensajeHtmlRecuperacionContrasena()==null) ? "" : parametrosSistema.getCuerpoMensajeHtmlRecuperacionContrasena();
             String numeroDocumento = (usuario.getNumeroDocumentoIdentificacionUsuario()==null) ? "" : usuario.getNumeroDocumentoIdentificacionUsuario();
             String cuerpoMensajeHtml = plantilla.replace(ETIQUETA_NUMERO_DOCUMENTO_IDENTIFICACION, numeroDocumento).replace(ETIQUETA_CODIGO_ACTIVACION, codigoActivacion);
-
+            
             //CORREO ELECTRÓNICO CON LOS DATOS SMTP DE LOS PARÁMETROS DEL SISTEMA:
             EmailDTO emailDTO = new EmailDTO();
             emailDTO.setAuthEnable(esVerdadero(parametrosSistema.getAuthEnable()));
@@ -366,7 +368,7 @@ public class RecuperacionContrasenaAccesoUsuarioServiceImpl implements Recuperac
             emailDTO.setCorreoElectronicoDestinatario(correoElectronicoDestinatario.trim());
             emailDTO.setAsuntoDestinatario(parametrosSistema.getAsuntoDestinatarioRecuperacionContrasena());
             emailDTO.setCuerpoMensajeHtml(cuerpoMensajeHtml);
-
+            
             RespuestaDTO respuestaEnvio = emailService.enviarCorreoElectronico(emailDTO);
             if (!respuestaEnvio.isBanderaexito()) {
                //SI EL CORREO NO SALIÓ, EL CÓDIGO NO SIRVE: SE BORRA PARA QUE NO QUEDE UNA RECUPERACIÓN HUÉRFANA.
@@ -378,7 +380,7 @@ public class RecuperacionContrasenaAccesoUsuarioServiceImpl implements Recuperac
             return new RespuestaDTO(MensajesConstantes.MSG_CODIGO_ACTIVACION_NO_ENVIADO, false);
         }
     }
-
+    
     //CÓDIGO DE ACTIVACIÓN DE 6 DÍGITOS NUMÉRICOS (MISMO FORMATO DEL PROYECTO DE REFERENCIA), CON GENERADOR SEGURO:
     private String generarCodigoActivacion() {
         StringBuilder codigo = new StringBuilder(6);
@@ -387,7 +389,7 @@ public class RecuperacionContrasenaAccesoUsuarioServiceImpl implements Recuperac
         }
         return codigo.toString();
     }
-
+    
     //LOS PARÁMETROS DEL SISTEMA GUARDAN authEnable Y startTTLSEnable COMO TEXTO:
     private boolean esVerdadero(String valor) {
         if (valor==null) {
