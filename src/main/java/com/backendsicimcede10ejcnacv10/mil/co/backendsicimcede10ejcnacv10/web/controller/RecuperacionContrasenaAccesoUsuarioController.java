@@ -5,6 +5,7 @@ package com.backendsicimcede10ejcnacv10.mil.co.backendsicimcede10ejcnacv10.web.c
 import com.backendsicimcede10ejcnacv10.mil.co.backendsicimcede10ejcnacv10.dominio.dto.RespuestaDTO;
 import com.backendsicimcede10ejcnacv10.mil.co.backendsicimcede10ejcnacv10.dominio.dto.RecuperacionContrasenaAccesoUsuarioDTO;
 import com.backendsicimcede10ejcnacv10.mil.co.backendsicimcede10ejcnacv10.dominio.service.RecuperacionContrasenaAccesoUsuarioService;
+import com.backendsicimcede10ejcnacv10.mil.co.backendsicimcede10ejcnacv10.dominio.dto.EnvioCodigoActivacionRecuperacionContrasenaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -114,5 +115,12 @@ public class RecuperacionContrasenaAccesoUsuarioController {
     @DeleteMapping("/recuperacionesContrasenasAccesosUsuarios/vaciar/{idUsuario}")//DECLARACIÓN DEL MAPEO DEL CRUD VACIAR REGISTROS.
     public RespuestaDTO vaciarRContrasenaAccesoUsuarioporIdUsuario(@PathVariable Long idUsuario){
         return recuperacionContrasenaAccesoUsuarioService.vaciarRecuperacionesContrasenasAccesosUsuariosporIdUsuario(idUsuario);
+    }
+    
+    //ENVIAR CÓDIGO DE ACTIVACIÓN DE RECUPERACIÓN DE CONTRASEÑA DE ACCESO (ENDPOINT PÚBLICO, SIN AUTENTICACIÓN):
+    //RECIBE SOLO EL ID DEL USUARIO Y EL MEDIO DE ENVÍO; EL CÓDIGO, LAS ETIQUETAS Y EL CORREO SE RESUELVEN EN EL SERVIDOR.
+    @PostMapping("/recuperacionesContrasenasAccesosUsuarios/enviarCodigoActivacion")//DECLARACIÓN DEL MAPEO DEL CRUD ENVIAR CÓDIGO DE ACTIVACIÓN.
+    public RespuestaDTO enviarCodigoActivacionRecuperacionContrasenaAccesoUsuario(@RequestBody EnvioCodigoActivacionRecuperacionContrasenaDTO envioCodigoActivacionRecuperacionContrasenaDTO){
+        return recuperacionContrasenaAccesoUsuarioService.enviarCodigoActivacionRecuperacionContrasenaAccesoUsuario(envioCodigoActivacionRecuperacionContrasenaDTO);
     }
 }

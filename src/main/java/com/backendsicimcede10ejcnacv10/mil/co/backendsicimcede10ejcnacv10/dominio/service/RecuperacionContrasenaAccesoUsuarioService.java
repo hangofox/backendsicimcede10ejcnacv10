@@ -4,6 +4,7 @@ package com.backendsicimcede10ejcnacv10.mil.co.backendsicimcede10ejcnacv10.domin
 //IMPORTACIÓN DE LIBRERIAS:
 import com.backendsicimcede10ejcnacv10.mil.co.backendsicimcede10ejcnacv10.dominio.dto.RespuestaDTO;
 import com.backendsicimcede10ejcnacv10.mil.co.backendsicimcede10ejcnacv10.dominio.dto.RecuperacionContrasenaAccesoUsuarioDTO;
+import com.backendsicimcede10ejcnacv10.mil.co.backendsicimcede10ejcnacv10.dominio.dto.EnvioCodigoActivacionRecuperacionContrasenaDTO;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import java.util.List;
@@ -31,4 +32,5 @@ public interface RecuperacionContrasenaAccesoUsuarioService {
     RespuestaDTO eliminarRecuperacionContrasenaAccesoUsuario(Long idRecuperacionContrasenaAccesoUsuario);
     RespuestaDTO actualizarEstadosUsosCodigosActivacionesContrasenasAccesosUsuarios(Date fechaHMSExpCodActivContrasenaAccesoUsuario);
     RespuestaDTO vaciarRecuperacionesContrasenasAccesosUsuariosporIdUsuario(Long idUsuario);
+    RespuestaDTO enviarCodigoActivacionRecuperacionContrasenaAccesoUsuario(EnvioCodigoActivacionRecuperacionContrasenaDTO envioCodigoActivacionRecuperacionContrasenaDTO);
 }

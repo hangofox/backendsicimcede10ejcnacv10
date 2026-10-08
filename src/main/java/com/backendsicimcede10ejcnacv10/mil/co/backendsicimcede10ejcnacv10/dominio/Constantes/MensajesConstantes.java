@@ -169,4 +169,11 @@ public class MensajesConstantes {
     public static final String MSG_ARCHIVO_NO_ENCONTRADO = "Archivo no encontrado.";
     public static final String MSG_ERROR_PARAMETRO_FALTANTE = "Parámetro faltante:";
     public static final String MSG_ERROR_PARAMETROS_FALTANTES = "Parámetros faltantes.";
+    //MENSAJES DEL ENVÍO DEL CÓDIGO DE ACTIVACIÓN DE RECUPERACIÓN DE CONTRASEÑA DE ACCESO:
+    public static final String MSG_CODIGO_ACTIVACION_ENVIADO_EXITO = "Código de Activación enviado con éxito al Correo Electrónico.";
+    public static final String MSG_CODIGO_ACTIVACION_NO_ENVIADO = "No es posible enviar el Código de Activación.";
+    public static final String MSG_USUARIO_RECUPERACION_NO_ENCONTRADO = "No se encontró el Usuario para la recuperación de contraseña.";
+    public static final String MSG_MEDIO_ENVIO_NO_VALIDO = "El medio de envío seleccionado no es válido.";
+    public static final String MSG_CORREO_ELECTRONICO_DESTINATARIO_NO_REGISTRADO = "El Usuario no tiene registrado el Correo Electrónico seleccionado.";
+    public static final String MSG_PARAMETROS_SISTEMA_NO_ENCONTRADOS = "No se encontraron los Parámetros del Sistema para el envío del Correo Electrónico.";
 }

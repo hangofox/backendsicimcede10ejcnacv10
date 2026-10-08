@@ -69,6 +69,7 @@ public class WebSecurityConfig {
                 .antMatchers("/recuperacionContrasenaAccesoUsuario/getRecuperacionContrasenaAccesoUsuariobyCodigoActivacion/**").permitAll()
                 .antMatchers("/recuperacionContrasenaAccesoUsuario/updateEstadosUsosCodigosActivacionesContrasenasAccesosUsuariosRecuperacionesContrasenasAccesosUsuarios/**").permitAll()
                 .antMatchers("/recuperacionContrasenaAccesoUsuario/toEmptyRecuperacionesContrasenasAccesosUsuariosbyIdUsuario/**").permitAll()
+                .antMatchers("/recuperacionesContrasenasAccesosUsuarios/enviarCodigoActivacion").permitAll()
                 
                 //CUALQUIER OTRA PETICIÓN REQUIERE AUTENTICACIÓN:
                 .anyRequest()//Cualquier otra solicitud...
