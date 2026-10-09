@@ -282,8 +282,19 @@ public class UsuarioServiceImpl implements UsuarioService {
            Date fechaHMSExpCodActivContrasenaAccesoUsuarioAlmacenada = recuperacionContrasenaAccesoUsuarioCodigoActivacion.get().getFechaHMSExpCodActivContrasenaAccesoUsuario();
            
            //VERIFICAMOS SI EL CÓDIGO DE ACTIVACIÓN DE LA CONTRASEÑA DE ACCESO DEL USUARIO CUMPLE CON LOS REQUISITOS DE: QUE LA FECHA, HORA, MINUTO Y SEGUNDO ACTUAL DEL SERVIDOR SEAN INFERIOR A LA FECHA, HORA, MINUTO Y SEGUNDO ALMACENADA EN LA TABLA DE LA BASE DE DATOS Y EL ESTADO DE USO DEL CÓDIGO DE ACTIVACIÓN ESTE EN PENDIENTE DE USO.
+           //EL CÓDIGO DEBE PERTENECER AL MISMO USUARIO QUE PIDE EL CAMBIO: SIN ESTO, CON UN CÓDIGO VÁLIDO PROPIO SE PODRÍA
+           //CAMBIAR LA CONTRASEÑA DE OTRO USUARIO ENVIANDO SU idUsuario. SE RESPONDE CON EL MENSAJE GENÉRICO PARA NO DAR PISTAS.
+           Usuario usuarioDelCodigo = recuperacionContrasenaAccesoUsuarioCodigoActivacion.get().getUsuario();
+           if ( (usuarioDelCodigo==null)||(idUsuario==null)||(!idUsuario.equals(usuarioDelCodigo.getIdUsuario())) ) {
+              return new RespuestaDTO(MensajesConstantes.MSG_CONTRASENA_ACCESO_USUARIO_NO_RECUPERADA, false);
+           }
+           
            if ( (fechaHMSExpCodActivContrasenaAccesoUsuarioServidor.after(fechaHMSExpCodActivContrasenaAccesoUsuarioAlmacenada)==false)&&(recuperacionContrasenaAccesoUsuarioCodigoActivacion.get().getEstadoUsoCodigoActivacionContrasenaAccesoUsuario().equals("PENDIENTE DE USO")==true) ) {//EN CASO DE QUE LA FECHA, HORA, MINUTO Y SEGUNDO ACTUAL DEL SERVIDOR YA SEA SUPERIOR A LA FECHA, HORA, MINUTO Y SEGUNDO ALMACENADA EN LA TABLA DE LA BASE DE DATOS O EL ESTADO DE USO DEL CÓDIGO DE ACTIVACIÓN ESTE EN EXPIRADO.
               usuarioRepository.updatePasswordUsuario(idUsuario, passwordUsuario);
+              //SE MARCA EL CÓDIGO COMO USADO PARA QUE NO SE PUEDA VOLVER A UTILIZAR (EN EL SERVIDOR, NO SOLO EN EL NAVEGADOR):
+              RecuperacionContrasenaAccesoUsuario recuperacionUsada = recuperacionContrasenaAccesoUsuarioCodigoActivacion.get();
+              recuperacionUsada.setEstadoUsoCodigoActivacionContrasenaAccesoUsuario("USADO");
+              recuperacionContrasenaAccesoUsuarioRepository.save(recuperacionUsada);
               respuestaDTO = new RespuestaDTO(MensajesConstantes.MSG_CONTRASENA_ACCESO_USUARIO_RECUPERADA_EXITO, true);
            }
            
