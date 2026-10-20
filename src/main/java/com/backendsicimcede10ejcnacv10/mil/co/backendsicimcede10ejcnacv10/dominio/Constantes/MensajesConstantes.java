@@ -50,8 +50,7 @@ public class MensajesConstantes {
     public static final String MSG_REGISTRO_NUMERO_DOCUMENTO_IDENTIFICACION_YA_EXISTE = "Número del Documento de Identificación del Registro ya existe en Base de Datos.";
     public static final String MSG_REGISTRO_NUMERO_DOCUMENTO_IDENTIFICACION_O_NIC_YA_EXISTE = "Número del Documento de Identificación o NIC del Registro ya existe en Base de Datos.";
     public static final String MSG_REGISTRO_NUMERO_TARJETA_PROFESIONAL_O_EMPRESA_YA_EXISTE = "Número de la Tarjeta Profesional o Empresa del Registro ya existe en Base de Datos.";
-    public static final String MSG_REGISTRO_CENTRO_COSTO_YA_EXISTE = "Centro de Costo del Registro ya existe en Base de Datos.";
-    public static final String MSG_REGISTRO_NICKNAME_YA_EXISTE = "Nickname de Usuario del Registro ya existe en Base de Datos.";
+    public static final String MSG_REGISTRO_CENTRO_COSTO_YA_EXISTE = "Centro de Costo del Registro ya existe en Base de Datos.";    public static final String MSG_REGISTRO_NICKNAME_YA_EXISTE = "Nickname de Usuario del Registro ya existe en Base de Datos.";
     public static final String MSG_REGISTRO_PRIVILEGIO_Y_RESTRICCION_YA_EXISTEN = "Privilegio y Restricción del Registro para el usuario ya existe en Base de Datos.";
     public static final String MSG_REGISTRO_SIGLA_O_ACRONIMO_YA_EXISTE = "Sigla o Acrónimo del Registro ya existe en Base de Datos.";
     public static final String MSG_REGISTRO_UNIDAD_MILITAR_YA_EXISTE = "La Unidad Militar del Registro ya existe en Base de Datos.";
@@ -60,7 +59,7 @@ public class MensajesConstantes {
     public static final String MSG_REGISTRO_NOMBRE_EN_COMPANIA_UNIDAD_MILITAR_YA_EXISTE = "Nombre del Registro ya existe en esta Compañia de Unidad Militar.";
     public static final String MSG_REGISTRO_NOMBRE_EN_PELOTON_UNIDAD_MILITAR_YA_EXISTE = "Nombre del Registro ya existe en este Pelotón de Unidad Militar.";
     public static final String MSG_REGISTRO_NOMBRE_EN_INFRAESTRUCTURA_YA_EXISTE = "Nombre del Registro ya existe en esta Infraestructura.";
-    public static final String MSG_REGISTRO_INTEGRANTES_YA_EXISTE_EN_SOLICITUD_INFRAESTRUCTURA = "No se puede crear un nuevo registro de integrantes a una misma solicitud de infraestructura.";
+    public static final String MSG_REGISTRO_CARGO_YA_EXISTE_EN_SOLICITUD_INFRAESTRUCTURA = "El Cargo del Registro ya existe para esta Unidad Militar en el historial de integrantes de esta solicitud de infraestructura.";
     public static final String MSG_REGISTRO_FOTOGRAFIA_ANEXA_YA_EXISTE_EN_SOLICITUD_INFRAESTRUCTURA = "No se puede crear un nuevo registro de fotografía anexa a una misma solicitud de infraestructura.";
     public static final String MSG_REGISTRO_FOTOGRAFIA_ANEXA_YA_EXISTE_EN_APOYO_ATENC_PREV_EMERG_DESAST = "No se puede crear un nuevo registro de fotografía anexa a un mismo apoyo de atención y prevención de emergencias y desastres.";
     public static final String MSG_REGISTRO_FOTOGRAFIA_ANEXA_NO_MODIFICAR_EN_APOYO_ATENC_PREV_EMERG_DESAST = "No se puede modificar un registro de fotografía anexa a un mismo apoyo de atención y prevención de emergencias y desastres.";
@@ -111,6 +110,7 @@ public class MensajesConstantes {
     public static final String MSG_REGISTRO_NOMBRES_Y_APELLIDOS_NO_ENCONTRADOS = "No se encontró el Registro con los Nombres y Apelllidos proporcionado.";
     public static final String MSG_REGISTRO_CODIGO_NO_ENCONTRADO = "No se encontró el Registro con el Código proporcionado.";
     public static final String MSG_REGISTRO_CENTRO_COSTO_Y_UNIDAD_MILITAR_NO_ENCONTRADOS = "No se encontró el Registro con el Centro de Costo y Unidad Militar proporcionados.";
+    public static final String MSG_REGISTRO_LINEA_MANDO_Y_UNIDAD_MILITAR_NO_ENCONTRADOS = "No se encontró el Registro con la Línea de Mando y Unidad Militar proporcionados.";
     public static final String MSG_REGISTRO_CENTRO_COSTO_Y_OFICINA_NO_ENCONTRADOS = "No se encontró el Registro con el Centro de Costo y Oficina proporcionados.";
     public static final String MSG_REGISTRO_CENTRO_COSTO_Y_COMPANIA_UNIDAD_MILITAR_NO_ENCONTRADOS = "No se encontró el Registro con el Centro de Costo y la Compañia de Unidad Militar proporcionados.";
     public static final String MSG_REGISTRO_CENTRO_COSTO_Y_PELOTON_UNIDAD_MILITAR_NO_ENCONTRADOS = "No se encontró el Registro con el Centro de Costo y Pelotón de Unidad Militar proporcionados.";

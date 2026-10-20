@@ -36,15 +36,15 @@ public class HistorialProveedorProductoOServicioServiceImpl implements Historial
     //CONTADOR DE REGISTROS FILTRADOS.
     //CONTAR TOTAL DE REGISTROS:
     @Override//SOBREESCRIBIMOS EL METODO DE CONTEO.
-    public Long contarTotalRegistros(Long idHistorialProveedorProductoOServicio, String keyword) {
-        return historialProveedorProductoOServicioRepository.findTotalRegistros(idHistorialProveedorProductoOServicio, keyword);
+    public Long contarTotalRegistros(Long idHistorialProveedorProductoOServicio, String keyword, String siglaoAcronimoUnidadMilitar) {
+        return historialProveedorProductoOServicioRepository.findTotalRegistros(idHistorialProveedorProductoOServicio, keyword, siglaoAcronimoUnidadMilitar);
     }
     
     //LISTADO DE REGISTROS FILTRADOS SIN PAGINACIÓN.
     //LISTAR REGISTROS:
     @Override//SOBREESCRIBIMOS EL METODO DE LISTAR REGISTROS.
-    public List<HistorialProveedorProductoOServicioDTO> listarHistorialesProveedoresProductosOServicios(Long idHistorialProveedorProductoOServicio, String keyword, String orderBy, String orderMode) {
-        List<HistorialProveedorProductoOServicio> historialesProveedoresProductosOServicios = historialProveedorProductoOServicioRepository.findAllHistorialesProveedoresProductosOServicios(idHistorialProveedorProductoOServicio, keyword, orderBy, orderMode);
+    public List<HistorialProveedorProductoOServicioDTO> listarHistorialesProveedoresProductosOServicios(Long idHistorialProveedorProductoOServicio, String keyword, String siglaoAcronimoUnidadMilitar, String orderBy, String orderMode) {
+        List<HistorialProveedorProductoOServicio> historialesProveedoresProductosOServicios = historialProveedorProductoOServicioRepository.findAllHistorialesProveedoresProductosOServicios(idHistorialProveedorProductoOServicio, keyword, siglaoAcronimoUnidadMilitar, orderBy, orderMode);
         List<HistorialProveedorProductoOServicioDTO> historialProveedorProductoOServicioDTOS = new ArrayList<>();
         for (HistorialProveedorProductoOServicio historialProveedorProductoOServicio : historialesProveedoresProductosOServicios) {
             historialProveedorProductoOServicioDTOS.add(historialProveedorProductoOServicioDAO.historialProveedorProductoOServicioDTO(historialProveedorProductoOServicio));
@@ -56,8 +56,8 @@ public class HistorialProveedorProductoOServicioServiceImpl implements Historial
     //LISTADO DE REGISTROS FILTRADOS CON PAGINACIÓN.
     //LISTAR REGISTROS CON PAGINACIÓN:
     @Override//SOBREESCRIBIMOS EL METODO DE LISTAR REGISTROS.
-    public Slice<HistorialProveedorProductoOServicioDTO> listarHistorialesProveedoresProductosOServiciosPag(Pageable pageable, Long idHistorialProveedorProductoOServicio, String keyword, String orderBy, String orderMode) {
-        Slice<HistorialProveedorProductoOServicio> historialesProveedoresProductosOServicios = historialProveedorProductoOServicioRepository.findAllHistorialesProveedoresProductosOServiciosPag(pageable, idHistorialProveedorProductoOServicio, keyword, orderBy, orderMode);
+    public Slice<HistorialProveedorProductoOServicioDTO> listarHistorialesProveedoresProductosOServiciosPag(Pageable pageable, Long idHistorialProveedorProductoOServicio, String keyword, String siglaoAcronimoUnidadMilitar, String orderBy, String orderMode) {
+        Slice<HistorialProveedorProductoOServicio> historialesProveedoresProductosOServicios = historialProveedorProductoOServicioRepository.findAllHistorialesProveedoresProductosOServiciosPag(pageable, idHistorialProveedorProductoOServicio, keyword, siglaoAcronimoUnidadMilitar, orderBy, orderMode);
         return historialesProveedoresProductosOServicios.map(historialProveedorProductoOServicio -> historialProveedorProductoOServicioDAO.historialProveedorProductoOServicioDTO(historialProveedorProductoOServicio));
     }
     

@@ -61,6 +61,7 @@ public class RespuestaDTO {
     private HistorialEquipTranspApoyAtencPrevEmergDesastDTO historialEquipTranspApoyAtencPrevEmergDesastDTO;
     private HistorialEquipTranspApoyObrRedMitigGestRiesgDesastDTO historialEquipTranspApoyObrRedMitigGestRiesgDesastDTO;
     private HistorialIntegranteDocumentosDTO historialIntegranteDocumentosDTO;
+    private HistorialIntegranteSolicitudInfraestructuraDTO historialIntegranteSolicitudInfraestructuraDTO;
     private HistorialMantenimientoEquipoIngenieroDTO historialMantenimientoEquipoIngenieroDTO;
     private HistorialMantenimientoInfraestructuraDTO historialMantenimientoInfraestructuraDTO;
     private HistorialMaqPesadApoyAtencPrevEmergDesastDTO historialMaqPesadApoyAtencPrevEmergDesastDTO;
@@ -85,8 +86,8 @@ public class RespuestaDTO {
     private InfraestructuraArrendadaDTO infraestructuraArrendadaDTO;
     private IntegrantesApoyosAtencPrevEmergDesastDTO integrantesApoyosAtencPrevEmergDesastDTO;
     private IntegrantesApoyosObrRedMitigGestRiesgDesastDTO integrantesApoyosObrRedMitigGestRiesgDesastDTO;
-    private IntegrantesSolicitudesInfraestructuraDTO integrantesSolicitudesInfraestructuraDTO;
     private LineaEquipoIngenieroDTO lineaEquipoIngenieroDTO;
+    private LineaMandoUnidadMilitarSolicInfraestDTO lineaMandoUnidadMilitarSolicInfraestDTO;
     private MaquinariaPesadaDTO maquinariaPesadaDTO;
     private MaterialTecnicoDTO materialTecnicoDTO;
     private MunicionEspecialDTO municionEspecialDTO;
@@ -449,6 +450,12 @@ public class RespuestaDTO {
     public void setHistorialIntegranteDocumentosDTO(HistorialIntegranteDocumentosDTO historialIntegranteDocumentosDTO) {
         this.historialIntegranteDocumentosDTO = historialIntegranteDocumentosDTO;
     }
+    public HistorialIntegranteSolicitudInfraestructuraDTO getHistorialIntegranteSolicitudInfraestructuraDTO() {
+        return historialIntegranteSolicitudInfraestructuraDTO;
+    }
+    public void setHistorialIntegranteSolicitudInfraestructuraDTO(HistorialIntegranteSolicitudInfraestructuraDTO historialIntegranteSolicitudInfraestructuraDTO) {
+        this.historialIntegranteSolicitudInfraestructuraDTO = historialIntegranteSolicitudInfraestructuraDTO;
+    }
     public HistorialMantenimientoEquipoIngenieroDTO getHistorialMantenimientoEquipoIngenieroDTO() {
         return historialMantenimientoEquipoIngenieroDTO;
     }
@@ -593,17 +600,17 @@ public class RespuestaDTO {
     public void setIntegrantesApoyosObrRedMitigGestRiesgDesastDTO(IntegrantesApoyosObrRedMitigGestRiesgDesastDTO integrantesApoyosObrRedMitigGestRiesgDesastDTO) {
         this.integrantesApoyosObrRedMitigGestRiesgDesastDTO = integrantesApoyosObrRedMitigGestRiesgDesastDTO;
     }
-    public IntegrantesSolicitudesInfraestructuraDTO getIntegrantesSolicitudesInfraestructuraDTO() {
-        return integrantesSolicitudesInfraestructuraDTO;
-    }
-    public void setIntegrantesSolicitudesInfraestructuraDTO(IntegrantesSolicitudesInfraestructuraDTO integrantesSolicitudesInfraestructuraDTO) {
-        this.integrantesSolicitudesInfraestructuraDTO = integrantesSolicitudesInfraestructuraDTO;
-    }
     public LineaEquipoIngenieroDTO getLineaEquipoIngenieroDTO() {
         return lineaEquipoIngenieroDTO;
     }
     public void setLineaEquipoIngenieroDTO(LineaEquipoIngenieroDTO lineaEquipoIngenieroDTO) {
         this.lineaEquipoIngenieroDTO = lineaEquipoIngenieroDTO;
+    }
+    public LineaMandoUnidadMilitarSolicInfraestDTO getLineaMandoUnidadMilitarSolicInfraestDTO() {
+        return lineaMandoUnidadMilitarSolicInfraestDTO;
+    }
+    public void setLineaMandoUnidadMilitarSolicInfraestDTO(LineaMandoUnidadMilitarSolicInfraestDTO lineaMandoUnidadMilitarSolicInfraestDTO) {
+        this.lineaMandoUnidadMilitarSolicInfraestDTO = lineaMandoUnidadMilitarSolicInfraestDTO;
     }
     public MaquinariaPesadaDTO getMaquinariaPesadaDTO() {
         return maquinariaPesadaDTO;

@@ -16,9 +16,9 @@ import java.util.List;
 public interface HistorialProveedorProductoOServicioService {
     //DECLARACIÓN DE LOS METODOS DE RESPUESTA EN LA INTERFACE PARA LOS CRUDS QUE SON LOS METODOS PARA LA
     //CREACIÓN, LECTURA (LISTAR Y CONSULTAR), EDICIÓN Y ELIMINACIÓN DE UN REGISTRO:
-    Long contarTotalRegistros(Long idHistorialProveedorProductoOServicio, String keyword);
-    List<HistorialProveedorProductoOServicioDTO> listarHistorialesProveedoresProductosOServicios(Long idHistorialProveedorProductoOServicio, String keyword, String orderBy, String orderMode);
-    Slice<HistorialProveedorProductoOServicioDTO> listarHistorialesProveedoresProductosOServiciosPag(Pageable pageable, Long idHistorialProveedorProductoOServicio, String keyword, String orderBy, String orderMode);
+    Long contarTotalRegistros(Long idHistorialProveedorProductoOServicio, String keyword, String siglaoAcronimoUnidadMilitar);
+    List<HistorialProveedorProductoOServicioDTO> listarHistorialesProveedoresProductosOServicios(Long idHistorialProveedorProductoOServicio, String keyword, String siglaoAcronimoUnidadMilitar, String orderBy, String orderMode);
+    Slice<HistorialProveedorProductoOServicioDTO> listarHistorialesProveedoresProductosOServiciosPag(Pageable pageable, Long idHistorialProveedorProductoOServicio, String keyword, String siglaoAcronimoUnidadMilitar, String orderBy, String orderMode);
     RespuestaDTO crearHistorialProveedorProductoOServicio(HistorialProveedorProductoOServicioDTO historialProveedorProductoOServicioDTO);
     RespuestaDTO consultarHistorialProveedorProductoOServicioporId(Long idHistorialProveedorProductoOServicio);
     RespuestaDTO consultarHistorialProveedorProductoOServicioporNumReg(String numRegHistorialProveedorProductoOServicio);

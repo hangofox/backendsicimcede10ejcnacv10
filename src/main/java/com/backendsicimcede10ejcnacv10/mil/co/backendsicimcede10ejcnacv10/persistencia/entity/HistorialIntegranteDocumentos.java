@@ -38,8 +38,14 @@ public class HistorialIntegranteDocumentos {
     @Column(name = "GRADO_INTEGRANTE_DOCUMENTOS", columnDefinition="VARCHAR2(255) NOT NULL")
     private String gradoIntegranteDocumentos;
     
-    @Column(name = "NOMBRES_Y_APELLIDOS_INTEGRANTE_DOCUMENTOS", columnDefinition="VARCHAR2(255) NOT NULL")
-    private String nombresYApellidosIntegranteDocumentos;
+    @Column(name = "NOMBRES_INTEGRANTE_DOCUMENTOS", columnDefinition="VARCHAR2(255) NOT NULL")
+    private String nombresIntegranteDocumentos;
+
+    @Column(name = "PRIMER_APELLIDO_INTEGRANTE_DOCUMENTOS", columnDefinition="VARCHAR2(255) NOT NULL")
+    private String primerApellidoIntegranteDocumentos;
+
+    @Column(name = "SEGUNDO_APELLIDO_INTEGRANTE_DOCUMENTOS", columnDefinition="VARCHAR2(255) NOT NULL")
+    private String segundoApellidoIntegranteDocumentos;
     
     @Column(name = "CARGO_INTEGRANTE_DOCUMENTOS", columnDefinition="VARCHAR2(255) NOT NULL")
     private String cargoIntegranteDocumentos;
@@ -112,11 +118,23 @@ public class HistorialIntegranteDocumentos {
     public void setGradoIntegranteDocumentos(String gradoIntegranteDocumentos) {
         this.gradoIntegranteDocumentos = gradoIntegranteDocumentos;
     }
-    public String getNombresYApellidosIntegranteDocumentos() {
-        return nombresYApellidosIntegranteDocumentos;
+    public String getNombresIntegranteDocumentos() {
+        return nombresIntegranteDocumentos;
     }
-    public void setNombresYApellidosIntegranteDocumentos(String nombresYApellidosIntegranteDocumentos) {
-        this.nombresYApellidosIntegranteDocumentos = nombresYApellidosIntegranteDocumentos;
+    public void setNombresIntegranteDocumentos(String nombresIntegranteDocumentos) {
+        this.nombresIntegranteDocumentos = nombresIntegranteDocumentos;
+    }
+    public String getPrimerApellidoIntegranteDocumentos() {
+        return primerApellidoIntegranteDocumentos;
+    }
+    public void setPrimerApellidoIntegranteDocumentos(String primerApellidoIntegranteDocumentos) {
+        this.primerApellidoIntegranteDocumentos = primerApellidoIntegranteDocumentos;
+    }
+    public String getSegundoApellidoIntegranteDocumentos() {
+        return segundoApellidoIntegranteDocumentos;
+    }
+    public void setSegundoApellidoIntegranteDocumentos(String segundoApellidoIntegranteDocumentos) {
+        this.segundoApellidoIntegranteDocumentos = segundoApellidoIntegranteDocumentos;
     }
     public String getCargoIntegranteDocumentos() {
         return cargoIntegranteDocumentos;

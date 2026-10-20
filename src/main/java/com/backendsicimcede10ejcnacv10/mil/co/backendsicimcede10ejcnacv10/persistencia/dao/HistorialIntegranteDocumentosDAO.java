@@ -52,7 +52,9 @@ public class HistorialIntegranteDocumentosDAO {
         historialIntegranteDocumentos.setIdHistorialIntegranteDocumentos(historialIntegranteDocumentosDTO.getIdHistorialIntegranteDocumentos());
         historialIntegranteDocumentos.setNumRegHistorialIntegranteDocumentos(historialIntegranteDocumentosDTO.getNumRegHistorialIntegranteDocumentos().toUpperCase());
         historialIntegranteDocumentos.setGradoIntegranteDocumentos(historialIntegranteDocumentosDTO.getGradoIntegranteDocumentos());
-        historialIntegranteDocumentos.setNombresYApellidosIntegranteDocumentos(historialIntegranteDocumentosDTO.getNombresYApellidosIntegranteDocumentos());
+        historialIntegranteDocumentos.setNombresIntegranteDocumentos(historialIntegranteDocumentosDTO.getNombresIntegranteDocumentos());
+        historialIntegranteDocumentos.setPrimerApellidoIntegranteDocumentos(historialIntegranteDocumentosDTO.getPrimerApellidoIntegranteDocumentos());
+        historialIntegranteDocumentos.setSegundoApellidoIntegranteDocumentos(historialIntegranteDocumentosDTO.getSegundoApellidoIntegranteDocumentos());
         historialIntegranteDocumentos.setCargoIntegranteDocumentos(historialIntegranteDocumentosDTO.getCargoIntegranteDocumentos());
         historialIntegranteDocumentos.setNumeroDocumentoIdentificacionIntegranteDocumentos(historialIntegranteDocumentosDTO.getNumeroDocumentoIdentificacionIntegranteDocumentos());
         historialIntegranteDocumentos.setNombreArchivoFotoFirmaIntegranteDocumentos(historialIntegranteDocumentosDTO.getNombreArchivoFotoFirmaIntegranteDocumentos());
@@ -97,7 +99,9 @@ public class HistorialIntegranteDocumentosDAO {
         historialIntegranteDocumentosDTO.setIdHistorialIntegranteDocumentos(historialIntegranteDocumentos.getIdHistorialIntegranteDocumentos());
         historialIntegranteDocumentosDTO.setNumRegHistorialIntegranteDocumentos(historialIntegranteDocumentos.getNumRegHistorialIntegranteDocumentos().toUpperCase());
         historialIntegranteDocumentosDTO.setGradoIntegranteDocumentos(historialIntegranteDocumentos.getGradoIntegranteDocumentos());
-        historialIntegranteDocumentosDTO.setNombresYApellidosIntegranteDocumentos(historialIntegranteDocumentos.getNombresYApellidosIntegranteDocumentos());
+        historialIntegranteDocumentosDTO.setNombresIntegranteDocumentos(historialIntegranteDocumentos.getNombresIntegranteDocumentos());
+        historialIntegranteDocumentosDTO.setPrimerApellidoIntegranteDocumentos(historialIntegranteDocumentos.getPrimerApellidoIntegranteDocumentos());
+        historialIntegranteDocumentosDTO.setSegundoApellidoIntegranteDocumentos(historialIntegranteDocumentos.getSegundoApellidoIntegranteDocumentos());
         historialIntegranteDocumentosDTO.setCargoIntegranteDocumentos(historialIntegranteDocumentos.getCargoIntegranteDocumentos());
         historialIntegranteDocumentosDTO.setNumeroDocumentoIdentificacionIntegranteDocumentos(historialIntegranteDocumentos.getNumeroDocumentoIdentificacionIntegranteDocumentos());
         historialIntegranteDocumentosDTO.setNombreArchivoFotoFirmaIntegranteDocumentos(historialIntegranteDocumentos.getNombreArchivoFotoFirmaIntegranteDocumentos());

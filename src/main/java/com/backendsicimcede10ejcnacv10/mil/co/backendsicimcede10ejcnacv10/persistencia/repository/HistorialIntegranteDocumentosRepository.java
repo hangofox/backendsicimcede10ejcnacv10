@@ -37,8 +37,12 @@ public interface HistorialIntegranteDocumentosRepository extends JpaRepository<H
             "CASE WHEN :orderBy = 'numRegHistorialIntegranteDocumentos' AND :orderMode = 'DESC' THEN tabla_historial_integrantes_documentos.num_reg_historial_integrante_documentos END DESC, " +
             "CASE WHEN :orderBy = 'gradoIntegranteDocumentos' AND :orderMode = 'ASC' THEN tabla_historial_integrantes_documentos.grado_integrante_documentos END ASC, " +
             "CASE WHEN :orderBy = 'gradoIntegranteDocumentos' AND :orderMode = 'DESC' THEN tabla_historial_integrantes_documentos.grado_integrante_documentos END DESC, " +
-            "CASE WHEN :orderBy = 'nombresYApellidosIntegranteDocumentos' AND :orderMode = 'ASC' THEN tabla_historial_integrantes_documentos.nombres_y_apellidos_integrante_documentos END ASC, " +
-            "CASE WHEN :orderBy = 'nombresYApellidosIntegranteDocumentos' AND :orderMode = 'DESC' THEN tabla_historial_integrantes_documentos.nombres_y_apellidos_integrante_documentos END DESC, " +
+            "CASE WHEN :orderBy = 'nombresIntegranteDocumentos' AND :orderMode = 'ASC' THEN tabla_historial_integrantes_documentos.nombres_integrante_documentos END ASC, " +
+            "CASE WHEN :orderBy = 'nombresIntegranteDocumentos' AND :orderMode = 'DESC' THEN tabla_historial_integrantes_documentos.nombres_integrante_documentos END DESC, " +
+            "CASE WHEN :orderBy = 'primerApellidoIntegranteDocumentos' AND :orderMode = 'ASC' THEN tabla_historial_integrantes_documentos.primer_apellido_integrante_documentos END ASC, " +
+            "CASE WHEN :orderBy = 'primerApellidoIntegranteDocumentos' AND :orderMode = 'DESC' THEN tabla_historial_integrantes_documentos.primer_apellido_integrante_documentos END DESC, " +
+            "CASE WHEN :orderBy = 'segundoApellidoIntegranteDocumentos' AND :orderMode = 'ASC' THEN tabla_historial_integrantes_documentos.segundo_apellido_integrante_documentos END ASC, " +
+            "CASE WHEN :orderBy = 'segundoApellidoIntegranteDocumentos' AND :orderMode = 'DESC' THEN tabla_historial_integrantes_documentos.segundo_apellido_integrante_documentos END DESC, " +
             "CASE WHEN :orderBy = 'cargoIntegranteDocumentos' AND :orderMode = 'ASC' THEN tabla_historial_integrantes_documentos.cargo_integrante_documentos END ASC, " +
             "CASE WHEN :orderBy = 'cargoIntegranteDocumentos' AND :orderMode = 'DESC' THEN tabla_historial_integrantes_documentos.cargo_integrante_documentos END DESC, " +
             "CASE WHEN :orderBy = 'numeroDocumentoIdentificacionIntegranteDocumentos' AND :orderMode = 'ASC' THEN tabla_historial_integrantes_documentos.numero_documento_identificacion_integrante_documentos END ASC, " +
@@ -70,8 +74,12 @@ public interface HistorialIntegranteDocumentosRepository extends JpaRepository<H
             "CASE WHEN :orderBy = 'numRegHistorialIntegranteDocumentos' AND :orderMode = 'DESC' THEN tabla_historial_integrantes_documentos.num_reg_historial_integrante_documentos END DESC, " +
             "CASE WHEN :orderBy = 'gradoIntegranteDocumentos' AND :orderMode = 'ASC' THEN tabla_historial_integrantes_documentos.grado_integrante_documentos END ASC, " +
             "CASE WHEN :orderBy = 'gradoIntegranteDocumentos' AND :orderMode = 'DESC' THEN tabla_historial_integrantes_documentos.grado_integrante_documentos END DESC, " +
-            "CASE WHEN :orderBy = 'nombresYApellidosIntegranteDocumentos' AND :orderMode = 'ASC' THEN tabla_historial_integrantes_documentos.nombres_y_apellidos_integrante_documentos END ASC, " +
-            "CASE WHEN :orderBy = 'nombresYApellidosIntegranteDocumentos' AND :orderMode = 'DESC' THEN tabla_historial_integrantes_documentos.nombres_y_apellidos_integrante_documentos END DESC, " +
+            "CASE WHEN :orderBy = 'nombresIntegranteDocumentos' AND :orderMode = 'ASC' THEN tabla_historial_integrantes_documentos.nombres_integrante_documentos END ASC, " +
+            "CASE WHEN :orderBy = 'nombresIntegranteDocumentos' AND :orderMode = 'DESC' THEN tabla_historial_integrantes_documentos.nombres_integrante_documentos END DESC, " +
+            "CASE WHEN :orderBy = 'primerApellidoIntegranteDocumentos' AND :orderMode = 'ASC' THEN tabla_historial_integrantes_documentos.primer_apellido_integrante_documentos END ASC, " +
+            "CASE WHEN :orderBy = 'primerApellidoIntegranteDocumentos' AND :orderMode = 'DESC' THEN tabla_historial_integrantes_documentos.primer_apellido_integrante_documentos END DESC, " +
+            "CASE WHEN :orderBy = 'segundoApellidoIntegranteDocumentos' AND :orderMode = 'ASC' THEN tabla_historial_integrantes_documentos.segundo_apellido_integrante_documentos END ASC, " +
+            "CASE WHEN :orderBy = 'segundoApellidoIntegranteDocumentos' AND :orderMode = 'DESC' THEN tabla_historial_integrantes_documentos.segundo_apellido_integrante_documentos END DESC, " +
             "CASE WHEN :orderBy = 'cargoIntegranteDocumentos' AND :orderMode = 'ASC' THEN tabla_historial_integrantes_documentos.cargo_integrante_documentos END ASC, " +
             "CASE WHEN :orderBy = 'cargoIntegranteDocumentos' AND :orderMode = 'DESC' THEN tabla_historial_integrantes_documentos.cargo_integrante_documentos END DESC, " +
             "CASE WHEN :orderBy = 'numeroDocumentoIdentificacionIntegranteDocumentos' AND :orderMode = 'ASC' THEN tabla_historial_integrantes_documentos.numero_documento_identificacion_integrante_documentos END ASC, " +

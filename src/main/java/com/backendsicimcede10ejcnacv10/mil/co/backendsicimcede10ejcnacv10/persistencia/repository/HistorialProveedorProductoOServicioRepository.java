@@ -20,12 +20,14 @@ public interface HistorialProveedorProductoOServicioRepository extends JpaReposi
     
     //CONTADORES Y LISTADOS UNIFICADOS (KEYWORD + ID + ORDERBY + ORDERMODE):
     @Query(value = "SELECT COUNT(*) FROM tabla_historial_proveedores_productos_o_servicios " +
-          "WHERE (:idHistorialProveedorProductoOServicio IS NULL OR tabla_historial_proveedores_productos_o_servicios.id_historial_proveedor_producto_o_servicio = :idHistorialProveedorProductoOServicio) AND " +
+          "WHERE (:siglaoAcronimoUnidadMilitar IS NULL OR UPPER(tabla_historial_proveedores_productos_o_servicios.sigla_o_acronimo_unidad_militar) = UPPER(:siglaoAcronimoUnidadMilitar)) AND " +
+          "(:idHistorialProveedorProductoOServicio IS NULL OR tabla_historial_proveedores_productos_o_servicios.id_historial_proveedor_producto_o_servicio = :idHistorialProveedorProductoOServicio) AND " +
           "(:keyword IS NULL OR UPPER(tabla_historial_proveedores_productos_o_servicios.num_reg_historial_proveedor_producto_o_servicio) LIKE UPPER('%'||:keyword||'%'))", nativeQuery = true)
-    Long findTotalRegistros(@Param("idHistorialProveedorProductoOServicio") Long idHistorialProveedorProductoOServicio, @Param("keyword") String keyword);
+    Long findTotalRegistros(@Param("idHistorialProveedorProductoOServicio") Long idHistorialProveedorProductoOServicio, @Param("keyword") String keyword, @Param("siglaoAcronimoUnidadMilitar") String siglaoAcronimoUnidadMilitar);
     
     @Query(value = "SELECT tabla_historial_proveedores_productos_o_servicios.* FROM tabla_historial_proveedores_productos_o_servicios " +
-          "WHERE (:idHistorialProveedorProductoOServicio IS NULL OR tabla_historial_proveedores_productos_o_servicios.id_historial_proveedor_producto_o_servicio = :idHistorialProveedorProductoOServicio) AND " +
+          "WHERE (:siglaoAcronimoUnidadMilitar IS NULL OR UPPER(tabla_historial_proveedores_productos_o_servicios.sigla_o_acronimo_unidad_militar) = UPPER(:siglaoAcronimoUnidadMilitar)) AND " +
+          "(:idHistorialProveedorProductoOServicio IS NULL OR tabla_historial_proveedores_productos_o_servicios.id_historial_proveedor_producto_o_servicio = :idHistorialProveedorProductoOServicio) AND " +
           "(:keyword IS NULL OR UPPER(tabla_historial_proveedores_productos_o_servicios.num_reg_historial_proveedor_producto_o_servicio) LIKE UPPER('%'||:keyword||'%')) " +
           "ORDER BY CASE WHEN :orderBy = 'idHistorialProveedorProductoOServicio' AND :orderMode = 'ASC' THEN tabla_historial_proveedores_productos_o_servicios.id_historial_proveedor_producto_o_servicio END ASC, " +
           "CASE WHEN :orderBy = 'idHistorialProveedorProductoOServicio' AND :orderMode = 'DESC' THEN tabla_historial_proveedores_productos_o_servicios.id_historial_proveedor_producto_o_servicio END DESC, " +
@@ -63,10 +65,11 @@ public interface HistorialProveedorProductoOServicioRepository extends JpaReposi
           "CASE WHEN :orderBy = 'fechaHMSIngresoProvProdOServ' AND :orderMode = 'DESC' THEN tabla_historial_proveedores_productos_o_servicios.fecha_h_m_s_ingreso_prov_prod_o_serv END DESC, " +
           "CASE WHEN :orderBy = 'fechaHMSModificacionProvProdOServ' AND :orderMode = 'ASC' THEN tabla_historial_proveedores_productos_o_servicios.fecha_h_m_s_modificacion_prov_prod_o_serv END ASC, " +
           "CASE WHEN :orderBy = 'fechaHMSModificacionProvProdOServ' AND :orderMode = 'DESC' THEN tabla_historial_proveedores_productos_o_servicios.fecha_h_m_s_modificacion_prov_prod_o_serv END DESC", nativeQuery = true)
-    List<HistorialProveedorProductoOServicio> findAllHistorialesProveedoresProductosOServicios(@Param("idHistorialProveedorProductoOServicio") Long idHistorialProveedorProductoOServicio, @Param("keyword") String keyword, @Param("orderBy") String orderBy, @Param("orderMode") String orderMode);
+    List<HistorialProveedorProductoOServicio> findAllHistorialesProveedoresProductosOServicios(@Param("idHistorialProveedorProductoOServicio") Long idHistorialProveedorProductoOServicio, @Param("keyword") String keyword, @Param("siglaoAcronimoUnidadMilitar") String siglaoAcronimoUnidadMilitar, @Param("orderBy") String orderBy, @Param("orderMode") String orderMode);
     
     @Query(value = "SELECT tabla_historial_proveedores_productos_o_servicios.* FROM tabla_historial_proveedores_productos_o_servicios " +
-          "WHERE (:idHistorialProveedorProductoOServicio IS NULL OR tabla_historial_proveedores_productos_o_servicios.id_historial_proveedor_producto_o_servicio = :idHistorialProveedorProductoOServicio) AND " +
+          "WHERE (:siglaoAcronimoUnidadMilitar IS NULL OR UPPER(tabla_historial_proveedores_productos_o_servicios.sigla_o_acronimo_unidad_militar) = UPPER(:siglaoAcronimoUnidadMilitar)) AND " +
+          "(:idHistorialProveedorProductoOServicio IS NULL OR tabla_historial_proveedores_productos_o_servicios.id_historial_proveedor_producto_o_servicio = :idHistorialProveedorProductoOServicio) AND " +
           "(:keyword IS NULL OR UPPER(tabla_historial_proveedores_productos_o_servicios.num_reg_historial_proveedor_producto_o_servicio) LIKE UPPER('%'||:keyword||'%')) " +
           "ORDER BY CASE WHEN :orderBy = 'idHistorialProveedorProductoOServicio' AND :orderMode = 'ASC' THEN tabla_historial_proveedores_productos_o_servicios.id_historial_proveedor_producto_o_servicio END ASC, " +
           "CASE WHEN :orderBy = 'idHistorialProveedorProductoOServicio' AND :orderMode = 'DESC' THEN tabla_historial_proveedores_productos_o_servicios.id_historial_proveedor_producto_o_servicio END DESC, " +
@@ -104,7 +107,7 @@ public interface HistorialProveedorProductoOServicioRepository extends JpaReposi
           "CASE WHEN :orderBy = 'fechaHMSIngresoProvProdOServ' AND :orderMode = 'DESC' THEN tabla_historial_proveedores_productos_o_servicios.fecha_h_m_s_ingreso_prov_prod_o_serv END DESC, " +
           "CASE WHEN :orderBy = 'fechaHMSModificacionProvProdOServ' AND :orderMode = 'ASC' THEN tabla_historial_proveedores_productos_o_servicios.fecha_h_m_s_modificacion_prov_prod_o_serv END ASC, " +
           "CASE WHEN :orderBy = 'fechaHMSModificacionProvProdOServ' AND :orderMode = 'DESC' THEN tabla_historial_proveedores_productos_o_servicios.fecha_h_m_s_modificacion_prov_prod_o_serv END DESC", nativeQuery = true)
-    Slice<HistorialProveedorProductoOServicio> findAllHistorialesProveedoresProductosOServiciosPag(Pageable pageable, @Param("idHistorialProveedorProductoOServicio") Long idHistorialProveedorProductoOServicio, @Param("keyword") String keyword, @Param("orderBy") String orderBy, @Param("orderMode") String orderMode);
+    Slice<HistorialProveedorProductoOServicio> findAllHistorialesProveedoresProductosOServiciosPag(Pageable pageable, @Param("idHistorialProveedorProductoOServicio") Long idHistorialProveedorProductoOServicio, @Param("keyword") String keyword, @Param("siglaoAcronimoUnidadMilitar") String siglaoAcronimoUnidadMilitar, @Param("orderBy") String orderBy, @Param("orderMode") String orderMode);
     
     Optional<HistorialProveedorProductoOServicio> findByIdHistorialProveedorProductoOServicio(Long idHistorialProveedorProductoOServicio);
     
