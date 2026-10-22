@@ -87,7 +87,7 @@ public class RespuestaDTO {
     private IntegrantesApoyosAtencPrevEmergDesastDTO integrantesApoyosAtencPrevEmergDesastDTO;
     private IntegrantesApoyosObrRedMitigGestRiesgDesastDTO integrantesApoyosObrRedMitigGestRiesgDesastDTO;
     private LineaEquipoIngenieroDTO lineaEquipoIngenieroDTO;
-    private LineaMandoUnidadMilitarSolicInfraestDTO lineaMandoUnidadMilitarSolicInfraestDTO;
+    private LineaMandoUnidadMilitarDTO lineaMandoUnidadMilitarDTO;
     private MaquinariaPesadaDTO maquinariaPesadaDTO;
     private MaterialTecnicoDTO materialTecnicoDTO;
     private MunicionEspecialDTO municionEspecialDTO;
@@ -606,11 +606,11 @@ public class RespuestaDTO {
     public void setLineaEquipoIngenieroDTO(LineaEquipoIngenieroDTO lineaEquipoIngenieroDTO) {
         this.lineaEquipoIngenieroDTO = lineaEquipoIngenieroDTO;
     }
-    public LineaMandoUnidadMilitarSolicInfraestDTO getLineaMandoUnidadMilitarSolicInfraestDTO() {
-        return lineaMandoUnidadMilitarSolicInfraestDTO;
+    public LineaMandoUnidadMilitarDTO getLineaMandoUnidadMilitarDTO() {
+        return lineaMandoUnidadMilitarDTO;
     }
-    public void setLineaMandoUnidadMilitarSolicInfraestDTO(LineaMandoUnidadMilitarSolicInfraestDTO lineaMandoUnidadMilitarSolicInfraestDTO) {
-        this.lineaMandoUnidadMilitarSolicInfraestDTO = lineaMandoUnidadMilitarSolicInfraestDTO;
+    public void setLineaMandoUnidadMilitarDTO(LineaMandoUnidadMilitarDTO lineaMandoUnidadMilitarDTO) {
+        this.lineaMandoUnidadMilitarDTO = lineaMandoUnidadMilitarDTO;
     }
     public MaquinariaPesadaDTO getMaquinariaPesadaDTO() {
         return maquinariaPesadaDTO;

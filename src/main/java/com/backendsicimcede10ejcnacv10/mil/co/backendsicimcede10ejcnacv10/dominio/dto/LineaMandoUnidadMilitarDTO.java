@@ -10,11 +10,11 @@ import lombok.Data;
 * Declaración del método DTO.
 */
 @Data//DECLARACIÓN DE LA DATA PARA LOS DATOS DE LA TABLA DE LA BASE DE DATOS PARA LOS RESPONSE DE LOS DTO.
-public class LineaMandoUnidadMilitarSolicInfraestDTO {
+public class LineaMandoUnidadMilitarDTO {
     
     //DECLARACIÓN DE LAS VARIABLES DEL DTO:
-    private Long idLineaMandoUnidadMilitarSolicInfraest;
-    private String lineaMandoUnidadMilitarSolicInfraest;
+    private Long idLineaMandoUnidadMilitar;
+    private String lineaMandoUnidadMilitar;
     private UnidadMilitarDTO unidadMilitarDTO;
     
     //DECLARACIÓN DE LOS MÉTODOS SETTERS Y GETTERS DEL DTO RELACIONAL:

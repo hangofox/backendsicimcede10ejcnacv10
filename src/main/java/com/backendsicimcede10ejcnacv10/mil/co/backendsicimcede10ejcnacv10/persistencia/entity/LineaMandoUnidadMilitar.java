@@ -13,8 +13,8 @@ import javax.persistence.*;
 */
 @Data//DECLARACIÓN DE LA DATA PARA LOS DATOS DE LA TABLA DE LA BASE DE DATOS PARA LA ENTIDAD.
 @Entity//DECLARACIÓN DE LA ENTIDAD QUE ES LA MISMA TABLA DE LA BASE DE DATOS.
-@Table(name = "TABLA_LINEAS_MANDOS_UNIDADES_MILITARES_SOLIC_INFRAEST")//REFERENCIA A LA TABLA DE LA BASE DE DATOS.
-public class LineaMandoUnidadMilitarSolicInfraest {
+@Table(name = "TABLA_LINEAS_MANDOS_UNIDADES_MILITARES")//REFERENCIA A LA TABLA DE LA BASE DE DATOS.
+public class LineaMandoUnidadMilitar {
     
     //CAMPOS DE LA TABLA DE LA BASE DE DATOS:
     @Id//DECLARACIÓN DEL ID PRINCIPAL DE LA TABLA DE BASE DE DATOS.
@@ -22,8 +22,8 @@ public class LineaMandoUnidadMilitarSolicInfraest {
     //AQUI ES DONDE SE CREA EL ENLACE ENTRE LOS CAMPOS DE LA TABLA DE LA BASE DE DATOS Y LAS VARIABLES DECLARADAS
     //QUE RECIBIRAN O ENVIARAS LOS DATOS A LA BASE DE DATOS PARA LA ENTIDAD.
     //NOTA: EN LOS NAME SE PONEN EL NOMBRE DE LOS CAMPOS DE LA TABLA DE LA BASE DE DATOS EXACTAMENTE IGUAL A COMO SE CREARÓN.
-    @Column(name = "ID_LINEA_MANDO_UNIDAD_MILITAR_SOLIC_INFRAEST", columnDefinition="NUMBER(20) NOT NULL")
-    private Long idLineaMandoUnidadMilitarSolicInfraest;
+    @Column(name = "ID_LINEA_MANDO_UNIDAD_MILITAR", columnDefinition="NUMBER(20) NOT NULL")
+    private Long idLineaMandoUnidadMilitar;
     
     //@Column(name = "ID_UNIDAD_MILITAR", columnDefinition = "NUMBER(20) NOT NULL")
     //private Long idUnidadMilitar;
@@ -32,15 +32,15 @@ public class LineaMandoUnidadMilitarSolicInfraest {
     @JoinColumn(name = "ID_UNIDAD_MILITAR", columnDefinition = "NUMBER(20) NOT NULL")
     private UnidadMilitar unidadMilitar;
     
-    @Column(name = "LINEA_MANDO_UNIDAD_MILITAR_SOLIC_INFRAEST", columnDefinition = "VARCHAR2(255) NOT NULL")
-    private String lineaMandoUnidadMilitarSolicInfraest;
+    @Column(name = "LINEA_MANDO_UNIDAD_MILITAR", columnDefinition = "VARCHAR2(255) NOT NULL")
+    private String lineaMandoUnidadMilitar;
     
     /*//DECLARACIÓN DE LOS MÉTODOS SETTERS Y GETTERS DE LAS VARIABLES DECLARADAS DE LOS CAMPOS DE LA TABLA DE LA BASE DE DATOS DE LA ENTIDAD:
-    public Long getIdLineaMandoUnidadMilitarSolicInfraest() {
-        return idLineaMandoUnidadMilitarSolicInfraest;
+    public Long getIdLineaMandoUnidadMilitar() {
+        return idLineaMandoUnidadMilitar;
     }
-    public void setIdLineaMandoUnidadMilitarSolicInfraest(Long idLineaMandoUnidadMilitarSolicInfraest) {
-        this.idLineaMandoUnidadMilitarSolicInfraest = idLineaMandoUnidadMilitarSolicInfraest;
+    public void setIdLineaMandoUnidadMilitar(Long idLineaMandoUnidadMilitar) {
+        this.idLineaMandoUnidadMilitar = idLineaMandoUnidadMilitar;
     }
     public UnidadMilitar getUnidadMilitar() {
         return unidadMilitar;
@@ -48,10 +48,10 @@ public class LineaMandoUnidadMilitarSolicInfraest {
     public void setUnidadMilitar(UnidadMilitar unidadMilitar) {
         this.unidadMilitar = unidadMilitar;
     }
-    public String getLineaMandoUnidadMilitarSolicInfraest() {
-        return lineaMandoUnidadMilitarSolicInfraest;
+    public String getLineaMandoUnidadMilitar() {
+        return lineaMandoUnidadMilitar;
     }
-    public void setLineaMandoUnidadMilitarSolicInfraest(String lineaMandoUnidadMilitarSolicInfraest) {
-        this.lineaMandoUnidadMilitarSolicInfraest = lineaMandoUnidadMilitarSolicInfraest;
+    public void setLineaMandoUnidadMilitar(String lineaMandoUnidadMilitar) {
+        this.lineaMandoUnidadMilitar = lineaMandoUnidadMilitar;
     }*/
 }

@@ -24,7 +24,7 @@ public class UnidadMilitarDAO {
         UnidadMilitar unidadMilitar = new UnidadMilitar();
         unidadMilitar.setIdUnidadMilitar(unidadMilitarDTO.getIdUnidadMilitar());
         unidadMilitar.setCodigoUnidadMilitar(unidadMilitarDTO.getCodigoUnidadMilitar().toUpperCase());
-        unidadMilitar.setNombreUnidadMilitar(unidadMilitarDTO.getNombreUnidadMilitar().toUpperCase());
+        unidadMilitar.setNombreUnidadMilitar(normalizarNombreUnidadMilitar(unidadMilitarDTO.getNombreUnidadMilitar()));
         unidadMilitar.setSiglaoAcronimoUnidadMilitar(unidadMilitarDTO.getSiglaoAcronimoUnidadMilitar().toUpperCase());
         unidadMilitar.setNombreArchivoFotoLogExtoFmtUnidadMilitar(unidadMilitarDTO.getNombreArchivoFotoLogExtoFmtUnidadMilitar());
         unidadMilitar.setNombreCarpetaAlmacenamientoUnidadMilitar(unidadMilitarDTO.getNombreCarpetaAlmacenamientoUnidadMilitar().toUpperCase());
@@ -44,12 +44,27 @@ public class UnidadMilitarDAO {
         UnidadMilitarDTO unidadMilitarDTO = new UnidadMilitarDTO();
         unidadMilitarDTO.setIdUnidadMilitar(unidadMilitar.getIdUnidadMilitar());
         unidadMilitarDTO.setCodigoUnidadMilitar(unidadMilitar.getCodigoUnidadMilitar().toUpperCase());
-        unidadMilitarDTO.setNombreUnidadMilitar(unidadMilitar.getNombreUnidadMilitar().toUpperCase());
+        unidadMilitarDTO.setNombreUnidadMilitar(normalizarNombreUnidadMilitar(unidadMilitar.getNombreUnidadMilitar()));
         unidadMilitarDTO.setSiglaoAcronimoUnidadMilitar(unidadMilitar.getSiglaoAcronimoUnidadMilitar().toUpperCase());
         unidadMilitarDTO.setNombreArchivoFotoLogExtoFmtUnidadMilitar(unidadMilitar.getNombreArchivoFotoLogExtoFmtUnidadMilitar());
         unidadMilitarDTO.setNombreCarpetaAlmacenamientoUnidadMilitar(unidadMilitar.getNombreCarpetaAlmacenamientoUnidadMilitar().toUpperCase());
         unidadMilitarDTO.setNivelUnidadMilitar(unidadMilitar.getNivelUnidadMilitar().toUpperCase());
         
         return unidadMilitarDTO;
+    }
+    
+    /**
+    * @Autor PD04. HERNAN ADOLFO NUÑEZ GONZALEZ.
+    * @Since 21/10/2026.
+    * @param nombreUnidadMilitar
+    * Convierte el nombre de la unidad militar a mayúscula y deja la abreviatura de número como "No. "
+    * (NO., NO, N°, Nº, N.°, NRO. O NUM. SEGUIDO DE UN NÚMERO), EJ: BATALLON DE APOYO Y SERVICIOS PARA EL COMBATE No. 6.
+    * @return nombreUnidadMilitar normalizado.
+    */
+    public static String normalizarNombreUnidadMilitar(String nombreUnidadMilitar){
+        if (nombreUnidadMilitar==null) {
+           return null;
+        }
+        return nombreUnidadMilitar.toUpperCase().replaceAll("(^|[^A-ZÁÉÍÓÚÑ])(NO\\.?|N\\.?[°º]\\.?|N\\.|NRO\\.?|NUM\\.?)\\s*(\\d)", "$1No. $3");
     }
 }

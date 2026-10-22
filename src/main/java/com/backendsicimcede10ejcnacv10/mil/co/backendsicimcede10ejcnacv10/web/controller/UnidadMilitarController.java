@@ -32,8 +32,9 @@ public class UnidadMilitarController {
     @GetMapping("/unidadesMilitares/count")//DECLARACIÓN DEL MAPEO DEL CRUD CONTAR REGISTROS.
     public ResponseEntity<Long> contarTotalRegistros(
             @RequestParam(required = false) Long idUnidadMilitar,
-            @RequestParam(required = false) String keyword) {
-        return new ResponseEntity<>(unidadMilitarService.contarTotalRegistros(idUnidadMilitar, keyword), HttpStatus.OK);
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) String nivelUnidadMilitar) {
+        return new ResponseEntity<>(unidadMilitarService.contarTotalRegistros(idUnidadMilitar, keyword, nivelUnidadMilitar), HttpStatus.OK);
     }
     
     //LISTAR REGISTROS:
@@ -41,9 +42,10 @@ public class UnidadMilitarController {
     public ResponseEntity<List<UnidadMilitarDTO>> listarUnidadesMilitaresLista(
             @RequestParam(required = false) Long idUnidadMilitar,
             @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) String nivelUnidadMilitar,
             @RequestParam(required = false) String orderBy,
             @RequestParam(required = false, defaultValue = "ASC") String orderMode) {
-        return new ResponseEntity<>(unidadMilitarService.listarUnidadesMilitares(idUnidadMilitar, keyword, orderBy, orderMode), HttpStatus.OK);
+        return new ResponseEntity<>(unidadMilitarService.listarUnidadesMilitares(idUnidadMilitar, keyword, nivelUnidadMilitar, orderBy, orderMode), HttpStatus.OK);
     }
     
     //LISTAR REGISTROS PAGINADOS:
@@ -51,12 +53,13 @@ public class UnidadMilitarController {
     public ResponseEntity<Slice<UnidadMilitarDTO>> listarUnidadesMilitares(
             @RequestParam(required = false) Long idUnidadMilitar,
             @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) String nivelUnidadMilitar,
             @RequestParam(required = false) String orderBy,
             @RequestParam(required = false, defaultValue = "ASC") String orderMode,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return new ResponseEntity<>(unidadMilitarService.listarUnidadesMilitaresPag(pageable, idUnidadMilitar, keyword, orderBy, orderMode), HttpStatus.OK);
+        return new ResponseEntity<>(unidadMilitarService.listarUnidadesMilitaresPag(pageable, idUnidadMilitar, keyword, nivelUnidadMilitar, orderBy, orderMode), HttpStatus.OK);
     }
     
     //CREAR REGISTRO:

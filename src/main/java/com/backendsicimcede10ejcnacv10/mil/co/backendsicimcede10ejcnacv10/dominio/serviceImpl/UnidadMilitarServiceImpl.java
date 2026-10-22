@@ -7,15 +7,20 @@ import com.backendsicimcede10ejcnacv10.mil.co.backendsicimcede10ejcnacv10.domini
 import com.backendsicimcede10ejcnacv10.mil.co.backendsicimcede10ejcnacv10.dominio.dto.UnidadMilitarDTO;
 import com.backendsicimcede10ejcnacv10.mil.co.backendsicimcede10ejcnacv10.dominio.service.UnidadMilitarService;
 import com.backendsicimcede10ejcnacv10.mil.co.backendsicimcede10ejcnacv10.persistencia.dao.UnidadMilitarDAO;
+import com.backendsicimcede10ejcnacv10.mil.co.backendsicimcede10ejcnacv10.persistencia.entity.LineaMandoUnidadMilitar;
 import com.backendsicimcede10ejcnacv10.mil.co.backendsicimcede10ejcnacv10.persistencia.entity.UnidadMilitar;
+import com.backendsicimcede10ejcnacv10.mil.co.backendsicimcede10ejcnacv10.persistencia.repository.LineaMandoUnidadMilitarRepository;
 import com.backendsicimcede10ejcnacv10.mil.co.backendsicimcede10ejcnacv10.persistencia.repository.UnidadMilitarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
 * * @Autor PD04. HERNAN ADOLFO NUÑEZ GONZALEZ.
@@ -33,16 +38,19 @@ public class UnidadMilitarServiceImpl implements UnidadMilitarService {
     @Autowired//INYECTAMOS EL REPOSITORIO.
     private UnidadMilitarRepository unidadMilitarRepository;
     
+    @Autowired//INYECTAMOS EL REPOSITORIO DE LAS LÍNEAS DE MANDO (SE ACTUALIZAN AL CAMBIAR LA SIGLA O ACRÓNIMO).
+    private LineaMandoUnidadMilitarRepository lineaMandoUnidadMilitarRepository;
+    
     //CONTAR TOTAL DE REGISTROS:
     @Override//SOBREESCRIBIMOS EL METODO DE CONTAR TOTAL DE REGISTROS.
-    public Long contarTotalRegistros(Long idUnidadMilitar, String keyword) {
-        return unidadMilitarRepository.findTotalRegistros(idUnidadMilitar, keyword);
+    public Long contarTotalRegistros(Long idUnidadMilitar, String keyword, String nivelUnidadMilitar) {
+        return unidadMilitarRepository.findTotalRegistros(idUnidadMilitar, keyword, nivelUnidadMilitar);
     }
     
     //LISTAR REGISTROS:
     @Override//SOBREESCRIBIMOS EL METODO DE LISTAR REGISTROS.
-    public List<UnidadMilitarDTO> listarUnidadesMilitares(Long idUnidadMilitar, String keyword, String orderBy, String orderMode) {
-        List<UnidadMilitar> unidadesMilitares = unidadMilitarRepository.findAllUnidadesMilitares(idUnidadMilitar, keyword, orderBy, orderMode);
+    public List<UnidadMilitarDTO> listarUnidadesMilitares(Long idUnidadMilitar, String keyword, String nivelUnidadMilitar, String orderBy, String orderMode) {
+        List<UnidadMilitar> unidadesMilitares = unidadMilitarRepository.findAllUnidadesMilitares(idUnidadMilitar, keyword, nivelUnidadMilitar, orderBy, orderMode);
         List<UnidadMilitarDTO> unidadMilitarDTOS = new ArrayList<>();
         
         for (UnidadMilitar unidadMilitar : unidadesMilitares){
@@ -54,8 +62,8 @@ public class UnidadMilitarServiceImpl implements UnidadMilitarService {
     
     //LISTAR REGISTROS PAGINADOS:
     @Override//SOBREESCRIBIMOS EL METODO DE LISTAR REGISTROS PAGINADOS.
-    public Slice<UnidadMilitarDTO> listarUnidadesMilitaresPag(Pageable pageable, Long idUnidadMilitar, String keyword, String orderBy, String orderMode) {
-        Slice<UnidadMilitar> unidadesMilitares = unidadMilitarRepository.findAllUnidadesMilitaresPag(pageable, idUnidadMilitar, keyword, orderBy, orderMode);
+    public Slice<UnidadMilitarDTO> listarUnidadesMilitaresPag(Pageable pageable, Long idUnidadMilitar, String keyword, String nivelUnidadMilitar, String orderBy, String orderMode) {
+        Slice<UnidadMilitar> unidadesMilitares = unidadMilitarRepository.findAllUnidadesMilitaresPag(pageable, idUnidadMilitar, keyword, nivelUnidadMilitar, orderBy, orderMode);
         return unidadesMilitares.map(unidadMilitar -> unidadMilitarDAO.unidadMilitarDTO(unidadMilitar));
     }
     
@@ -63,7 +71,7 @@ public class UnidadMilitarServiceImpl implements UnidadMilitarService {
     @Override//SOBREESCRIBIMOS EL METODO DE CREAR REGISTRO.
     public RespuestaDTO crearUnidadMilitar(UnidadMilitarDTO unidadMilitarDTO) {
         Long maxIdUnidadMilitar=null;
-        UnidadMilitar unidadMilitarNombre = unidadMilitarRepository.findByNombreUnidadMilitar(unidadMilitarDTO.getNombreUnidadMilitar().toUpperCase());
+        UnidadMilitar unidadMilitarNombre = unidadMilitarRepository.findByNombreUnidadMilitar(UnidadMilitarDAO.normalizarNombreUnidadMilitar(unidadMilitarDTO.getNombreUnidadMilitar()));
         UnidadMilitar unidadMilitarSiglaoAcronimo = unidadMilitarRepository.findBySiglaoAcronimoUnidadMilitar(unidadMilitarDTO.getSiglaoAcronimoUnidadMilitar().toUpperCase());
         UnidadMilitar unidadMilitarCodigo = unidadMilitarRepository.findByCodigoUnidadMilitar(unidadMilitarDTO.getCodigoUnidadMilitar().toUpperCase());
         RespuestaDTO respuestaDTO = new RespuestaDTO(MensajesConstantes.MSG_REGISTRO_NO_CREADO, false);
@@ -167,85 +175,83 @@ public class UnidadMilitarServiceImpl implements UnidadMilitarService {
     
     //MODIFICAR REGISTRO:
     @Override//SOBREESCRIBIMOS EL METODO DE MODIFICAR REGISTRO.
+    @Transactional//LA MODIFICACIÓN DE LA UNIDAD MILITAR Y LA ACTUALIZACIÓN DE SUS LÍNEAS DE MANDO SE CONFIRMAN O SE REVIERTEN JUNTAS.
     public RespuestaDTO actualizarUnidadMilitar(UnidadMilitarDTO unidadMilitarDTO) {
         Optional<UnidadMilitar> unidadMilitarId = unidadMilitarRepository.findByIdUnidadMilitar(unidadMilitarDTO.getIdUnidadMilitar());
         RespuestaDTO respuestaDTO = new RespuestaDTO(MensajesConstantes.MSG_REGISTRO_NO_ACTUALIZADO, false);
         
-        if (unidadMilitarId.isPresent()==true) {//SI ENCONTRO EL ID DEL REGISTRO EN LA TABLA DE LA BASE DE DATOS SE VERIFICA EL NOMBRE DEL REGISTRO CON EL ID PROPORCIONADO.
-           if ( (unidadMilitarDTO.getNombreUnidadMilitar().equals(unidadMilitarId.get().getNombreUnidadMilitar())==true)&&(unidadMilitarDTO.getSiglaoAcronimoUnidadMilitar().equals(unidadMilitarId.get().getSiglaoAcronimoUnidadMilitar())==true)&&(unidadMilitarDTO.getCodigoUnidadMilitar().equals(unidadMilitarId.get().getCodigoUnidadMilitar())==true) ) {//SI EL NOMBRE, SIGLA O ACRÓNIMO Y CÓDIGO DIGITADO ES IGUAL AL ALMACENADO EN LA TABLA DE LA BASE DE DATOS SE MODIFICA EL REGISTRO Y MUESTRA UN MENSAJE DE REGISTRO MODIFICADO EXITOSAMENTE.
-              UnidadMilitar unidadMilitar = unidadMilitarDAO.unidadMilitar(unidadMilitarDTO);
-              unidadMilitarRepository.save(unidadMilitar);
-              respuestaDTO = new RespuestaDTO(MensajesConstantes.MSG_REGISTRO_ACTUALIZADO_EXITO, true);
-           }
-           if (unidadMilitarDTO.getNombreUnidadMilitar().equals(unidadMilitarId.get().getNombreUnidadMilitar())==false) {//SI EL NOMBRE O SIGLA O ACRÓNIMO DIGITADO ES DIFERENTE AL NOMBRE O SIGLA O ACRÓNIMO ALMACENADO EN LA TABLA DE LA BASE DE DATOS SE REALIZA BUSQUEDA PARA VERIFICAR SI ESTE NOMBRE O SIGLA O ACRÓNIMO DIGITADO EXISTE EN OTROS REGISTROS.
-              //consulte por nombre e imprima si existe y si no existe
-              UnidadMilitar unidadMilitarNombre = unidadMilitarRepository.findByNombreUnidadMilitar(unidadMilitarDTO.getNombreUnidadMilitar().toUpperCase());
-              
-              //DECLARACIÓN E INICIALIZACIÓN DE LAS BANDERAS EN CERO (0):
-              long banderaNombreRegistroEncontrado=0;
-              
-              if (!(unidadMilitarNombre==null)) {//SI ENCONTRO EL NOMBRE DEL REGISTRO EN LA TABLA DE LA BASE DE DATOS MUESTRA UN MENSAJE DE NOMBRE DE REGISTRO REPETIDO CON EL NOMBRE PROPORCIONADO.
-                 banderaNombreRegistroEncontrado=1;
-              }
-              
-              if (banderaNombreRegistroEncontrado==1) {//SI LA BUSQUEDA OBTIENE QUE EL NOMBRE DIGITADO Y BUSCADO ES DIFERENTE DE NULO SIGNIFICA QUE ENCONTRO EL MISMO NOMBRE ALMACENADO EN LA TABLA DE LA BASE DE DATOS Y MUESTRA UN MENSAJE DE NOMBRE DEL REGISTRO REPETIDO.
-                 respuestaDTO = new RespuestaDTO(MensajesConstantes.MSG_REGISTRO_NOMBRE_YA_EXISTE, false);
-                 respuestaDTO.setUnidadMilitarDTO(null);
-              }
-              if (banderaNombreRegistroEncontrado==0) {//SI LA BUSQUEDA OBTIENE QUE EL NOMBRE DIGITADO Y BUSCADO ES NULO EN LA TABLA DE LA BASE DE DATOS SE MODIFICA EL REGISTRO Y MUESTRA UN MENSAJE DE REGISTRO MODIFICADO EXITOSAMENTE.
-                 UnidadMilitar unidadMilitar = unidadMilitarDAO.unidadMilitar(unidadMilitarDTO);
-                 unidadMilitarRepository.save(unidadMilitar);
-                 respuestaDTO = new RespuestaDTO(MensajesConstantes.MSG_REGISTRO_ACTUALIZADO_EXITO, true);
-              }
-           }
-           if (unidadMilitarDTO.getSiglaoAcronimoUnidadMilitar().equals(unidadMilitarId.get().getSiglaoAcronimoUnidadMilitar())==false) {//SI LA SIGLA O ACRÓNIMO DIGITADO ES DIFERENTE AL ALMACENADO EN LA TABLA DE LA BASE DE DATOS SE REALIZA BUSQUEDA PARA VERIFICAR SI EXISTE EN OTROS REGISTROS.
-              //consulte por nombre e imprima si existe y si no existe
-              UnidadMilitar unidadMilitarSiglaoAcronimo = unidadMilitarRepository.findBySiglaoAcronimoUnidadMilitar(unidadMilitarDTO.getSiglaoAcronimoUnidadMilitar().toUpperCase());
-              
-              //DECLARACIÓN E INICIALIZACIÓN DE LAS BANDERAS EN CERO (0):
-              long banderaSiglaoAcronimoEncontrado=0;
-              
-              if (!(unidadMilitarSiglaoAcronimo==null)) {//SI ENCONTRO LA SIGLA O ACRÓNIMO DEL REGISTRO EN LA TABLA DE LA BASE DE DATOS MUESTRA UN MENSAJE DE SIGLA O ACRÓNIMO DE REGISTRO REPETIDO CON LA MISMA SIGLA O ACRÓNIMO PROPORCIONADO.
-                 banderaSiglaoAcronimoEncontrado=1;
-              }
-              
-              if (banderaSiglaoAcronimoEncontrado==1) {//SI LA BUSQUEDA OBTIENE QUE LA SIGLA O ACRÓNIMO DIGITADO Y BUSCADO ES DIFERENTE DE NULO SIGNIFICA QUE ENCONTRO LA MISMA SIGLA O ACRÓNIMO ALMACENADO EN LA TABLA DE LA BASE DE DATOS Y MUESTRA UN MENSAJE DE SIGLA O ACRÓNIMO DEL REGISTRO REPETIDO.
-                 respuestaDTO = new RespuestaDTO(MensajesConstantes.MSG_REGISTRO_SIGLA_O_ACRONIMO_YA_EXISTE, false);
-                 respuestaDTO.setUnidadMilitarDTO(null);
-              }
-              if (banderaSiglaoAcronimoEncontrado==0) {//SI LA BUSQUEDA OBTIENE QUE LA SIGLA O ACRÓNIMO DIGITADO Y BUSCADO ES NULO EN LA TABLA DE LA BASE DE DATOS SE MODIFICA EL REGISTRO Y MUESTRA UN MENSAJE DE REGISTRO MODIFICADO EXITOSAMENTE.
-                 UnidadMilitar unidadMilitar = unidadMilitarDAO.unidadMilitar(unidadMilitarDTO);
-                 unidadMilitarRepository.save(unidadMilitar);
-                 respuestaDTO = new RespuestaDTO(MensajesConstantes.MSG_REGISTRO_ACTUALIZADO_EXITO, true);
-              }
-           }
-           if (unidadMilitarDTO.getCodigoUnidadMilitar().equals(unidadMilitarId.get().getCodigoUnidadMilitar())==false) {//SI EL CÓDIGO DIGITADO ES DIFERENTE AL ALMACENADO EN LA TABLA DE LA BASE DE DATOS SE REALIZA BUSQUEDA PARA VERIFICAR SI EXISTE EN OTROS REGISTROS.
-              UnidadMilitar unidadMilitarCodigo = unidadMilitarRepository.findByCodigoUnidadMilitar(unidadMilitarDTO.getCodigoUnidadMilitar().toUpperCase());
-              
-              //DECLARACIÓN E INICIALIZACIÓN DE LAS BANDERAS EN CERO (0):
-              long banderaCodigoRegistroEncontrado=0;
-              
-              if (!(unidadMilitarCodigo==null)) {//SI ENCONTRO EL CÓDIGO DEL REGISTRO EN LA TABLA DE LA BASE DE DATOS MUESTRA UN MENSAJE DE CÓDIGO DE REGISTRO REPETIDO CON EL CÓDIGO PROPORCIONADO.
-                 banderaCodigoRegistroEncontrado=1;
-              }
-              
-              if (banderaCodigoRegistroEncontrado==1) {//SI LA BUSQUEDA OBTIENE QUE EL CÓDIGO DIGITADO Y BUSCADO ES DIFERENTE DE NULO SIGNIFICA QUE ENCONTRO EL MISMO CÓDIGO ALMACENADO EN LA TABLA DE LA BASE DE DATOS Y MUESTRA UN MENSAJE DE CÓDIGO DEL REGISTRO REPETIDO.
-                 respuestaDTO = new RespuestaDTO(MensajesConstantes.MSG_REGISTRO_CODIGO_YA_EXISTE, false);
-                 respuestaDTO.setUnidadMilitarDTO(null);
-              }
-              if (banderaCodigoRegistroEncontrado==0) {//SI LA BUSQUEDA OBTIENE QUE EL CÓDIGO DIGITADO Y BUSCADO ES NULO EN LA TABLA DE LA BASE DE DATOS SE MODIFICA EL REGISTRO Y MUESTRA UN MENSAJE DE REGISTRO MODIFICADO EXITOSAMENTE.
-                 UnidadMilitar unidadMilitar = unidadMilitarDAO.unidadMilitar(unidadMilitarDTO);
-                 unidadMilitarRepository.save(unidadMilitar);
-                 respuestaDTO = new RespuestaDTO(MensajesConstantes.MSG_REGISTRO_ACTUALIZADO_EXITO, true);
-              }
-           }
-        }
         if (unidadMilitarId.isPresent()==false) {//SI NO ENCONTRO EL ID DEL REGISTRO EN LA TABLA DE LA BASE DE DATOS SE MUESTRA UN MENSAJE DE REGISTRO NO MODIFICADO EXITOSAMENTE CON EL ID PROPORCIONADO.
-           respuestaDTO = new RespuestaDTO(MensajesConstantes.MSG_REGISTRO_NO_ACTUALIZADO, false);
            respuestaDTO.setUnidadMilitarDTO(null);
+           return respuestaDTO;
         }
         
+        //VALORES DIGITADOS NORMALIZADOS IGUAL QUE COMO SE ALMACENAN (VER UnidadMilitarDAO):
+        String nombreNuevo = UnidadMilitarDAO.normalizarNombreUnidadMilitar(unidadMilitarDTO.getNombreUnidadMilitar());
+        String siglaoAcronimoNuevo = unidadMilitarDTO.getSiglaoAcronimoUnidadMilitar().toUpperCase();
+        String codigoNuevo = unidadMilitarDTO.getCodigoUnidadMilitar().toUpperCase();
+        String siglaoAcronimoAnterior = unidadMilitarId.get().getSiglaoAcronimoUnidadMilitar();
+        
+        //PRIMERO SE VALIDA QUE EL NOMBRE, LA SIGLA O ACRÓNIMO Y EL CÓDIGO NO EXISTAN EN OTRO REGISTRO; SOLO SI LOS TRES SON VÁLIDOS
+        //SE MODIFICA EL REGISTRO (ANTES SE GUARDABA CADA CAMPO POR SEPARADO Y EL REGISTRO QUEDABA MODIFICADO AUNQUE OTRO CAMPO ESTUVIERA REPETIDO):
+        if (existeEnOtroRegistro(unidadMilitarRepository.findByNombreUnidadMilitar(nombreNuevo), unidadMilitarDTO.getIdUnidadMilitar())) {//NOMBRE REPETIDO.
+           respuestaDTO = new RespuestaDTO(MensajesConstantes.MSG_REGISTRO_NOMBRE_YA_EXISTE, false);
+           respuestaDTO.setUnidadMilitarDTO(null);
+           return respuestaDTO;
+        }
+        if (existeEnOtroRegistro(unidadMilitarRepository.findBySiglaoAcronimoUnidadMilitar(siglaoAcronimoNuevo), unidadMilitarDTO.getIdUnidadMilitar())) {//SIGLA O ACRÓNIMO REPETIDO.
+           respuestaDTO = new RespuestaDTO(MensajesConstantes.MSG_REGISTRO_SIGLA_O_ACRONIMO_YA_EXISTE, false);
+           respuestaDTO.setUnidadMilitarDTO(null);
+           return respuestaDTO;
+        }
+        if (existeEnOtroRegistro(unidadMilitarRepository.findByCodigoUnidadMilitar(codigoNuevo), unidadMilitarDTO.getIdUnidadMilitar())) {//CÓDIGO REPETIDO.
+           respuestaDTO = new RespuestaDTO(MensajesConstantes.MSG_REGISTRO_CODIGO_YA_EXISTE, false);
+           respuestaDTO.setUnidadMilitarDTO(null);
+           return respuestaDTO;
+        }
+        
+        //SI CAMBIÓ LA SIGLA O ACRÓNIMO SE PREPARAN LAS LÍNEAS DE MANDO QUE LA USAN COMO PASO (EJ. CAOCC->JEMOP->SECEJ->COEJC):
+        List<LineaMandoUnidadMilitar> lineasMandosActualizadas = new ArrayList<>();
+        if (siglaoAcronimoNuevo.equals(siglaoAcronimoAnterior)==false) {
+           for (LineaMandoUnidadMilitar lineaMando : lineaMandoUnidadMilitarRepository.findByPasoSiglaoAcronimoUnidadMilitar(siglaoAcronimoAnterior)) {
+              String lineaMandoNueva = reemplazarPasoLineaMando(lineaMando.getLineaMandoUnidadMilitar(), siglaoAcronimoAnterior, siglaoAcronimoNuevo);
+              if (lineaMandoNueva.equals(lineaMando.getLineaMandoUnidadMilitar())) {//EL LIKE PUDO TRAER UNA LÍNEA SIN EL PASO EXACTO.
+                 continue;
+              }
+              if (lineaMandoNueva.length() > 255) {//LA COLUMNA LINEA_MANDO_UNIDAD_MILITAR ES VARCHAR2(255).
+                 respuestaDTO = new RespuestaDTO(MensajesConstantes.MSG_LINEA_MANDO_EXCEDE_LONGITUD_CON_SIGLA_NUEVA, false);
+                 respuestaDTO.setUnidadMilitarDTO(null);
+                 return respuestaDTO;
+              }
+              lineaMando.setLineaMandoUnidadMilitar(lineaMandoNueva);
+              lineasMandosActualizadas.add(lineaMando);
+           }
+        }
+        
+        //SE MODIFICA EL REGISTRO Y LAS LÍNEAS DE MANDO EN LA MISMA TRANSACCIÓN:
+        UnidadMilitar unidadMilitar = unidadMilitarDAO.unidadMilitar(unidadMilitarDTO);
+        unidadMilitarRepository.save(unidadMilitar);
+        lineaMandoUnidadMilitarRepository.saveAll(lineasMandosActualizadas);
+        
+        String mensaje = MensajesConstantes.MSG_REGISTRO_ACTUALIZADO_EXITO;
+        if (lineasMandosActualizadas.isEmpty()==false) {
+           mensaje = mensaje + " Se actualizó la sigla o acrónimo en " + lineasMandosActualizadas.size() + (lineasMandosActualizadas.size()==1 ? " línea de mando." : " líneas de mando.");
+        }
+        respuestaDTO = new RespuestaDTO(mensaje, true);
+        
         return respuestaDTO;
+    }
+    
+    //INDICA SI EL REGISTRO ENCONTRADO POR NOMBRE, SIGLA O CÓDIGO PERTENECE A OTRA UNIDAD MILITAR (NO AL QUE SE ESTÁ MODIFICANDO):
+    private boolean existeEnOtroRegistro(UnidadMilitar unidadMilitarEncontrada, Long idUnidadMilitar) {
+        return unidadMilitarEncontrada!=null && unidadMilitarEncontrada.getIdUnidadMilitar().equals(idUnidadMilitar)==false;
+    }
+    
+    //REEMPLAZA LA SIGLA O ACRÓNIMO ANTERIOR POR LA NUEVA SOLO CUANDO ES UN PASO COMPLETO DE LA LÍNEA DE MANDO, ES DECIR, CUANDO
+    //ESTÁ ENTRE LOS SEPARADORES "->", "[" O "]" DE LOS FINALES ALTERNATIVOS (EJ. "CAOCC->[SECEJ->CEDE10][CEDE10]"), PARA QUE
+    //CAMBIAR "BR06" NO ALTERE OTRA SIGLA QUE LA CONTENGA COMO "BR06A". SE QUITAN LOS ESPACIOS ALREDEDOR DE LOS SEPARADORES:
+    private String reemplazarPasoLineaMando(String lineaMando, String siglaoAcronimoAnterior, String siglaoAcronimoNuevo) {
+        String lineaMandoCompacta = lineaMando.trim().replaceAll("\\s*(->|\\[|\\])\\s*", "$1");
+        return lineaMandoCompacta.replaceAll("(^|->|\\[|\\])" + Pattern.quote(siglaoAcronimoAnterior) + "(?=$|->|\\[|\\])", "$1" + Matcher.quoteReplacement(siglaoAcronimoNuevo));
     }
     
     //ELIMINAR REGISTRO:

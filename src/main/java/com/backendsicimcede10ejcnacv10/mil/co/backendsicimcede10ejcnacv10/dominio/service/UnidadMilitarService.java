@@ -18,9 +18,9 @@ import java.util.List;
 public interface UnidadMilitarService {
     //DECLARACIÓN DE LOS METODOS DE RESPUESTA EN LA INTERFACE PARA LOS CRUDS QUE SON LOS METODOS PARA LA
     //CREACIÓN, LECTURA (LISTAR Y CONSULTAR), EDICIÓN Y ELIMINACIÓN DE UN REGISTRO:
-    Long contarTotalRegistros(Long idUnidadMilitar, String keyword);
-    List<UnidadMilitarDTO> listarUnidadesMilitares(Long idUnidadMilitar, String keyword, String orderBy, String orderMode);
-    Slice<UnidadMilitarDTO> listarUnidadesMilitaresPag(Pageable pageable, Long idUnidadMilitar, String keyword, String orderBy, String orderMode);
+    Long contarTotalRegistros(Long idUnidadMilitar, String keyword, String nivelUnidadMilitar);
+    List<UnidadMilitarDTO> listarUnidadesMilitares(Long idUnidadMilitar, String keyword, String nivelUnidadMilitar, String orderBy, String orderMode);
+    Slice<UnidadMilitarDTO> listarUnidadesMilitaresPag(Pageable pageable, Long idUnidadMilitar, String keyword, String nivelUnidadMilitar, String orderBy, String orderMode);
     RespuestaDTO crearUnidadMilitar(UnidadMilitarDTO unidadMilitarDTO);
     RespuestaDTO consultarUnidadMilitarporId(Long idUnidadMilitar);
     RespuestaDTO consultarUnidadMilitarporCodigo(String codigoUnidadMilitar);
