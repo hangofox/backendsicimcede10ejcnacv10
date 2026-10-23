@@ -93,6 +93,9 @@ public class SolicitudInfraestructura {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaHMSModificacionSolicitudInfraestructura;
     
+    @Column(name = "ESTADO_SOLICITUD_INFRAESTRUCTURA", columnDefinition = "VARCHAR2(50) NOT NULL")
+    private String estadoSolicitudInfraestructura;
+    
     /*//DECLARACIÓN DE LOS MÉTODOS SETTERS Y GETTERS DE LAS VARIABLES DECLARADAS DE LOS CAMPOS DE LA TABLA DE LA BASE DE DATOS DE LA ENTIDAD:
     public Long getIdSolicitudInfraestructura() {
         return idSolicitudInfraestructura;
@@ -195,5 +198,11 @@ public class SolicitudInfraestructura {
     }
     public void setFechaHMSModificacionSolicitudInfraestructura(Date fechaHMSModificacionSolicitudInfraestructura) {
         this.fechaHMSModificacionSolicitudInfraestructura = fechaHMSModificacionSolicitudInfraestructura;
+    }
+    public String getEstadoSolicitudInfraestructura() {
+        return estadoSolicitudInfraestructura;
+    }
+    public void setEstadoSolicitudInfraestructura(String estadoSolicitudInfraestructura) {
+        this.estadoSolicitudInfraestructura = estadoSolicitudInfraestructura;
     }*/
 }

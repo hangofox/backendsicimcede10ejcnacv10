@@ -18,12 +18,13 @@ import java.util.List;
 public interface SolicitudInfraestructuraService {
     //DECLARACIÓN DE LOS METODOS DE RESPUESTA EN LA INTERFACE PARA LOS CRUDS QUE SON LOS METODOS PARA LA
     //CREACIÓN, LECTURA (LISTAR Y CONSULTAR), EDICIÓN Y ELIMINACIÓN DE UN REGISTRO:
-    Long contarTotalRegistros(Long idSolicitudInfraestructura, String keyword, String siglaoAcronimoUnidadMilitar);
-    List<SolicitudInfraestructuraDTO> listarSolicitudesInfraestructuras(Long idSolicitudInfraestructura, String keyword, String siglaoAcronimoUnidadMilitar, String orderBy, String orderMode);
-    Slice<SolicitudInfraestructuraDTO> listarSolicitudesInfraestructurasPag(Pageable pageable, Long idSolicitudInfraestructura, String keyword, String siglaoAcronimoUnidadMilitar, String orderBy, String orderMode);
+    Long contarTotalRegistros(Long idSolicitudInfraestructura, String keyword, String siglaoAcronimoUnidadMilitar, String estadosSolicitudInfraestructura);
+    List<SolicitudInfraestructuraDTO> listarSolicitudesInfraestructuras(Long idSolicitudInfraestructura, String keyword, String siglaoAcronimoUnidadMilitar, String estadosSolicitudInfraestructura, String orderBy, String orderMode);
+    Slice<SolicitudInfraestructuraDTO> listarSolicitudesInfraestructurasPag(Pageable pageable, Long idSolicitudInfraestructura, String keyword, String siglaoAcronimoUnidadMilitar, String estadosSolicitudInfraestructura, String orderBy, String orderMode);
     RespuestaDTO crearSolicitudInfraestructura(SolicitudInfraestructuraDTO solicitudInfraestructuraDTO);
     RespuestaDTO consultarSolicitudInfraestructuraporId(Long idSolicitudInfraestructura);
     RespuestaDTO consultarSolicitudInfraestructuraporCodigoRadicado(String codigoRadicadoSolicitudInfraestructura);
     RespuestaDTO actualizarSolicitudInfraestructura(SolicitudInfraestructuraDTO solicitudInfraestructuraDTO);
+    RespuestaDTO actualizarSolicitudInfraestructuraAvalada(SolicitudInfraestructuraDTO solicitudInfraestructuraDTO);
     RespuestaDTO eliminarSolicitudInfraestructura(Long idSolicitudInfraestructura);
 }

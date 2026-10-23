@@ -63,6 +63,7 @@ public class SolicitudInfraestructuraDAO {
         solicitudInfraestructura.setDescripcionImpactoEsperadoInfraestructura(solicitudInfraestructuraDTO.getDescripcionImpactoEsperadoInfraestructura());
         solicitudInfraestructura.setFechaHMSIngresoSolicitudInfraestructura(solicitudInfraestructuraDTO.getFechaHMSIngresoSolicitudInfraestructura());
         solicitudInfraestructura.setFechaHMSModificacionSolicitudInfraestructura(solicitudInfraestructuraDTO.getFechaHMSModificacionSolicitudInfraestructura());
+        solicitudInfraestructura.setEstadoSolicitudInfraestructura(solicitudInfraestructuraDTO.getEstadoSolicitudInfraestructura() == null ? null : solicitudInfraestructuraDTO.getEstadoSolicitudInfraestructura().toUpperCase());
         
         //MAPEAR UNIDAD MILITAR RELACIONADA.
         if (solicitudInfraestructuraDTO.getUnidadMilitarDTO() != null && solicitudInfraestructuraDTO.getUnidadMilitarDTO().getIdUnidadMilitar() != null) {
@@ -108,6 +109,7 @@ public class SolicitudInfraestructuraDAO {
         solicitudInfraestructuraDTO.setDescripcionImpactoEsperadoInfraestructura(solicitudInfraestructura.getDescripcionImpactoEsperadoInfraestructura());
         solicitudInfraestructuraDTO.setFechaHMSIngresoSolicitudInfraestructura(solicitudInfraestructura.getFechaHMSIngresoSolicitudInfraestructura());
         solicitudInfraestructuraDTO.setFechaHMSModificacionSolicitudInfraestructura(solicitudInfraestructura.getFechaHMSModificacionSolicitudInfraestructura());
+        solicitudInfraestructuraDTO.setEstadoSolicitudInfraestructura(solicitudInfraestructura.getEstadoSolicitudInfraestructura());
         
         //MAPEAR UNIDAD MILITAR RELACIONADA.
         if (solicitudInfraestructura.getUnidadMilitar() != null && solicitudInfraestructura.getUnidadMilitar().getIdUnidadMilitar() != null) {

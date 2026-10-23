@@ -31,6 +31,7 @@ public class SolicitudInfraestructuraDTO {
     private String descripcionImpactoEsperadoInfraestructura;
     private Date fechaHMSIngresoSolicitudInfraestructura;
     private Date fechaHMSModificacionSolicitudInfraestructura;
+    private String estadoSolicitudInfraestructura;
     
     private UnidadMilitarDTO unidadMilitarDTO;
     private TipoSolicitudInfraestructuraDTO tipoSolicitudInfraestructuraDTO;

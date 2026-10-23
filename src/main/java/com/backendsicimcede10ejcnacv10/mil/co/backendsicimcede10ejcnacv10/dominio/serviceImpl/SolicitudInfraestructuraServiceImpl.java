@@ -2,6 +2,7 @@
 package com.backendsicimcede10ejcnacv10.mil.co.backendsicimcede10ejcnacv10.dominio.serviceImpl;
 
 //IMPORTACIÓN DE LIBRERIAS:
+import com.backendsicimcede10ejcnacv10.mil.co.backendsicimcede10ejcnacv10.dominio.Constantes.EstadosSolicitudesInfraestructurasConstantes;
 import com.backendsicimcede10ejcnacv10.mil.co.backendsicimcede10ejcnacv10.dominio.Constantes.MensajesConstantes;
 import com.backendsicimcede10ejcnacv10.mil.co.backendsicimcede10ejcnacv10.dominio.dto.RespuestaDTO;
 import com.backendsicimcede10ejcnacv10.mil.co.backendsicimcede10ejcnacv10.dominio.dto.SolicitudInfraestructuraDTO;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
 * * @Autor PD04. HERNAN ADOLFO NUÑEZ GONZALEZ.
@@ -35,17 +37,18 @@ public class SolicitudInfraestructuraServiceImpl implements SolicitudInfraestruc
     private SolicitudInfraestructuraRepository solicitudInfraestructuraRepository;
     
     //CONTADORES DE REGISTROS FILTRADOS.
-    //CONTAR TOTAL DE REGISTROS (CON FILTROS OPCIONALES POR KEYWORD Y SIGLA O ACRÓNIMO DE UNIDAD MILITAR):
+    //CONTAR TOTAL DE REGISTROS (CON FILTROS OPCIONALES POR KEYWORD, SIGLA O ACRÓNIMO DE UNIDAD MILITAR Y ESTADOS DE LA SOLICITUD SEPARADOS
+    //POR COMA, ESTE ÚLTIMO PARA LA SEMAFORIZACIÓN DE LOS LISTADOS Y PARA LAS SOLICITUDES AVALADAS):
     @Override//SOBREESCRIBIMOS EL METODO DE CONTEO.
-    public Long contarTotalRegistros(Long idSolicitudInfraestructura, String keyword, String siglaoAcronimoUnidadMilitar) {
-        return solicitudInfraestructuraRepository.findTotalRegistros(idSolicitudInfraestructura, keyword, siglaoAcronimoUnidadMilitar);
+    public Long contarTotalRegistros(Long idSolicitudInfraestructura, String keyword, String siglaoAcronimoUnidadMilitar, String estadosSolicitudInfraestructura) {
+        return solicitudInfraestructuraRepository.findTotalRegistros(idSolicitudInfraestructura, keyword, siglaoAcronimoUnidadMilitar, estadosSolicitudInfraestructura);
     }
-    
+
     //LISTADO DE REGISTROS FILTRADOS SIN PAGINACIÓN.
-    //LISTAR REGISTROS (CON FILTROS OPCIONALES POR KEYWORD Y SIGLA O ACRÓNIMO DE UNIDAD MILITAR):
+    //LISTAR REGISTROS (CON FILTROS OPCIONALES POR KEYWORD, SIGLA O ACRÓNIMO DE UNIDAD MILITAR Y ESTADOS DE LA SOLICITUD):
     @Override//SOBREESCRIBIMOS EL METODO DE LISTAR REGISTROS.
-    public List<SolicitudInfraestructuraDTO> listarSolicitudesInfraestructuras(Long idSolicitudInfraestructura, String keyword, String siglaoAcronimoUnidadMilitar, String orderBy, String orderMode) {
-        List<SolicitudInfraestructura> solicitudesInfraestructuras = solicitudInfraestructuraRepository.findAllSolicitudesInfraestructuras(idSolicitudInfraestructura, keyword, siglaoAcronimoUnidadMilitar, orderBy, orderMode);
+    public List<SolicitudInfraestructuraDTO> listarSolicitudesInfraestructuras(Long idSolicitudInfraestructura, String keyword, String siglaoAcronimoUnidadMilitar, String estadosSolicitudInfraestructura, String orderBy, String orderMode) {
+        List<SolicitudInfraestructura> solicitudesInfraestructuras = solicitudInfraestructuraRepository.findAllSolicitudesInfraestructuras(idSolicitudInfraestructura, keyword, siglaoAcronimoUnidadMilitar, estadosSolicitudInfraestructura, orderBy, orderMode);
         List<SolicitudInfraestructuraDTO> solicitudesInfraestructurasDTOS = new ArrayList<>();
         
         for (SolicitudInfraestructura solicitudInfraestructura : solicitudesInfraestructuras) {
@@ -56,10 +59,10 @@ public class SolicitudInfraestructuraServiceImpl implements SolicitudInfraestruc
     }
     
     //LISTADO DE REGISTROS FILTRADOS CON PAGINACIÓN.
-    //LISTAR REGISTROS CON PAGINACIÓN (CON FILTROS OPCIONALES POR KEYWORD Y SIGLA O ACRÓNIMO DE UNIDAD MILITAR):
+    //LISTAR REGISTROS CON PAGINACIÓN (CON FILTROS OPCIONALES POR KEYWORD, SIGLA O ACRÓNIMO DE UNIDAD MILITAR Y ESTADOS DE LA SOLICITUD):
     @Override//SOBREESCRIBIMOS EL METODO DE LISTAR REGISTROS.
-    public Slice<SolicitudInfraestructuraDTO> listarSolicitudesInfraestructurasPag(Pageable pageable, Long idSolicitudInfraestructura, String keyword, String siglaoAcronimoUnidadMilitar, String orderBy, String orderMode) {
-        Slice<SolicitudInfraestructura> solicitudesInfraestructuras = solicitudInfraestructuraRepository.findAllSolicitudesInfraestructurasPag(pageable, idSolicitudInfraestructura, keyword, siglaoAcronimoUnidadMilitar, orderBy, orderMode);
+    public Slice<SolicitudInfraestructuraDTO> listarSolicitudesInfraestructurasPag(Pageable pageable, Long idSolicitudInfraestructura, String keyword, String siglaoAcronimoUnidadMilitar, String estadosSolicitudInfraestructura, String orderBy, String orderMode) {
+        Slice<SolicitudInfraestructura> solicitudesInfraestructuras = solicitudInfraestructuraRepository.findAllSolicitudesInfraestructurasPag(pageable, idSolicitudInfraestructura, keyword, siglaoAcronimoUnidadMilitar, estadosSolicitudInfraestructura, orderBy, orderMode);
         return solicitudesInfraestructuras.map(solicitudInfraestructura -> solicitudInfraestructuraDAO.solicitudInfraestructuraDTO(solicitudInfraestructura));
     }
     
@@ -92,6 +95,10 @@ public class SolicitudInfraestructuraServiceImpl implements SolicitudInfraestruc
            SimpleDateFormat objetoFechaHMS = new SimpleDateFormat("yyyyMMddHHmmss");
            String fechaHMSIngresoSolicitudInfraestructurasinIntermedios = objetoFechaHMS.format(solicitudInfraestructuraDTO.getFechaHMSIngresoSolicitudInfraestructura());
            solicitudInfraestructuraDTO.setCodigoRadicadoSolicitudInfraestructura("SOL-INF" + "-" + (maxIdSolicitudInfraestructura + 1) + "-" + solicitudInfraestructuraDTO.getUnidadMilitarDTO().getSiglaoAcronimoUnidadMilitar() + "-" + fechaHMSIngresoSolicitudInfraestructurasinIntermedios);
+           
+           //TODA SOLICITUD DE INFRAESTRUCTURA NUEVA INICIA EN ESTADO "CREACION"; LUEGO AVANZA AUTOMÁTICAMENTE A MEDIDA QUE SE REGISTRAN
+           //INTEGRANTES EN SU HISTORIAL (VER HistorialIntegranteSolicitudInfraestructuraServiceImpl.actualizarEstadoSolicitudInfraestructura):
+           solicitudInfraestructuraDTO.setEstadoSolicitudInfraestructura(EstadosSolicitudesInfraestructurasConstantes.ESTADO_CREACION);
            
            solicitudInfraestructuraRepository.save(solicitudInfraestructuraDAO.solicitudInfraestructura(solicitudInfraestructuraDTO));
            respuestaDTO = new RespuestaDTO(MensajesConstantes.MSG_REGISTRO_CREADO_EXITO, true);
@@ -145,6 +152,9 @@ public class SolicitudInfraestructuraServiceImpl implements SolicitudInfraestruc
         RespuestaDTO respuestaDTO = new RespuestaDTO(MensajesConstantes.MSG_REGISTRO_NO_ACTUALIZADO, false);
         
         if (solicitudInfraestructuraId.isPresent() == true) {//SI ENCONTRO EL ID DEL REGISTRO EN LA TABLA DE LA BASE DE DATOS SE VERIFICA EL CÓDIGO RADICADO DEL REGISTRO CON EL ID PROPORCIONADO.
+           //EL ESTADO NO SE MODIFICA DESDE EL FORMULARIO DE LA SOLICITUD: SE CONSERVA EL ALMACENADO (LO CAMBIA EL HISTORIAL DE INTEGRANTES
+           //AUTOMÁTICAMENTE HASTA "ASIGNACION", Y LOS ESTADOS "APROBACION" Y "RECHAZADO" SE ASIGNAN MANUALMENTE):
+           solicitudInfraestructuraDTO.setEstadoSolicitudInfraestructura(solicitudInfraestructuraId.get().getEstadoSolicitudInfraestructura());
            if (solicitudInfraestructuraDTO.getCodigoRadicadoSolicitudInfraestructura().equals(solicitudInfraestructuraId.get().getCodigoRadicadoSolicitudInfraestructura()) == true) {//SI EL CÓDIGO RADICADO DIGITADO ES IGUAL AL CÓDIGO RADICADO EN LA TABLA DE LA BASE DE DATOS SE MODIFICA EL REGISTRO Y MUESTRA UN MENSAJE DE REGISTRO MODIFICADO EXITOSAMENTE.
               SolicitudInfraestructura solicitudInfraestructura = solicitudInfraestructuraDAO.solicitudInfraestructura(solicitudInfraestructuraDTO);
               solicitudInfraestructuraRepository.save(solicitudInfraestructura);
@@ -179,6 +189,50 @@ public class SolicitudInfraestructuraServiceImpl implements SolicitudInfraestruc
         return respuestaDTO;
     }
     
+    //MODIFICAR REGISTRO DE UNA SOLICITUD DE INFRAESTRUCTURA AVALADA (EN ESTADO ASIGNACION, APROBACION O RECHAZADO): SOLO SE MODIFICAN LAS
+    //OBSERVACIONES JURÍDICAS DEL ESTADO DEL PREDIO, LAS OBSERVACIONES DEL ESTADO AMBIENTAL, LA JUSTIFICACIÓN DE LA NECESIDAD, LA DESCRIPCIÓN
+    //GENERAL DE LA NECESIDAD, LA DESCRIPCIÓN DEL IMPACTO ESPERADO Y EL ESTADO (QUE SOLO PUEDE QUEDAR EN ASIGNACION, APROBACION O RECHAZADO);
+    //EL RESTO DE LOS DATOS SE CONSERVA TAL COMO ESTÁ ALMACENADO:
+    @Override//SOBREESCRIBIMOS EL METODO DE MODIFICAR REGISTRO.
+    public RespuestaDTO actualizarSolicitudInfraestructuraAvalada(SolicitudInfraestructuraDTO solicitudInfraestructuraDTO) {
+        Optional<SolicitudInfraestructura> solicitudInfraestructuraId = solicitudInfraestructuraRepository.findByIdSolicitudInfraestructura(solicitudInfraestructuraDTO.getIdSolicitudInfraestructura());
+        RespuestaDTO respuestaDTO = new RespuestaDTO(MensajesConstantes.MSG_REGISTRO_NO_ACTUALIZADO, false);
+
+        if (solicitudInfraestructuraId.isPresent() == false) {//SI NO ENCONTRO EL ID DEL REGISTRO EN LA TABLA DE LA BASE DE DATOS SE MUESTRA UN MENSAJE DE REGISTRO NO MODIFICADO.
+           respuestaDTO.setSolicitudInfraestructuraDTO(null);
+           return respuestaDTO;
+        }
+        SolicitudInfraestructura solicitudInfraestructura = solicitudInfraestructuraId.get();
+        if (esEstadoSolicitudInfraestructuraAvalada(solicitudInfraestructura.getEstadoSolicitudInfraestructura()) == false) {//LA SOLICITUD AÚN NO HA LLEGADO A ASIGNACION (SIGUE EN CREACION, VERIFICACION O VALIDACION).
+           respuestaDTO = new RespuestaDTO(MensajesConstantes.MSG_SOLICITUD_INFRAESTRUCTURA_NO_AVALADA, false);
+           return respuestaDTO;
+        }
+        String estadoNuevo = solicitudInfraestructuraDTO.getEstadoSolicitudInfraestructura() == null ? "" : solicitudInfraestructuraDTO.getEstadoSolicitudInfraestructura().trim().toUpperCase();
+        if (esEstadoSolicitudInfraestructuraAvalada(estadoNuevo) == false) {//EL ESTADO ELEGIDO NO ES ASIGNACION, APROBACION NI RECHAZADO.
+           respuestaDTO = new RespuestaDTO(MensajesConstantes.MSG_ESTADO_SOLICITUD_INFRAESTRUCTURA_AVALADA_NO_PERMITIDO, false);
+           return respuestaDTO;
+        }
+
+        solicitudInfraestructura.setObservacionesJuridicasEstadoPredioInfraestructura(solicitudInfraestructuraDTO.getObservacionesJuridicasEstadoPredioInfraestructura());
+        solicitudInfraestructura.setObservacionesEstadoAmbientalInfraestructura(solicitudInfraestructuraDTO.getObservacionesEstadoAmbientalInfraestructura());
+        solicitudInfraestructura.setJustificacionNecesidadInfraestructura(solicitudInfraestructuraDTO.getJustificacionNecesidadInfraestructura());
+        solicitudInfraestructura.setDescripcionGeneralNecesidadInfraestructura(solicitudInfraestructuraDTO.getDescripcionGeneralNecesidadInfraestructura());
+        solicitudInfraestructura.setDescripcionImpactoEsperadoInfraestructura(solicitudInfraestructuraDTO.getDescripcionImpactoEsperadoInfraestructura());
+        solicitudInfraestructura.setEstadoSolicitudInfraestructura(estadoNuevo);
+        solicitudInfraestructura.setFechaHMSModificacionSolicitudInfraestructura(solicitudInfraestructuraDTO.getFechaHMSModificacionSolicitudInfraestructura() != null ? solicitudInfraestructuraDTO.getFechaHMSModificacionSolicitudInfraestructura() : new Date());
+        solicitudInfraestructuraRepository.save(solicitudInfraestructura);
+        respuestaDTO = new RespuestaDTO(MensajesConstantes.MSG_REGISTRO_ACTUALIZADO_EXITO, true);
+
+        return respuestaDTO;
+    }
+
+    //INDICA SI EL ESTADO ES DE UNA SOLICITUD DE INFRAESTRUCTURA AVALADA (ASIGNACION, APROBACION O RECHAZADO):
+    private boolean esEstadoSolicitudInfraestructuraAvalada(String estadoSolicitudInfraestructura) {
+        return EstadosSolicitudesInfraestructurasConstantes.ESTADO_ASIGNACION.equals(estadoSolicitudInfraestructura)
+            || EstadosSolicitudesInfraestructurasConstantes.ESTADO_APROBACION.equals(estadoSolicitudInfraestructura)
+            || EstadosSolicitudesInfraestructurasConstantes.ESTADO_RECHAZADO.equals(estadoSolicitudInfraestructura);
+    }
+
     //ELIMINAR REGISTRO:
     @Override//SOBREESCRIBIMOS EL METODO DE ELIMINAR REGISTRO.
     public RespuestaDTO eliminarSolicitudInfraestructura(Long idSolicitudInfraestructura) {

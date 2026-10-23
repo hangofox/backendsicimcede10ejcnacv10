@@ -54,6 +54,8 @@ public class MensajesConstantes {
     public static final String MSG_REGISTRO_PRIVILEGIO_Y_RESTRICCION_YA_EXISTEN = "Privilegio y Restricción del Registro para el usuario ya existe en Base de Datos.";
     public static final String MSG_REGISTRO_SIGLA_O_ACRONIMO_YA_EXISTE = "Sigla o Acrónimo del Registro ya existe en Base de Datos.";
     public static final String MSG_LINEA_MANDO_EXCEDE_LONGITUD_CON_SIGLA_NUEVA = "No se actualizó el Registro: con la nueva Sigla o Acrónimo una Línea de Mando de Unidades Militares superaría los 255 caracteres.";
+    public static final String MSG_SOLICITUD_INFRAESTRUCTURA_NO_AVALADA = "No se actualizó el Registro: la Solicitud de Infraestructura aún no ha llegado al estado ASIGNACION.";
+    public static final String MSG_ESTADO_SOLICITUD_INFRAESTRUCTURA_AVALADA_NO_PERMITIDO = "No se actualizó el Registro: el estado de una Solicitud de Infraestructura avalada solo puede ser ASIGNACION, APROBACION o RECHAZADO.";
     public static final String MSG_REGISTRO_UNIDAD_MILITAR_YA_EXISTE = "La Unidad Militar del Registro ya existe en Base de Datos.";
     public static final String MSG_REGISTRO_NOMBRE_EN_UNIDAD_MILITAR_YA_EXISTE = "Nombre del Registro ya existe en esta Unidad Militar.";
     public static final String MSG_REGISTRO_NUMERO_DOCUMENTO_IDENTIFICACION_O_NIC_EN_UNIDAD_MILITAR_YA_EXISTE = "Número del Documento de Identificación o NIC del Registro ya existe en esta Unidad Militar.";
