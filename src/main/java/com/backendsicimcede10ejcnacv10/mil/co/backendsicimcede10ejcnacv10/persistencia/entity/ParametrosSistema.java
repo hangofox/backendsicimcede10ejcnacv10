@@ -58,6 +58,9 @@ public class ParametrosSistema {
     @Column(name = "RUTA_DESTINO_ARCHIVOS_BAJAS_EQUIPOS_INGENIEROS", columnDefinition="CLOB NOT NULL")
     private String rutaDestinoArchivosBajasEquiposIngenieros;
     
+    @Column(name = "RUTA_DESTINO_ARCHIVOS_FOTOGRAFIAS_ANEXAS_APOYOS_ATENC_PREV_EMERG_DESAST", columnDefinition="CLOB NOT NULL")
+    private String rutaDestinoArchivosFotografiasAnexasApoyosAtencPrevEmergDesast;
+    
     @Column(name = "AUTH_ENABLE", columnDefinition="VARCHAR2(150) NULL")
     private String authEnable;
     
@@ -154,6 +157,12 @@ public class ParametrosSistema {
     }
     public void setRutaDestinoArchivosBajasEquiposIngenieros(String rutaDestinoArchivosBajasEquiposIngenieros) {
         this.rutaDestinoArchivosBajasEquiposIngenieros = rutaDestinoArchivosBajasEquiposIngenieros;
+    }
+    public String getRutaDestinoArchivosFotografiasAnexasApoyosAtencPrevEmergDesast() {
+        return rutaDestinoArchivosFotografiasAnexasApoyosAtencPrevEmergDesast;
+    }
+    public void setRutaDestinoArchivosFotografiasAnexasApoyosAtencPrevEmergDesast(String rutaDestinoArchivosFotografiasAnexasApoyosAtencPrevEmergDesast) {
+        this.rutaDestinoArchivosFotografiasAnexasApoyosAtencPrevEmergDesast = rutaDestinoArchivosFotografiasAnexasApoyosAtencPrevEmergDesast;
     }
     public String getAuthEnable() {
         return authEnable;
