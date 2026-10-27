@@ -34,6 +34,7 @@ public class ParametrosSistemaDAO {
         parametrosSistema.setRutaDestinoArchivosAltasEquiposIngenieros(parametrosSistemaDTO.getRutaDestinoArchivosAltasEquiposIngenieros());
         parametrosSistema.setRutaDestinoArchivosBajasEquiposIngenieros(parametrosSistemaDTO.getRutaDestinoArchivosBajasEquiposIngenieros());
         parametrosSistema.setRutaDestinoArchivosFotografiasAnexasApoyosAtencPrevEmergDesast(parametrosSistemaDTO.getRutaDestinoArchivosFotografiasAnexasApoyosAtencPrevEmergDesast());
+        parametrosSistema.setRutaDestinoArchivosIntegrantesApoyosAtencPrevEmergDesast(parametrosSistemaDTO.getRutaDestinoArchivosIntegrantesApoyosAtencPrevEmergDesast());
         parametrosSistema.setAuthEnable(parametrosSistemaDTO.getAuthEnable());
         parametrosSistema.setStartTTLSEnable(parametrosSistemaDTO.getStartTTLSEnable());
         parametrosSistema.setSmtpHost(parametrosSistemaDTO.getSmtpHost());
@@ -69,6 +70,7 @@ public class ParametrosSistemaDAO {
         parametrosSistemaDTO.setRutaDestinoArchivosAltasEquiposIngenieros(parametrosSistema.getRutaDestinoArchivosAltasEquiposIngenieros());
         parametrosSistemaDTO.setRutaDestinoArchivosBajasEquiposIngenieros(parametrosSistema.getRutaDestinoArchivosBajasEquiposIngenieros());
         parametrosSistemaDTO.setRutaDestinoArchivosFotografiasAnexasApoyosAtencPrevEmergDesast(parametrosSistema.getRutaDestinoArchivosFotografiasAnexasApoyosAtencPrevEmergDesast());
+        parametrosSistemaDTO.setRutaDestinoArchivosIntegrantesApoyosAtencPrevEmergDesast(parametrosSistema.getRutaDestinoArchivosIntegrantesApoyosAtencPrevEmergDesast());
         parametrosSistemaDTO.setAuthEnable(parametrosSistema.getAuthEnable());
         parametrosSistemaDTO.setStartTTLSEnable(parametrosSistema.getStartTTLSEnable());
         parametrosSistemaDTO.setSmtpHost(parametrosSistema.getSmtpHost());
