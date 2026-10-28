@@ -58,6 +58,12 @@ public class ParametrosSistema {
     @Column(name = "RUTA_DESTINO_ARCHIVOS_BAJAS_EQUIPOS_INGENIEROS", columnDefinition="CLOB NOT NULL")
     private String rutaDestinoArchivosBajasEquiposIngenieros;
     
+    @Column(name = "RUTA_DESTINO_ARCHIVOS_DOCUMENTACION_ANEXA_SOLIC_INFRAEST", columnDefinition="CLOB NOT NULL")
+    private String rutaDestinoArchivosDocumentacionAnexaSolicInfraest;
+    
+    @Column(name = "RUTA_DESTINO_ARCHIVOS_FOTOGRAFIAS_ANEXAS_SOLIC_INFRAEST", columnDefinition="CLOB NOT NULL")
+    private String rutaDestinoArchivosFotografiasAnexasSolicInfraest;
+    
     @Column(name = "RUTA_DESTINO_ARCHIVOS_FOTOGRAFIAS_ANEXAS_APOYOS_ATENC_PREV_EMERG_DESAST", columnDefinition="CLOB NOT NULL")
     private String rutaDestinoArchivosFotografiasAnexasApoyosAtencPrevEmergDesast;
     
@@ -160,6 +166,18 @@ public class ParametrosSistema {
     }
     public void setRutaDestinoArchivosBajasEquiposIngenieros(String rutaDestinoArchivosBajasEquiposIngenieros) {
         this.rutaDestinoArchivosBajasEquiposIngenieros = rutaDestinoArchivosBajasEquiposIngenieros;
+    }
+    public String getRutaDestinoArchivosDocumentacionAnexaSolicInfraest() {
+        return rutaDestinoArchivosDocumentacionAnexaSolicInfraest;
+    }
+    public void setRutaDestinoArchivosDocumentacionAnexaSolicInfraest(String rutaDestinoArchivosDocumentacionAnexaSolicInfraest) {
+        this.rutaDestinoArchivosDocumentacionAnexaSolicInfraest = rutaDestinoArchivosDocumentacionAnexaSolicInfraest;
+    }
+    public String getRutaDestinoArchivosFotografiasAnexasSolicInfraest() {
+        return rutaDestinoArchivosFotografiasAnexasSolicInfraest;
+    }
+    public void setRutaDestinoArchivosFotografiasAnexasSolicInfraest(String rutaDestinoArchivosFotografiasAnexasSolicInfraest) {
+        this.rutaDestinoArchivosFotografiasAnexasSolicInfraest = rutaDestinoArchivosFotografiasAnexasSolicInfraest;
     }
     public String getRutaDestinoArchivosFotografiasAnexasApoyosAtencPrevEmergDesast() {
         return rutaDestinoArchivosFotografiasAnexasApoyosAtencPrevEmergDesast;

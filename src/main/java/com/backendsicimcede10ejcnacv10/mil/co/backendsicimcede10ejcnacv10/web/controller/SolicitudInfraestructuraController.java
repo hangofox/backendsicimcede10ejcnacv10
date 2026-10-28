@@ -35,8 +35,9 @@ public class SolicitudInfraestructuraController {
             @RequestParam(required = false) Long idSolicitudInfraestructura,
             @RequestParam(required = false) String keyword,
             @RequestParam(required = false) String siglaoAcronimoUnidadMilitar,
-            @RequestParam(required = false) String estadosSolicitudInfraestructura) {//UNO O VARIOS ESTADOS SEPARADOS POR COMA.
-        return new ResponseEntity<>(solicitudInfraestructuraService.contarTotalRegistros(idSolicitudInfraestructura, keyword, siglaoAcronimoUnidadMilitar, estadosSolicitudInfraestructura), HttpStatus.OK);
+            @RequestParam(required = false) String estadosSolicitudInfraestructura,//UNO O VARIOS ESTADOS SEPARADOS POR COMA.
+            @RequestParam(required = false) Long idTipoSolicitudInfraestructura) {//TIPO DE SOLICITUD (EJ. CONSTRUCCION NUEVA O MANTENIMIENTO).
+        return new ResponseEntity<>(solicitudInfraestructuraService.contarTotalRegistros(idSolicitudInfraestructura, keyword, siglaoAcronimoUnidadMilitar, estadosSolicitudInfraestructura, idTipoSolicitudInfraestructura), HttpStatus.OK);
     }
     
     //LISTADO DE REGISTROS FILTRADOS SIN PAGINACIÓN.
@@ -47,9 +48,10 @@ public class SolicitudInfraestructuraController {
             @RequestParam(required = false) String keyword,
             @RequestParam(required = false) String siglaoAcronimoUnidadMilitar,
             @RequestParam(required = false) String estadosSolicitudInfraestructura,
+            @RequestParam(required = false) Long idTipoSolicitudInfraestructura,
             @RequestParam(required = false) String orderBy,
             @RequestParam(required = false, defaultValue = "ASC") String orderMode) {
-        return new ResponseEntity<>(solicitudInfraestructuraService.listarSolicitudesInfraestructuras(idSolicitudInfraestructura, keyword, siglaoAcronimoUnidadMilitar, estadosSolicitudInfraestructura, orderBy, orderMode), HttpStatus.OK);
+        return new ResponseEntity<>(solicitudInfraestructuraService.listarSolicitudesInfraestructuras(idSolicitudInfraestructura, keyword, siglaoAcronimoUnidadMilitar, estadosSolicitudInfraestructura, idTipoSolicitudInfraestructura, orderBy, orderMode), HttpStatus.OK);
     }
     
     //LISTADO DE REGISTROS FILTRADOS CON PAGINACIÓN.
@@ -60,12 +62,13 @@ public class SolicitudInfraestructuraController {
             @RequestParam(required = false) String keyword,
             @RequestParam(required = false) String siglaoAcronimoUnidadMilitar,
             @RequestParam(required = false) String estadosSolicitudInfraestructura,
+            @RequestParam(required = false) Long idTipoSolicitudInfraestructura,
             @RequestParam(required = false) String orderBy,
             @RequestParam(required = false, defaultValue = "ASC") String orderMode,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return new ResponseEntity<>(solicitudInfraestructuraService.listarSolicitudesInfraestructurasPag(pageable, idSolicitudInfraestructura, keyword, siglaoAcronimoUnidadMilitar, estadosSolicitudInfraestructura, orderBy, orderMode), HttpStatus.OK);
+        return new ResponseEntity<>(solicitudInfraestructuraService.listarSolicitudesInfraestructurasPag(pageable, idSolicitudInfraestructura, keyword, siglaoAcronimoUnidadMilitar, estadosSolicitudInfraestructura, idTipoSolicitudInfraestructura, orderBy, orderMode), HttpStatus.OK);
     }
     
     //CREAR REGISTRO:

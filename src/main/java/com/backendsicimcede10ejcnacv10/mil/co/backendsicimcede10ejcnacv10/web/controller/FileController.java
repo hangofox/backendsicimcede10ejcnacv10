@@ -19,6 +19,7 @@ import java.nio.file.*;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
 * @Autor PD04. HERNAN ADOLFO NUÑEZ GONZALEZ.
@@ -103,7 +104,9 @@ public class FileController {
     }
     
     //OBTENCIÓN DE ARCHIVO:
-    private final Map<String, String> rutasTemporales = new HashMap<>();
+    //MAPA CONCURRENTE: LOS LISTADOS PIDEN VARIAS RUTAS ESTÁTICAS AL MISMO TIEMPO (EJ. LAS OCHO FOTOGRAFÍAS ANEXAS DE UNA SOLICITUD)
+    //Y UN HashMap PIERDE ENTRADAS CON ESCRITURAS SIMULTÁNEAS, DEJANDO ARCHIVOS EXISTENTES COMO "NO ENCONTRADOS":
+    private final Map<String, String> rutasTemporales = new ConcurrentHashMap<>();
     
     //1. Generar ruta estática:
     @GetMapping("/archivos/rutaEstatica")

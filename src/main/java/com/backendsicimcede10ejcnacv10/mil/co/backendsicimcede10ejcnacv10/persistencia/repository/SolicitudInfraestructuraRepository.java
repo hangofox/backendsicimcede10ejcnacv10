@@ -18,7 +18,7 @@ import java.util.Optional;
 */
 public interface SolicitudInfraestructuraRepository extends JpaRepository<SolicitudInfraestructura,Long> {
     
-    //CONTADORES Y LISTADOS UNIFICADOS (ID + KEYWORD + SIGLA O ACRONIMO UNIDAD MILITAR + ESTADOS + ORDERBY + ORDERMODE). "estadosSolicitudInfraestructura" ES
+    //CONTADORES Y LISTADOS UNIFICADOS (ID + KEYWORD + SIGLA O ACRONIMO UNIDAD MILITAR + ESTADOS + TIPO DE SOLICITUD + ORDERBY + ORDERMODE). "estadosSolicitudInfraestructura" ES
     //OPCIONAL Y RECIBE UNO O VARIOS ESTADOS SEPARADOS POR COMA (EJ. "ASIGNACION,APROBACION,RECHAZADO" PARA LAS SOLICITUDES AVALADAS):
     @Query(value = "SELECT COUNT(*) FROM tabla_solicitudes_infraestructuras, tabla_unidades_militares " +
           "WHERE (:idSolicitudInfraestructura IS NULL OR tabla_solicitudes_infraestructuras.id_solicitud_infraestructura = :idSolicitudInfraestructura) AND " +
@@ -27,8 +27,9 @@ public interface SolicitudInfraestructuraRepository extends JpaRepository<Solici
           "UPPER(tabla_solicitudes_infraestructuras.nombre_solicitud_infraestructura) LIKE UPPER('%'||:keyword||'%') OR " +
           "UPPER(tabla_unidades_militares.sigla_o_acronimo_unidad_militar) LIKE UPPER('%'||:keyword||'%'))) AND " +
           "(:siglaoAcronimoUnidadMilitar IS NULL OR UPPER(tabla_unidades_militares.sigla_o_acronimo_unidad_militar) = UPPER(:siglaoAcronimoUnidadMilitar)) AND " +
-          "(:estadosSolicitudInfraestructura IS NULL OR INSTR(','||UPPER(REPLACE(:estadosSolicitudInfraestructura,' ',''))||',', ','||UPPER(tabla_solicitudes_infraestructuras.estado_solicitud_infraestructura)||',') > 0)", nativeQuery = true)
-    Long findTotalRegistros(@Param("idSolicitudInfraestructura") Long idSolicitudInfraestructura, @Param("keyword") String keyword, @Param("siglaoAcronimoUnidadMilitar") String siglaoAcronimoUnidadMilitar, @Param("estadosSolicitudInfraestructura") String estadosSolicitudInfraestructura);
+          "(:estadosSolicitudInfraestructura IS NULL OR INSTR(','||UPPER(REPLACE(:estadosSolicitudInfraestructura,' ',''))||',', ','||UPPER(tabla_solicitudes_infraestructuras.estado_solicitud_infraestructura)||',') > 0) AND " +
+          "(:idTipoSolicitudInfraestructura IS NULL OR tabla_solicitudes_infraestructuras.id_tipo_solicitud_infraestructura = :idTipoSolicitudInfraestructura)", nativeQuery = true)
+    Long findTotalRegistros(@Param("idSolicitudInfraestructura") Long idSolicitudInfraestructura, @Param("keyword") String keyword, @Param("siglaoAcronimoUnidadMilitar") String siglaoAcronimoUnidadMilitar, @Param("estadosSolicitudInfraestructura") String estadosSolicitudInfraestructura, @Param("idTipoSolicitudInfraestructura") Long idTipoSolicitudInfraestructura);
     
     @Query(value = "SELECT tabla_solicitudes_infraestructuras.* FROM tabla_solicitudes_infraestructuras, tabla_unidades_militares " +
           "WHERE (:idSolicitudInfraestructura IS NULL OR tabla_solicitudes_infraestructuras.id_solicitud_infraestructura = :idSolicitudInfraestructura) AND " +
@@ -37,7 +38,8 @@ public interface SolicitudInfraestructuraRepository extends JpaRepository<Solici
           "UPPER(tabla_solicitudes_infraestructuras.nombre_solicitud_infraestructura) LIKE UPPER('%'||:keyword||'%') OR " +
           "UPPER(tabla_unidades_militares.sigla_o_acronimo_unidad_militar) LIKE UPPER('%'||:keyword||'%'))) AND " +
           "(:siglaoAcronimoUnidadMilitar IS NULL OR UPPER(tabla_unidades_militares.sigla_o_acronimo_unidad_militar) = UPPER(:siglaoAcronimoUnidadMilitar)) AND " +
-          "(:estadosSolicitudInfraestructura IS NULL OR INSTR(','||UPPER(REPLACE(:estadosSolicitudInfraestructura,' ',''))||',', ','||UPPER(tabla_solicitudes_infraestructuras.estado_solicitud_infraestructura)||',') > 0) " +
+          "(:estadosSolicitudInfraestructura IS NULL OR INSTR(','||UPPER(REPLACE(:estadosSolicitudInfraestructura,' ',''))||',', ','||UPPER(tabla_solicitudes_infraestructuras.estado_solicitud_infraestructura)||',') > 0) AND " +
+          "(:idTipoSolicitudInfraestructura IS NULL OR tabla_solicitudes_infraestructuras.id_tipo_solicitud_infraestructura = :idTipoSolicitudInfraestructura) " +
           "ORDER BY CASE WHEN :orderBy = 'idSolicitudInfraestructura' AND :orderMode = 'ASC' THEN tabla_solicitudes_infraestructuras.id_solicitud_infraestructura END ASC, " +
           "CASE WHEN :orderBy = 'idSolicitudInfraestructura' AND :orderMode = 'DESC' THEN tabla_solicitudes_infraestructuras.id_solicitud_infraestructura END DESC, " +
           "CASE WHEN :orderBy = 'codigoRadicadoSolicitudInfraestructura' AND :orderMode = 'ASC' THEN tabla_solicitudes_infraestructuras.codigo_radicado_solicitud_infraestructura END ASC, " +
@@ -62,7 +64,7 @@ public interface SolicitudInfraestructuraRepository extends JpaRepository<Solici
           "CASE WHEN :orderBy = 'fechaHMSIngresoSolicitudInfraestructura' AND :orderMode = 'DESC' THEN tabla_solicitudes_infraestructuras.fecha_h_m_s_ingreso_solicitud_infraestructura END DESC, " +
           "CASE WHEN :orderBy = 'fechaHMSModificacionSolicitudInfraestructura' AND :orderMode = 'ASC' THEN tabla_solicitudes_infraestructuras.fecha_h_m_s_modificacion_solicitud_infraestructura END ASC, " +
           "CASE WHEN :orderBy = 'fechaHMSModificacionSolicitudInfraestructura' AND :orderMode = 'DESC' THEN tabla_solicitudes_infraestructuras.fecha_h_m_s_modificacion_solicitud_infraestructura END DESC", nativeQuery = true)
-    List<SolicitudInfraestructura> findAllSolicitudesInfraestructuras(@Param("idSolicitudInfraestructura") Long idSolicitudInfraestructura, @Param("keyword") String keyword, @Param("siglaoAcronimoUnidadMilitar") String siglaoAcronimoUnidadMilitar, @Param("estadosSolicitudInfraestructura") String estadosSolicitudInfraestructura, @Param("orderBy") String orderBy, @Param("orderMode") String orderMode);
+    List<SolicitudInfraestructura> findAllSolicitudesInfraestructuras(@Param("idSolicitudInfraestructura") Long idSolicitudInfraestructura, @Param("keyword") String keyword, @Param("siglaoAcronimoUnidadMilitar") String siglaoAcronimoUnidadMilitar, @Param("estadosSolicitudInfraestructura") String estadosSolicitudInfraestructura, @Param("idTipoSolicitudInfraestructura") Long idTipoSolicitudInfraestructura, @Param("orderBy") String orderBy, @Param("orderMode") String orderMode);
     
     @Query(value = "SELECT tabla_solicitudes_infraestructuras.* FROM tabla_solicitudes_infraestructuras, tabla_unidades_militares " +
           "WHERE (:idSolicitudInfraestructura IS NULL OR tabla_solicitudes_infraestructuras.id_solicitud_infraestructura = :idSolicitudInfraestructura) AND " +
@@ -71,7 +73,8 @@ public interface SolicitudInfraestructuraRepository extends JpaRepository<Solici
           "UPPER(tabla_solicitudes_infraestructuras.nombre_solicitud_infraestructura) LIKE UPPER('%'||:keyword||'%') OR " +
           "UPPER(tabla_unidades_militares.sigla_o_acronimo_unidad_militar) LIKE UPPER('%'||:keyword||'%'))) AND " +
           "(:siglaoAcronimoUnidadMilitar IS NULL OR UPPER(tabla_unidades_militares.sigla_o_acronimo_unidad_militar) = UPPER(:siglaoAcronimoUnidadMilitar)) AND " +
-          "(:estadosSolicitudInfraestructura IS NULL OR INSTR(','||UPPER(REPLACE(:estadosSolicitudInfraestructura,' ',''))||',', ','||UPPER(tabla_solicitudes_infraestructuras.estado_solicitud_infraestructura)||',') > 0) " +
+          "(:estadosSolicitudInfraestructura IS NULL OR INSTR(','||UPPER(REPLACE(:estadosSolicitudInfraestructura,' ',''))||',', ','||UPPER(tabla_solicitudes_infraestructuras.estado_solicitud_infraestructura)||',') > 0) AND " +
+          "(:idTipoSolicitudInfraestructura IS NULL OR tabla_solicitudes_infraestructuras.id_tipo_solicitud_infraestructura = :idTipoSolicitudInfraestructura) " +
           "ORDER BY CASE WHEN :orderBy = 'idSolicitudInfraestructura' AND :orderMode = 'ASC' THEN tabla_solicitudes_infraestructuras.id_solicitud_infraestructura END ASC, " +
           "CASE WHEN :orderBy = 'idSolicitudInfraestructura' AND :orderMode = 'DESC' THEN tabla_solicitudes_infraestructuras.id_solicitud_infraestructura END DESC, " +
           "CASE WHEN :orderBy = 'codigoRadicadoSolicitudInfraestructura' AND :orderMode = 'ASC' THEN tabla_solicitudes_infraestructuras.codigo_radicado_solicitud_infraestructura END ASC, " +
@@ -96,7 +99,7 @@ public interface SolicitudInfraestructuraRepository extends JpaRepository<Solici
           "CASE WHEN :orderBy = 'fechaHMSIngresoSolicitudInfraestructura' AND :orderMode = 'DESC' THEN tabla_solicitudes_infraestructuras.fecha_h_m_s_ingreso_solicitud_infraestructura END DESC, " +
           "CASE WHEN :orderBy = 'fechaHMSModificacionSolicitudInfraestructura' AND :orderMode = 'ASC' THEN tabla_solicitudes_infraestructuras.fecha_h_m_s_modificacion_solicitud_infraestructura END ASC, " +
           "CASE WHEN :orderBy = 'fechaHMSModificacionSolicitudInfraestructura' AND :orderMode = 'DESC' THEN tabla_solicitudes_infraestructuras.fecha_h_m_s_modificacion_solicitud_infraestructura END DESC", nativeQuery = true)
-    Slice<SolicitudInfraestructura> findAllSolicitudesInfraestructurasPag(Pageable pageable, @Param("idSolicitudInfraestructura") Long idSolicitudInfraestructura, @Param("keyword") String keyword, @Param("siglaoAcronimoUnidadMilitar") String siglaoAcronimoUnidadMilitar, @Param("estadosSolicitudInfraestructura") String estadosSolicitudInfraestructura, @Param("orderBy") String orderBy, @Param("orderMode") String orderMode);
+    Slice<SolicitudInfraestructura> findAllSolicitudesInfraestructurasPag(Pageable pageable, @Param("idSolicitudInfraestructura") Long idSolicitudInfraestructura, @Param("keyword") String keyword, @Param("siglaoAcronimoUnidadMilitar") String siglaoAcronimoUnidadMilitar, @Param("estadosSolicitudInfraestructura") String estadosSolicitudInfraestructura, @Param("idTipoSolicitudInfraestructura") Long idTipoSolicitudInfraestructura, @Param("orderBy") String orderBy, @Param("orderMode") String orderMode);
     
     Optional<SolicitudInfraestructura> findByIdSolicitudInfraestructura(Long idSolicitudInfraestructura);
     

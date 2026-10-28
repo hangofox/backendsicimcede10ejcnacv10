@@ -40,15 +40,15 @@ public class SolicitudInfraestructuraServiceImpl implements SolicitudInfraestruc
     //CONTAR TOTAL DE REGISTROS (CON FILTROS OPCIONALES POR KEYWORD, SIGLA O ACRÓNIMO DE UNIDAD MILITAR Y ESTADOS DE LA SOLICITUD SEPARADOS
     //POR COMA, ESTE ÚLTIMO PARA LA SEMAFORIZACIÓN DE LOS LISTADOS Y PARA LAS SOLICITUDES AVALADAS):
     @Override//SOBREESCRIBIMOS EL METODO DE CONTEO.
-    public Long contarTotalRegistros(Long idSolicitudInfraestructura, String keyword, String siglaoAcronimoUnidadMilitar, String estadosSolicitudInfraestructura) {
-        return solicitudInfraestructuraRepository.findTotalRegistros(idSolicitudInfraestructura, keyword, siglaoAcronimoUnidadMilitar, estadosSolicitudInfraestructura);
+    public Long contarTotalRegistros(Long idSolicitudInfraestructura, String keyword, String siglaoAcronimoUnidadMilitar, String estadosSolicitudInfraestructura, Long idTipoSolicitudInfraestructura) {
+        return solicitudInfraestructuraRepository.findTotalRegistros(idSolicitudInfraestructura, keyword, siglaoAcronimoUnidadMilitar, estadosSolicitudInfraestructura, idTipoSolicitudInfraestructura);
     }
 
     //LISTADO DE REGISTROS FILTRADOS SIN PAGINACIÓN.
     //LISTAR REGISTROS (CON FILTROS OPCIONALES POR KEYWORD, SIGLA O ACRÓNIMO DE UNIDAD MILITAR Y ESTADOS DE LA SOLICITUD):
     @Override//SOBREESCRIBIMOS EL METODO DE LISTAR REGISTROS.
-    public List<SolicitudInfraestructuraDTO> listarSolicitudesInfraestructuras(Long idSolicitudInfraestructura, String keyword, String siglaoAcronimoUnidadMilitar, String estadosSolicitudInfraestructura, String orderBy, String orderMode) {
-        List<SolicitudInfraestructura> solicitudesInfraestructuras = solicitudInfraestructuraRepository.findAllSolicitudesInfraestructuras(idSolicitudInfraestructura, keyword, siglaoAcronimoUnidadMilitar, estadosSolicitudInfraestructura, orderBy, orderMode);
+    public List<SolicitudInfraestructuraDTO> listarSolicitudesInfraestructuras(Long idSolicitudInfraestructura, String keyword, String siglaoAcronimoUnidadMilitar, String estadosSolicitudInfraestructura, Long idTipoSolicitudInfraestructura, String orderBy, String orderMode) {
+        List<SolicitudInfraestructura> solicitudesInfraestructuras = solicitudInfraestructuraRepository.findAllSolicitudesInfraestructuras(idSolicitudInfraestructura, keyword, siglaoAcronimoUnidadMilitar, estadosSolicitudInfraestructura, idTipoSolicitudInfraestructura, orderBy, orderMode);
         List<SolicitudInfraestructuraDTO> solicitudesInfraestructurasDTOS = new ArrayList<>();
         
         for (SolicitudInfraestructura solicitudInfraestructura : solicitudesInfraestructuras) {
@@ -61,8 +61,8 @@ public class SolicitudInfraestructuraServiceImpl implements SolicitudInfraestruc
     //LISTADO DE REGISTROS FILTRADOS CON PAGINACIÓN.
     //LISTAR REGISTROS CON PAGINACIÓN (CON FILTROS OPCIONALES POR KEYWORD, SIGLA O ACRÓNIMO DE UNIDAD MILITAR Y ESTADOS DE LA SOLICITUD):
     @Override//SOBREESCRIBIMOS EL METODO DE LISTAR REGISTROS.
-    public Slice<SolicitudInfraestructuraDTO> listarSolicitudesInfraestructurasPag(Pageable pageable, Long idSolicitudInfraestructura, String keyword, String siglaoAcronimoUnidadMilitar, String estadosSolicitudInfraestructura, String orderBy, String orderMode) {
-        Slice<SolicitudInfraestructura> solicitudesInfraestructuras = solicitudInfraestructuraRepository.findAllSolicitudesInfraestructurasPag(pageable, idSolicitudInfraestructura, keyword, siglaoAcronimoUnidadMilitar, estadosSolicitudInfraestructura, orderBy, orderMode);
+    public Slice<SolicitudInfraestructuraDTO> listarSolicitudesInfraestructurasPag(Pageable pageable, Long idSolicitudInfraestructura, String keyword, String siglaoAcronimoUnidadMilitar, String estadosSolicitudInfraestructura, Long idTipoSolicitudInfraestructura, String orderBy, String orderMode) {
+        Slice<SolicitudInfraestructura> solicitudesInfraestructuras = solicitudInfraestructuraRepository.findAllSolicitudesInfraestructurasPag(pageable, idSolicitudInfraestructura, keyword, siglaoAcronimoUnidadMilitar, estadosSolicitudInfraestructura, idTipoSolicitudInfraestructura, orderBy, orderMode);
         return solicitudesInfraestructuras.map(solicitudInfraestructura -> solicitudInfraestructuraDAO.solicitudInfraestructuraDTO(solicitudInfraestructura));
     }
     

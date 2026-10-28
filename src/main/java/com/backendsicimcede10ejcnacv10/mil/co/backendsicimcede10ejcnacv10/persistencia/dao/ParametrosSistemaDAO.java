@@ -33,6 +33,8 @@ public class ParametrosSistemaDAO {
         parametrosSistema.setRutaDestinoArchivosResponsables(parametrosSistemaDTO.getRutaDestinoArchivosResponsables());
         parametrosSistema.setRutaDestinoArchivosAltasEquiposIngenieros(parametrosSistemaDTO.getRutaDestinoArchivosAltasEquiposIngenieros());
         parametrosSistema.setRutaDestinoArchivosBajasEquiposIngenieros(parametrosSistemaDTO.getRutaDestinoArchivosBajasEquiposIngenieros());
+        parametrosSistema.setRutaDestinoArchivosDocumentacionAnexaSolicInfraest(parametrosSistemaDTO.getRutaDestinoArchivosDocumentacionAnexaSolicInfraest());
+        parametrosSistema.setRutaDestinoArchivosFotografiasAnexasSolicInfraest(parametrosSistemaDTO.getRutaDestinoArchivosFotografiasAnexasSolicInfraest());
         parametrosSistema.setRutaDestinoArchivosFotografiasAnexasApoyosAtencPrevEmergDesast(parametrosSistemaDTO.getRutaDestinoArchivosFotografiasAnexasApoyosAtencPrevEmergDesast());
         parametrosSistema.setRutaDestinoArchivosIntegrantesApoyosAtencPrevEmergDesast(parametrosSistemaDTO.getRutaDestinoArchivosIntegrantesApoyosAtencPrevEmergDesast());
         parametrosSistema.setAuthEnable(parametrosSistemaDTO.getAuthEnable());
@@ -69,6 +71,8 @@ public class ParametrosSistemaDAO {
         parametrosSistemaDTO.setRutaDestinoArchivosResponsables(parametrosSistema.getRutaDestinoArchivosResponsables());
         parametrosSistemaDTO.setRutaDestinoArchivosAltasEquiposIngenieros(parametrosSistema.getRutaDestinoArchivosAltasEquiposIngenieros());
         parametrosSistemaDTO.setRutaDestinoArchivosBajasEquiposIngenieros(parametrosSistema.getRutaDestinoArchivosBajasEquiposIngenieros());
+        parametrosSistemaDTO.setRutaDestinoArchivosDocumentacionAnexaSolicInfraest(parametrosSistema.getRutaDestinoArchivosDocumentacionAnexaSolicInfraest());
+        parametrosSistemaDTO.setRutaDestinoArchivosFotografiasAnexasSolicInfraest(parametrosSistema.getRutaDestinoArchivosFotografiasAnexasSolicInfraest());
         parametrosSistemaDTO.setRutaDestinoArchivosFotografiasAnexasApoyosAtencPrevEmergDesast(parametrosSistema.getRutaDestinoArchivosFotografiasAnexasApoyosAtencPrevEmergDesast());
         parametrosSistemaDTO.setRutaDestinoArchivosIntegrantesApoyosAtencPrevEmergDesast(parametrosSistema.getRutaDestinoArchivosIntegrantesApoyosAtencPrevEmergDesast());
         parametrosSistemaDTO.setAuthEnable(parametrosSistema.getAuthEnable());
