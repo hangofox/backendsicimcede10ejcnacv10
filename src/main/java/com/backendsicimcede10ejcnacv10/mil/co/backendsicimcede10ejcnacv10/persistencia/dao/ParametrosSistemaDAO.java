@@ -37,6 +37,8 @@ public class ParametrosSistemaDAO {
         parametrosSistema.setRutaDestinoArchivosFotografiasAnexasSolicInfraest(parametrosSistemaDTO.getRutaDestinoArchivosFotografiasAnexasSolicInfraest());
         parametrosSistema.setRutaDestinoArchivosFotografiasAnexasApoyosAtencPrevEmergDesast(parametrosSistemaDTO.getRutaDestinoArchivosFotografiasAnexasApoyosAtencPrevEmergDesast());
         parametrosSistema.setRutaDestinoArchivosIntegrantesApoyosAtencPrevEmergDesast(parametrosSistemaDTO.getRutaDestinoArchivosIntegrantesApoyosAtencPrevEmergDesast());
+        parametrosSistema.setRutaDestinoArchivosFotografiasAnexasApoyosObrRedMitigGestRiesgDesast(parametrosSistemaDTO.getRutaDestinoArchivosFotografiasAnexasApoyosObrRedMitigGestRiesgDesast());
+        parametrosSistema.setRutaDestinoArchivosIntegrantesApoyosObrRedMitigGestRiesgDesast(parametrosSistemaDTO.getRutaDestinoArchivosIntegrantesApoyosObrRedMitigGestRiesgDesast());
         parametrosSistema.setAuthEnable(parametrosSistemaDTO.getAuthEnable());
         parametrosSistema.setStartTTLSEnable(parametrosSistemaDTO.getStartTTLSEnable());
         parametrosSistema.setSmtpHost(parametrosSistemaDTO.getSmtpHost());
@@ -75,6 +77,8 @@ public class ParametrosSistemaDAO {
         parametrosSistemaDTO.setRutaDestinoArchivosFotografiasAnexasSolicInfraest(parametrosSistema.getRutaDestinoArchivosFotografiasAnexasSolicInfraest());
         parametrosSistemaDTO.setRutaDestinoArchivosFotografiasAnexasApoyosAtencPrevEmergDesast(parametrosSistema.getRutaDestinoArchivosFotografiasAnexasApoyosAtencPrevEmergDesast());
         parametrosSistemaDTO.setRutaDestinoArchivosIntegrantesApoyosAtencPrevEmergDesast(parametrosSistema.getRutaDestinoArchivosIntegrantesApoyosAtencPrevEmergDesast());
+        parametrosSistemaDTO.setRutaDestinoArchivosFotografiasAnexasApoyosObrRedMitigGestRiesgDesast(parametrosSistema.getRutaDestinoArchivosFotografiasAnexasApoyosObrRedMitigGestRiesgDesast());
+        parametrosSistemaDTO.setRutaDestinoArchivosIntegrantesApoyosObrRedMitigGestRiesgDesast(parametrosSistema.getRutaDestinoArchivosIntegrantesApoyosObrRedMitigGestRiesgDesast());
         parametrosSistemaDTO.setAuthEnable(parametrosSistema.getAuthEnable());
         parametrosSistemaDTO.setStartTTLSEnable(parametrosSistema.getStartTTLSEnable());
         parametrosSistemaDTO.setSmtpHost(parametrosSistema.getSmtpHost());

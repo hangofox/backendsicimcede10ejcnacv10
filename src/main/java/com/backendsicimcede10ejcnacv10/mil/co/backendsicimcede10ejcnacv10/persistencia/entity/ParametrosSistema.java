@@ -70,6 +70,12 @@ public class ParametrosSistema {
     @Column(name = "RUTA_DESTINO_ARCHIVOS_INTEGRANTES_APOYOS_ATENC_PREV_EMERG_DESAST", columnDefinition="CLOB NOT NULL")
     private String rutaDestinoArchivosIntegrantesApoyosAtencPrevEmergDesast;
     
+    @Column(name = "RUTA_DESTINO_ARCHIVOS_FOTOGRAFIAS_ANEXAS_APOYOS_OBR_RED_MITIG_GEST_RIESG_DESAST", columnDefinition="CLOB NOT NULL")
+    private String rutaDestinoArchivosFotografiasAnexasApoyosObrRedMitigGestRiesgDesast;
+    
+    @Column(name = "RUTA_DESTINO_ARCHIVOS_INTEGRANTES_APOYOS_OBR_RED_MITIG_GEST_RIESG_DESAST", columnDefinition="CLOB NOT NULL")
+    private String rutaDestinoArchivosIntegrantesApoyosObrRedMitigGestRiesgDesast;
+    
     @Column(name = "AUTH_ENABLE", columnDefinition="VARCHAR2(150) NULL")
     private String authEnable;
     
@@ -190,6 +196,18 @@ public class ParametrosSistema {
     }
     public void setRutaDestinoArchivosIntegrantesApoyosAtencPrevEmergDesast(String rutaDestinoArchivosIntegrantesApoyosAtencPrevEmergDesast) {
         this.rutaDestinoArchivosIntegrantesApoyosAtencPrevEmergDesast = rutaDestinoArchivosIntegrantesApoyosAtencPrevEmergDesast;
+    }
+    public String getRutaDestinoArchivosFotografiasAnexasApoyosObrRedMitigGestRiesgDesast() {
+        return rutaDestinoArchivosFotografiasAnexasApoyosObrRedMitigGestRiesgDesast;
+    }
+    public void setRutaDestinoArchivosFotografiasAnexasApoyosObrRedMitigGestRiesgDesast(String rutaDestinoArchivosFotografiasAnexasApoyosObrRedMitigGestRiesgDesast) {
+        this.rutaDestinoArchivosFotografiasAnexasApoyosObrRedMitigGestRiesgDesast = rutaDestinoArchivosFotografiasAnexasApoyosObrRedMitigGestRiesgDesast;
+    }
+    public String getRutaDestinoArchivosIntegrantesApoyosObrRedMitigGestRiesgDesast() {
+        return rutaDestinoArchivosIntegrantesApoyosObrRedMitigGestRiesgDesast;
+    }
+    public void setRutaDestinoArchivosIntegrantesApoyosObrRedMitigGestRiesgDesast(String rutaDestinoArchivosIntegrantesApoyosObrRedMitigGestRiesgDesast) {
+        this.rutaDestinoArchivosIntegrantesApoyosObrRedMitigGestRiesgDesast = rutaDestinoArchivosIntegrantesApoyosObrRedMitigGestRiesgDesast;
     }
     public String getAuthEnable() {
         return authEnable;
